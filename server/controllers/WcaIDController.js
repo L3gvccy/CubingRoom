@@ -1,7 +1,7 @@
 import axios from "axios";
 import querystring from "querystring";
 import User from "../models/UserModel.js";
-import { createToken } from "../utils/utils.js";
+import { createToken, maxAge } from "../utils/utils.js";
 
 export const redirectToWcaID = (req, res) => {
   const params = querystring.stringify({

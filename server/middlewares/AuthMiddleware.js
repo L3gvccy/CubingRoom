@@ -6,7 +6,7 @@ export const verifyToken = (req, res, next) => {
     return res.status(401).send("Потрібно увійти до акаунту");
   }
 
-  jwt.verify(token, process.env.JWT_KEY, async (err, payload) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
     if (err) {
       return res.status(403).send("Невірний токен авторизації");
     }
