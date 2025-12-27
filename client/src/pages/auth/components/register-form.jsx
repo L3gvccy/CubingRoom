@@ -16,7 +16,7 @@ const RegisterForm = ({ setAuthAction }) => {
 
   return (
     <div className="w-full grid px-2 gap-5 items-center dark:text-zinc-100">
-      <div className="text-zinc-100">
+      <div className="dark:text-zinc-100">
         <p className="text-xl font-semibold text-center">Реєстрація</p>
         <p className="text-sm text-center">
           Вже маєте акаунт?{" "}
@@ -31,19 +31,19 @@ const RegisterForm = ({ setAuthAction }) => {
         </p>
       </div>
       <div className="flex flex-col gap-3">
-        <div className="w-full flex px-2 items-center rounded-md bg-zinc-800">
+        <div className="w-full flex px-2 items-center rounded-md bg-zinc-200 dark:bg-zinc-800">
           <MdAlternateEmail className="text-xl text-zinc-400" />
           <input
             type="text"
-            className="flex-1 outline-0 p-2 text-zinc-100"
+            className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Email"
           />
         </div>
-        <div className="w-full flex px-2 items-center rounded-md bg-zinc-800">
+        <div className="w-full flex px-2 items-center rounded-md bg-zinc-200 dark:bg-zinc-800">
           <IoKey className="text-xl text-zinc-400" />
           <input
             type={showPasswod ? "text" : "password"}
-            className="flex-1 outline-0 p-2 text-zinc-100"
+            className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Пароль"
           />
           <div
@@ -55,11 +55,11 @@ const RegisterForm = ({ setAuthAction }) => {
             {showPasswod ? <FaEye /> : <FaEyeSlash />}
           </div>
         </div>
-        <div className="w-full flex px-2 items-center rounded-md bg-zinc-800">
+        <div className="w-full flex px-2 items-center rounded-md bg-zinc-200 dark:bg-zinc-800">
           <IoKey className="text-xl text-zinc-400" />
           <input
             type={showPasswod ? "text" : "password"}
-            className="flex-1 outline-0 p-2 text-zinc-100"
+            className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Повтор паролю"
           />
           <div
