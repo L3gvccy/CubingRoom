@@ -15,7 +15,7 @@ const WcaSuccess = () => {
       .then((res) => {
         toast.success("Ви успішно авторизувались!");
         navigate("/");
-        console.log(res.data.user);
+        setUserData(res.data.user);
       })
       .catch((err) => {
         console.log(err);
