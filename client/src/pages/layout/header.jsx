@@ -11,8 +11,8 @@ const Header = () => {
     <div className="flex justify-center items-center w-screen p-2 bg-zinc-900 border-zinc-800/50 border-b-2">
       <div className="flex items-center justify-between w-full max-w-342">
         <HeaderLogo />
-        <HeaderNav />
-        <EndMenu />
+        <HeaderNav authorized={authorized} />
+        <EndMenu authorized={authorized} />
       </div>
     </div>
   );

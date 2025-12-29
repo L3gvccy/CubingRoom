@@ -1,9 +1,13 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const HeaderNav = () => {
+const HeaderNav = ({ authorized }) => {
   return (
-    <div className="hidden md:flex gap-5 items-center">
+    <div
+      className={`hidden md:flex ${
+        !authorized && "md:hidden"
+      } gap-5 items-center`}
+    >
       <NavLink
         to="/rooms"
         className={({ isActive }) =>

@@ -3,6 +3,8 @@ import LoginForm from "./components/login-form";
 import RegisterForm from "./components/register-form";
 import AuthSideBar from "./components/auth-side-bar";
 import ThemeToggler from "@/components/themeToggler";
+import { IoMdArrowBack } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const Auth = () => {
   const [authAction, setAuthAction] = useState("login");
@@ -24,6 +26,14 @@ const Auth = () => {
       </div>
       <div className="absolute top-4 right-4">
         <ThemeToggler />
+      </div>
+      <div className="absolute top-4 left-4">
+        <Link
+          to="/"
+          className="text-xl text-zinc-400 hover:text-zinc-300 active:text-zinc-500 transition-all duration-300"
+        >
+          <IoMdArrowBack />
+        </Link>
       </div>
     </>
   );
