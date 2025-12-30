@@ -25,11 +25,11 @@ const userSchema = mongoose.Schema({
   },
   countryCode: {
     type: String,
-    enum: ["keyboard", "typing"],
-    default: "keyboard",
   },
   timerType: {
     type: String,
+    enum: ["keyboard", "typing"],
+    default: "keyboard",
   },
   isOnline: {
     type: Boolean,

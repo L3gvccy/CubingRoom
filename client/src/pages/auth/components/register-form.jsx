@@ -33,7 +33,7 @@ const RegisterForm = ({ setAuthAction }) => {
     }
     if (validatePassword()) {
       await apiClient
-        .post(REGISTER_ROUTE, { email, password })
+        .post(REGISTER_ROUTE, { email, password }, { withCredentials: true })
         .then((res) => {
           if (res.status === 201) {
             toast.success("Ви успішно зареєструвались");

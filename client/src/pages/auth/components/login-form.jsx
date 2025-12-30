@@ -27,7 +27,7 @@ const LoginForm = ({ setAuthAction }) => {
       return;
     }
     await apiClient
-      .post(LOGIN_ROUTE, { email, password })
+      .post(LOGIN_ROUTE, { email, password }, { withCredentials: true })
       .then((res) => {
         if (res.status === 200) {
           toast.success("Ви успішно увійшли");
