@@ -2,17 +2,58 @@ import React, { useState } from "react";
 import { MdAlternateEmail } from "react-icons/md";
 import { IoKey } from "react-icons/io5";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Divider from "../../../components/divider";
 import { apiClient } from "@/lib/api-client";
-import { WCA_AUTH_ROUTE } from "@/utils/constants";
+import { REGISTER_ROUTE, WCA_AUTH_ROUTE } from "@/utils/constants";
 import WcaIdBtn from "./wca-id-btn";
+import { toast } from "sonner";
+import { useAppStore } from "@/store";
 
 const RegisterForm = ({ setAuthAction }) => {
+  const navigate = useNavigate();
+  const { setUserData } = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPasswod, setShowPasswod] = useState(false);
+
+  const validatePassword = () => {
+    return password === confirmPassword;
+  };
+
+  const handleRegisterClick = async () => {
+    if (!email) {
+      toast.error("Email обов'язковий");
+      return;
+    }
+    if (!password) {
+      toast.error("Пароль обов'язковий");
+      return;
+    }
+    if (validatePassword()) {
+      await apiClient
+        .post(REGISTER_ROUTE, { email, password })
+        .then((res) => {
+          if (res.status === 201) {
+            toast.success("Ви успішно зареєструвались");
+            setUserData(res.data.user);
+            navigate("/");
+            return;
+          }
+        })
+        .catch((err) => {
+          if (err.response.status !== 500) {
+            toast.error(err.response?.data);
+          } else {
+            console.error(err);
+          }
+        });
+    } else {
+      toast.error("Паролі не співпадають");
+      return;
+    }
+  };
 
   return (
     <div className="w-full grid px-2 gap-5 items-center dark:text-zinc-100">
@@ -37,6 +78,10 @@ const RegisterForm = ({ setAuthAction }) => {
             type="text"
             className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
         </div>
         <div className="w-full flex px-2 items-center rounded-md bg-zinc-200 dark:bg-zinc-800">
@@ -45,6 +90,10 @@ const RegisterForm = ({ setAuthAction }) => {
             type={showPasswod ? "text" : "password"}
             className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Пароль"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <div
             className="cursor-pointer text-xl text-zinc-400 hover:text-zinc-300 transition-all duration-300"
@@ -61,6 +110,10 @@ const RegisterForm = ({ setAuthAction }) => {
             type={showPasswod ? "text" : "password"}
             className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Повтор паролю"
+            value={confirmPassword}
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
           />
           <div
             className="cursor-pointer text-xl text-zinc-400 hover:text-zinc-300 transition-all duration-300"
@@ -72,6 +125,7 @@ const RegisterForm = ({ setAuthAction }) => {
         <button
           type="submit"
           className="p-2 text-zinc-100 bg-green-700 hover:bg-green-600 active:bg-green-800 rounded-md cursor-pointer transition-all duration-300"
+          onClick={handleRegisterClick}
         >
           Зареєструватись
         </button>

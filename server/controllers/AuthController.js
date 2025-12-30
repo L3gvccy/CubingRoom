@@ -1,6 +1,6 @@
 import { compare } from "bcrypt";
 import User from "../models/UserModel.js";
-import { createToken } from "../utils/utils.js";
+import { createToken, maxAge } from "../utils/utils.js";
 
 export const getMe = async (req, res) => {
   try {

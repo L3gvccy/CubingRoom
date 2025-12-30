@@ -20,7 +20,7 @@ function App() {
         setUserData(res.data.user);
       })
       .catch((err) => {
-        console.error(err);
+        setUserData(undefined);
       });
   };
   useEffect(() => {

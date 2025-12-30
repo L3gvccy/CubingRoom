@@ -2,14 +2,48 @@ import React, { useState } from "react";
 import { MdAlternateEmail } from "react-icons/md";
 import { IoKey } from "react-icons/io5";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Divider from "../../../components/divider";
 import WcaIdBtn from "./wca-id-btn";
+import { apiClient } from "@/lib/api-client";
+import { LOGIN_ROUTE } from "@/utils/constants";
+import { toast } from "sonner";
+import { useAppStore } from "@/store";
 
 const LoginForm = ({ setAuthAction }) => {
+  const navigate = useNavigate();
+  const { setUserData } = useAppStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPasswod, setShowPasswod] = useState(false);
+
+  const handleLoginClick = async () => {
+    if (!email) {
+      toast.error("Email обов'язковий");
+      return;
+    }
+    if (!password) {
+      toast.error("Пароль обов'язковий");
+      return;
+    }
+    await apiClient
+      .post(LOGIN_ROUTE, { email, password })
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("Ви успішно увійшли");
+          setUserData(res.data.user);
+          navigate("/");
+          return;
+        }
+      })
+      .catch((err) => {
+        if (err.response.status !== 500) {
+          toast.error(err.response?.data);
+        } else {
+          console.error(err);
+        }
+      });
+  };
 
   return (
     <div className="w-full grid px-2 py-4 gap-5 items-center dark:text-zinc-100">
@@ -34,6 +68,10 @@ const LoginForm = ({ setAuthAction }) => {
             type="text"
             className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
         </div>
         <div className="w-full flex px-2 items-center rounded-md bg-zinc-200 dark:bg-zinc-800">
@@ -42,6 +80,10 @@ const LoginForm = ({ setAuthAction }) => {
             type={showPasswod ? "text" : "password"}
             className="flex-1 outline-0 p-2 dark:text-zinc-100"
             placeholder="Пароль"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <div
             className="cursor-pointer text-xl text-zinc-400 hover:text-zinc-300 transition-all duration-300"
@@ -55,6 +97,7 @@ const LoginForm = ({ setAuthAction }) => {
         <button
           type="submit"
           className="p-2 text-zinc-100 bg-green-700 hover:bg-green-600 active:bg-green-800 rounded-md cursor-pointer transition-all duration-300"
+          onClick={handleLoginClick}
         >
           Увійти
         </button>
