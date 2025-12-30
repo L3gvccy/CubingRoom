@@ -52,7 +52,7 @@ const LoginForm = ({ setAuthAction }) => {
         <p className="text-sm text-center">
           Ще не маєте акаунту?{" "}
           <button
-            className="cursor-pointer underline text-green-500"
+            className="cursor-pointer underline text-violet-700 dark:text-violet-300"
             onClick={() => {
               setAuthAction("register");
             }}
@@ -96,7 +96,7 @@ const LoginForm = ({ setAuthAction }) => {
         </div>
         <button
           type="submit"
-          className="p-2 text-zinc-100 bg-green-700 hover:bg-green-600 active:bg-green-800 rounded-md cursor-pointer transition-all duration-300"
+          className="p-2 text-zinc-100 bg-violet-700 hover:bg-violet-600 active:bg-violet-800 rounded-md cursor-pointer transition-all duration-300"
           onClick={handleLoginClick}
         >
           Увійти

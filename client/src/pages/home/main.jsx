@@ -15,12 +15,10 @@ const Main = () => {
   return (
     <div
       className="relative min-h-screen w-full bg-linear-to-br
-    from-emerald-900
-    via-green-950
-    to-zinc-950 text-white overflow-x-hidden"
+    from-teal-900 via-cyan-800 to-violet-950 text-white overflow-x-hidden"
     >
       <div className="relative z-10">
-        <section className="min-h-screen flex flex-col items-center justify-center text-center px-6">
+        <section className="min-h-[90vh] flex flex-col items-center justify-center text-center px-6">
           <motion.img
             src="CubingLogoLight.png"
             alt="CubiX Logo"
@@ -36,7 +34,7 @@ const Main = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            CubiX — змагальна платформа для швидкубінгу
+            CubiX – змагальна платформа для швидкубінгу
           </motion.h1>
 
           <motion.p
@@ -57,14 +55,14 @@ const Main = () => {
             {isAuthorized ? (
               <Link
                 to="/rooms"
-                className="px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition font-medium"
+                className="px-8 py-3 rounded-lg bg-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-300 font-medium"
               >
                 Перейти до кімнат
               </Link>
             ) : (
               <Link
                 to="/auth"
-                className="px-8 py-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition font-medium"
+                className="px-8 py-3 rounded-lg bg-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-300 font-medium"
               >
                 Приєднатись
               </Link>
@@ -124,7 +122,7 @@ const Main = () => {
               <Link
                 to="/auth"
                 className="inline-block mt-8 px-8 py-3 rounded-lg
-                         bg-emerald-600 hover:bg-emerald-500 transition font-medium"
+                         bg-zinc-800 hover:bg-zinc-100 hover:text-zinc-900 transition-all duration-300 font-medium"
               >
                 Увійти або зареєструватися
               </Link>

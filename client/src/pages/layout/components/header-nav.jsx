@@ -21,7 +21,7 @@ const HeaderNav = ({ authorized }) => {
           className={({ isActive }) =>
             `transition-all duration-300 ${
               isActive
-                ? "text-green-500 font-semibold"
+                ? "text-violet-400 font-semibold"
                 : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
             }`
           }
@@ -33,7 +33,7 @@ const HeaderNav = ({ authorized }) => {
           className={({ isActive }) =>
             `transition-all duration-300 ${
               isActive
-                ? "text-green-500 font-semibold"
+                ? "text-violet-400 font-semibold"
                 : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
             }`
           }
@@ -56,7 +56,7 @@ const HeaderNav = ({ authorized }) => {
                 className={({ isActive }) =>
                   `transition-all duration-300 ${
                     isActive
-                      ? "text-green-500 font-semibold"
+                      ? "text-violet-400 font-semibold"
                       : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
                   }`
                 }
@@ -72,7 +72,7 @@ const HeaderNav = ({ authorized }) => {
                   console.log(isActive);
                   return `transition-all duration-300 ${
                     isActive
-                      ? "text-green-500 font-semibold"
+                      ? "text-violet-400 font-semibold"
                       : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
                   }`;
                 }}

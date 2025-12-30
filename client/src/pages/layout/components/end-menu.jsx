@@ -73,7 +73,7 @@ const EndMenu = ({ authorized }) => {
       ) : (
         <Link
           to="/auth"
-          className="border-zinc-100 text-zinc-100 border hover:border-green-500 hover:bg-green-500 rounded-lg text-md flex px-4 py-1 gap-2 items-center transition-all duration-300 cursor-pointer"
+          className="border-zinc-100 text-zinc-100 border  hover:bg-zinc-100 hover:text-zinc-900 rounded-lg text-md flex px-4 py-1 gap-2 items-center transition-all duration-300 cursor-pointer"
         >
           <span>Авторизація</span>
           <IoLogInOutline />

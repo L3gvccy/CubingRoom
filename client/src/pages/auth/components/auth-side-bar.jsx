@@ -4,7 +4,7 @@ const AuthSideBar = () => {
   return (
     <div
       className="relative w-full h-full rounded-l-lg overflow-hidden
-                bg-linear-to-br from-green-600 via-emerald-600 to-green-800"
+                bg-linear-to-br from-cyan-700 via-cyan-600 to-violet-800"
     >
       <div
         className="absolute inset-0 opacity-10
