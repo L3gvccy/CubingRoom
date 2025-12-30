@@ -26,7 +26,7 @@ const Footer = () => {
             </a>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
             <a
               href="https://send.monobank.ua/jar/2MA4ddxNTc"
               target="_blank"

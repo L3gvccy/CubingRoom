@@ -44,7 +44,7 @@ const EndMenu = ({ authorized }) => {
         <>
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer outline-0">
-              <UserAvatar size={8} />
+              <UserAvatar size={10} />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[90vw] max-w-56" align="end">
               <DropdownMenuLabel className="truncate">
