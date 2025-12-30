@@ -42,46 +42,6 @@ const EndMenu = ({ authorized }) => {
     <div className="flex gap-3">
       {authorized ? (
         <>
-          <DropdownMenu className="md:hidden">
-            <DropdownMenuTrigger className="md:hidden cursor-pointer outline-0">
-              <div className="w-8 h-8 flex items-center justify-center text-2xl rounded-md text-zinc-400 border-2 border-zinc-400">
-                <IoReorderThree />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[90vw] max-w-56" align="end">
-              <DropdownMenuItem asChild>
-                <NavLink
-                  to="/rooms"
-                  end
-                  className={({ isActive }) =>
-                    `transition-all duration-300 ${
-                      isActive
-                        ? "text-green-500 font-semibold"
-                        : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
-                    }`
-                  }
-                >
-                  Кімнати
-                </NavLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <NavLink
-                  to="/contests"
-                  end
-                  className={({ isActive }) => {
-                    console.log(isActive);
-                    return `transition-all duration-300 ${
-                      isActive
-                        ? "text-green-500 font-semibold"
-                        : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
-                    }`;
-                  }}
-                >
-                  Контести
-                </NavLink>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer outline-0">
               <UserAvatar size={8} />

@@ -5,7 +5,7 @@ const Footer = () => {
   const version = "v1.0.0";
   return (
     <div className="mt-auto">
-      <footer className="flex justify-center w-screen bg-zinc-900 border-t-2 border-zinc-800/50 p-4">
+      <footer className="flex justify-center w-full bg-zinc-900 border-t-2 border-zinc-800/50 p-4">
         <div className="flex flex-col md:flex-row items-center justify-between w-full max-w-342 gap-2 text-sm text-zinc-400">
           <div>© {year} CubiX. Oleksandr Ivanov.</div>
 
