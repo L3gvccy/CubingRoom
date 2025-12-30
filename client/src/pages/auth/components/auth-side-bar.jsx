@@ -16,7 +16,7 @@ const AuthSideBar = () => {
         <div>
           <p className="text-2xl font-bold tracking-wide">CubiX</p>
           <p className="mt-2 text-sm text-white/80">
-            Змагальна платформа з швидкокубінгу
+            Змагальна платформа з швидкубінгу
           </p>
         </div>
 
