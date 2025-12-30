@@ -1,6 +1,5 @@
 import { genSalt, hash } from "bcrypt";
 import mongoose from "mongoose";
-import { type } from "os";
 
 const userSchema = mongoose.Schema({
   email: {
@@ -25,6 +24,11 @@ const userSchema = mongoose.Schema({
     default: undefined,
   },
   countryCode: {
+    type: String,
+    enum: ["keyboard", "typing"],
+    default: "keyboard",
+  },
+  timerType: {
     type: String,
   },
   isOnline: {
