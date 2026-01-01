@@ -4,6 +4,6 @@ import { getUser } from "../controllers/ProfileController.js";
 
 const profileRoutes = Router();
 
-profileRoutes.put("/users/:id", verifyToken, getUser);
+profileRoutes.get("/users/:id", verifyToken, getUser);
 
 export default profileRoutes;
