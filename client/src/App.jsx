@@ -9,9 +9,12 @@ import Main from "./pages/home/main";
 import { apiClient } from "./lib/api-client";
 import { GET_ME_ROUTE } from "./utils/constants";
 import { useAppStore } from "./store";
+import Profile from "./pages/profile/profile";
+import Loader from "./components/loader/loader";
 
 function App() {
   const { setUserData } = useAppStore();
+  const [loading, setLoading] = useState(true);
 
   const getUserData = async () => {
     await apiClient
@@ -21,11 +24,22 @@ function App() {
       })
       .catch((err) => {
         setUserData(undefined);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
   useEffect(() => {
     getUserData();
   }, []);
+
+  if (loading)
+    return (
+      <div className="w-screen h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+
   return (
     <BrowserRouter>
       <Routes>
@@ -33,6 +47,8 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/rooms" element={<Main />} />
           <Route path="/contests" element={<Main />} />
+
+          <Route path="/users/:id" element={<Profile />} />
         </Route>
 
         <Route path="/auth" element={<Auth />} />

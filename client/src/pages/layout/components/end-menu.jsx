@@ -20,11 +20,12 @@ import {
 import { apiClient } from "@/lib/api-client";
 import { LOGOUT_ROUTE } from "@/utils/constants";
 import { toast } from "sonner";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const EndMenu = ({ authorized }) => {
   const { userData, setUserData } = useAppStore();
   const { theme, toggleTheme } = useTheme();
+  const navigate = useNavigate();
 
   const logout = async () => {
     apiClient
@@ -44,14 +45,20 @@ const EndMenu = ({ authorized }) => {
         <>
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer outline-0">
-              <UserAvatar size={10} />
+              <UserAvatar size="md" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[90vw] max-w-56" align="end">
               <DropdownMenuLabel className="truncate">
                 {userData.displayName}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Профіль</DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                  navigate(`/users/${userData._id}`);
+                }}
+              >
+                Профіль
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={toggleTheme}>
                 <div className="flex gap-2 items-center">
                   <span>Змінити тему</span>

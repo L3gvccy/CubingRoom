@@ -8,3 +8,6 @@ export const LOGOUT_ROUTE = `${AUTH_ROUTES}/logout`;
 
 export const WCA_ROUTES = "/api/wca";
 export const WCA_AUTH_ROUTE = `${WCA_ROUTES}/auth`;
+
+export const PROFILE_ROUTES = "/api/profile";
+export const GET_USER_ROUTE = `${PROFILE_ROUTES}/users`;

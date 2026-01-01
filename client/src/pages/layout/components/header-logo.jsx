@@ -10,7 +10,7 @@ const HeaderLogo = () => {
         navigate("/");
       }}
     >
-      <img src="CubingLogo.png" alt="Logo" className="w-10" />
+      <img src="/CubingLogo.png" alt="Logo" className="w-10" />
       <p className="text-2xl font-thin text-zinc-100">CubiX</p>
     </div>
   );
