@@ -18,3 +18,24 @@ export const getUser = async (req, res) => {
     return res.status(500).send("Помилка сервара");
   }
 };
+
+export const updateName = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { newName } = req.body;
+
+    if (!newName) {
+      return res.status(400).send("Ім'я не введено");
+    }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      { displayName: newName }
+    );
+
+    return res.status(200).json({ user: updatedUser });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Помилка сервара");
+  }
+};
