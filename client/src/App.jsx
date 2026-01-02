@@ -11,6 +11,7 @@ import { GET_ME_ROUTE } from "./utils/constants";
 import { useAppStore } from "./store";
 import Profile from "./pages/profile/profile";
 import Loader from "./components/loader/loader";
+import WcaLinkSuccess from "./pages/profile/components/wca-link-success";
 
 function App() {
   const { setUserData } = useAppStore();
@@ -54,6 +55,7 @@ function App() {
         <Route path="/auth" element={<Auth />} />
 
         <Route path="/wca-success" element={<WcaSuccess />} />
+        <Route path="/wca-link-success" element={<WcaLinkSuccess />} />
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

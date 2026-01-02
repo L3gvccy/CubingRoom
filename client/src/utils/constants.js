@@ -11,3 +11,4 @@ export const WCA_AUTH_ROUTE = `${WCA_ROUTES}/auth`;
 
 export const PROFILE_ROUTES = "/api/profile";
 export const GET_USER_ROUTE = `${PROFILE_ROUTES}/users`;
+export const UPDATE_NAME_ROUTE = `${PROFILE_ROUTES}/update-name`;

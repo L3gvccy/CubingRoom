@@ -28,11 +28,12 @@ const EndMenu = ({ authorized }) => {
   const navigate = useNavigate();
 
   const logout = async () => {
-    apiClient
+    await apiClient
       .get(LOGOUT_ROUTE, { withCredentials: true })
       .then((res) => {
         setUserData(undefined);
         toast.success(res.data);
+        navigate("/");
       })
       .catch((err) => {
         console.error(err);

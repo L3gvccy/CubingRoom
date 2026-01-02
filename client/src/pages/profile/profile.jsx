@@ -2,16 +2,19 @@ import Loader from "@/components/loader/loader";
 import UserAvatar from "@/components/user-avatar";
 import { apiClient } from "@/lib/api-client";
 import { useAppStore } from "@/store";
-import { GET_USER_ROUTE } from "@/utils/constants";
+import { GET_USER_ROUTE, UPDATE_NAME_ROUTE } from "@/utils/constants";
 import React, { useState, useEffect } from "react";
 import { IoMdArrowBack, IoMdCheckmark } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { FaCheck } from "react-icons/fa6";
 import { MdModeEdit } from "react-icons/md";
+import { FiExternalLink } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
+import { getFlagEmoji } from "@/utils/tools";
+import LinkWcaBtn from "./components/link-wca-btn";
+import { toast } from "sonner";
 
 const Profile = () => {
-  const { userData } = useAppStore();
+  const { userData, setUserData } = useAppStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState();
@@ -46,11 +49,26 @@ const Profile = () => {
   };
 
   const handleNameEdit = async () => {
-    if (newName === userData.displayName) {
+    if (!newName || newName === userData.displayName) {
       setEditingName(false);
       return;
     }
-    await apiClient.post();
+    await apiClient
+      .post(UPDATE_NAME_ROUTE, { newName }, { withCredentials: true })
+      .then((res) => {
+        setUser(res.data.user);
+        setUserData(res.data.user);
+        toast.success("Ім'я успішно оновлено!");
+        setEditingName(false);
+      })
+      .catch((err) => {
+        if (err.response?.status !== 500) {
+          console.log(err);
+          toast.error(err.response?.data);
+        } else {
+          console.error(err);
+        }
+      });
   };
 
   useEffect(() => {
@@ -80,7 +98,7 @@ const Profile = () => {
           {editingName ? (
             <div className="flex gap-2 items-center">
               <input
-                className="text-xl border-b border-zinc-100/50"
+                className="text-2xl border-b border-zinc-100/50 mb-1"
                 type="text"
                 value={newName}
                 onChange={(e) => {
@@ -115,6 +133,39 @@ const Profile = () => {
               )}
             </div>
           )}
+
+          <div className="flex flex-col w-full gap-2 text-lg">
+            {user.wcaId ? (
+              <>
+                <p className="flex gap-2">
+                  <span className="font-semibold">WCA: </span>
+                  <a
+                    className="flex gap-1 items-center"
+                    href={`https://www.worldcubeassociation.org/persons/${user.wcaId}`}
+                    target="_blank"
+                  >
+                    {user.wcaId}
+                    <FiExternalLink />
+                  </a>
+                </p>
+                <p>
+                  <span className="font-semibold">Ім'я: </span>
+                  {user.wcaName}
+                </p>
+                <p>
+                  <span className="font-semibold">Країна: </span>
+                  {getFlagEmoji(user.countryCode)}
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  <span className="font-semibold">WCA:</span> Не підключено
+                </p>
+                <LinkWcaBtn />
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
