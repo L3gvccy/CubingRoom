@@ -28,10 +28,9 @@ export const updateName = async (req, res) => {
       return res.status(400).send("Ім'я не введено");
     }
 
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: userId },
-      { displayName: newName }
-    );
+    await User.findOneAndUpdate({ _id: userId }, { displayName: newName });
+
+    const updatedUser = await User.findOne({ _id: userId });
 
     return res.status(200).json({ user: updatedUser });
   } catch (error) {

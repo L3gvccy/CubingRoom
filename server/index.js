@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
+import cron from "node-cron";
 import authRoutes from "./routes/AuthRoutes.js";
 import wcaIdRoutes from "./routes/WcaIDRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
@@ -27,6 +28,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/wca", wcaIdRoutes);
 app.use("/api/profile", profileRoutes);
+
+// cron.schedule("*/1 * * * *", scheduledTask, { scheduled: true });
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
