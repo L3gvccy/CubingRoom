@@ -7,6 +7,7 @@ import cron from "node-cron";
 import authRoutes from "./routes/AuthRoutes.js";
 import wcaIdRoutes from "./routes/WcaIDRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
+import testRoutes from "./routes/TestRoutes.js";
 
 dotenv.config();
 
@@ -28,6 +29,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/wca", wcaIdRoutes);
 app.use("/api/profile", profileRoutes);
+
+app.use("/api/test", testRoutes);
 
 // cron.schedule("*/1 * * * *", scheduledTask, { scheduled: true });
 
