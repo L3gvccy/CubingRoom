@@ -77,14 +77,14 @@ const Profile = () => {
 
   if (loading)
     return (
-      <div className="flex bg-zinc-900 w-full min-h-screen items-center justify-center">
+      <div className="flex dark:bg-zinc-900 w-full min-h-screen items-center justify-center">
         <Loader />
       </div>
     );
 
   return (
     <>
-      <div className="bg-zinc-900 w-full min-h-screen p-4 relative flex justify-center">
+      <div className=" w-full p-4 relative flex justify-center">
         <div
           className="absolute top-4 left-4 text-xl text-zinc-400 hover:text-zinc-300 active:text-zinc-500 transition-all duration-300 cursor-pointer"
           onClick={() => {
