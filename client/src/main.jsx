@@ -7,6 +7,20 @@ import { Toaster } from "./components/ui/sonner.jsx";
 import { TimerProvider } from "./context/timerContext.jsx";
 import TimerFullscreen from "./components/timer/timer-fullscreen.jsx";
 
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/uk";
+
+dayjs.extend(localizedFormat);
+dayjs.extend(relativeTime);
+
+const supportedLocales = ["uk", "en"];
+const browserLocale = navigator.language || "en";
+const locale = browserLocale.split("-")[0];
+
+dayjs.locale(supportedLocales.includes(locale) ? locale : "uk");
+
 createRoot(document.getElementById("root")).render(
   // <StrictMode>
   <ThemeProvider>
