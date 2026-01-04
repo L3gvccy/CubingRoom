@@ -32,6 +32,11 @@ export function useTimer({ onFinish } = {}) {
   const chooseResult = (penalty) => {
     if (!pendingResult) return;
 
+    if (penalty === "reset") {
+      reset();
+      return;
+    }
+
     if (penalty === "+2") {
       pendingResult.time += 2000;
     }
@@ -56,6 +61,17 @@ export function useTimer({ onFinish } = {}) {
   useEffect(() => {
     const onKeyDown = (e) => {
       if (!e.code || e.code !== "Space" || e.repeat) return;
+
+      const activeTag = document.activeElement?.tagName;
+      const editable = document.activeElement?.isContentEditable;
+      if (
+        activeTag === "INPUT" ||
+        activeTag === "TEXTAREA" ||
+        activeTag === "SELECT" ||
+        editable
+      ) {
+        return;
+      }
 
       if (state === "idle") {
         setState("holding");

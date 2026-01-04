@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getTimerColor } from "@/utils/tools";
+import { formatTimeDisplay, getTimerColor } from "@/utils/tools";
 import { useGlobalTimer } from "@/context/timerContext";
 
 const TimerFullscreen = () => {
@@ -9,6 +9,8 @@ const TimerFullscreen = () => {
   const onEnterPress = (e) => {
     if (e.key === "Enter") {
       chooseResult("OK");
+    } else if (e.key === "Escape") {
+      chooseResult("reset");
     }
   };
 
@@ -31,28 +33,34 @@ const TimerFullscreen = () => {
           state
         )}`}
       >
-        {(time / 1000).toFixed(2)}
+        {formatTimeDisplay(time)}
       </div>
 
       {state === "stopped" && pendingResult && (
         <div className="flex gap-2">
           <button
-            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-orange-400"
+            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-orange-400 cursor-pointer"
             onClick={() => chooseResult("+2")}
           >
             +2
           </button>
           <button
-            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-red-400"
+            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-red-400 cursor-pointer"
             onClick={() => chooseResult("DNF")}
           >
             DNF
           </button>
           <button
-            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-emerald-400"
+            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-emerald-400 cursor-pointer"
             onClick={() => chooseResult("OK")}
           >
             OK
+          </button>
+          <button
+            className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-zinc-700 cursor-pointer"
+            onClick={() => chooseResult("reset")}
+          >
+            RESET
           </button>
         </div>
       )}

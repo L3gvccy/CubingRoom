@@ -2,10 +2,11 @@ import { getScrambles } from "cubicdb-module";
 
 export const generateScramble = async (req, res) => {
   try {
-    const { event } = req.body;
-    console.log(event);
+    const { event, length } = req.body;
 
-    const scramble = getScrambles([{ scrambler: event, image: true }])[0];
+    const scramble = getScrambles([
+      { scrambler: event, length: length, image: true },
+    ])[0];
 
     res.status(200).json({ scramble });
   } catch (error) {

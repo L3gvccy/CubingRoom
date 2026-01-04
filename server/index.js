@@ -8,6 +8,7 @@ import authRoutes from "./routes/AuthRoutes.js";
 import wcaIdRoutes from "./routes/WcaIDRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import testRoutes from "./routes/TestRoutes.js";
+import { createContests } from "./cron/createContests.js";
 
 dotenv.config();
 
@@ -32,7 +33,10 @@ app.use("/api/profile", profileRoutes);
 
 app.use("/api/test", testRoutes);
 
-// cron.schedule("*/1 * * * *", scheduledTask, { scheduled: true });
+// every hour
+// cron.schedule("* */1 * * *", scheduledTask, { scheduled: true });
+// every minute
+// cron.schedule("*/1 * * * *", createContests, { scheduled: true });
 
 const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
