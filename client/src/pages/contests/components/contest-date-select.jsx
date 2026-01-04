@@ -33,7 +33,7 @@ const ContestDateSelect = ({ value, onChange }) => {
         onClick={(e) => {
           handleBackBtnClick(e);
         }}
-        className="text-zinc-300 hover:text-zinc-200 disabled:text-zinc-700 disabled:cursor-auto cursor-pointer transition-all duration-300"
+        className="text-zinc-700 hover:text-zinc-600 disabled:text-zinc-300 dark:text-zinc-300 dark:hover:text-zinc-200 dark:disabled:text-zinc-700 disabled:cursor-auto cursor-pointer transition-all duration-300"
       >
         <ChevronLeft size={30} />
       </button>
@@ -45,7 +45,7 @@ const ContestDateSelect = ({ value, onChange }) => {
         onClick={(e) => {
           handleForwBtnClick(e);
         }}
-        className="text-zinc-300 hover:text-zinc-200 disabled:text-zinc-700 disabled:cursor-auto cursor-pointer transition-all duration-300"
+        className="text-zinc-700 hover:text-zinc-600 disabled:text-zinc-300 dark:text-zinc-300 dark:hover:text-zinc-200 dark:disabled:text-zinc-700 disabled:cursor-auto cursor-pointer transition-all duration-300"
       >
         <ChevronRight size={30} />
       </button>
