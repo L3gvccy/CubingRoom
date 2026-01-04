@@ -38,3 +38,23 @@ export const updateName = async (req, res) => {
     return res.status(500).send("Помилка сервара");
   }
 };
+
+export const updateTimerType = async (req, res) => {
+  try {
+    const { userId } = req;
+    const { type } = req.body;
+
+    if (!type) {
+      return res.status(400).send("Тип таймеру не вказано");
+    }
+
+    await User.findOneAndUpdate({ _id: userId }, { timerType: type });
+
+    const updatedUser = await User.findOne({ _id: userId });
+
+    return res.status(200).json({ user: updatedUser });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send("Помилка сервара");
+  }
+};

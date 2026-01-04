@@ -11,6 +11,10 @@ const contestSchema = mongoose.Schema({
     enum: ["ao5", "mo3"],
   },
   scrambles: { type: Array, default: [] },
+  active: {
+    type: Boolean,
+    default: true,
+  },
   date: {
     type: Date,
     default: Date.now,
