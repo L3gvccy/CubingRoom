@@ -85,6 +85,24 @@ export const parseTimeInput = (value) => {
     centiseconds = Number(clean.slice(-2));
   }
 
-  // 2️⃣ переводимо в мілісекунди
   return minutes * 60 * 1000 + seconds * 1000 + centiseconds * 10;
+};
+
+export const getNameAndFormat = (event) => {
+  const wca_events = {
+    333: ["3x3", "ao5"],
+    222: ["2x2", "ao5"],
+    444: ["4x4", "ao5"],
+    555: ["5x5", "ao5"],
+    666: ["6x6", "mo3"],
+    777: ["7x7", "mo3"],
+    "333oh": ["3x3 OH", "ao5"],
+    clock: ["Clock", "ao5"],
+    megaminx: ["Megaminx", "ao5"],
+    pyraminx: ["Pyraminx", "ao5"],
+    skewb: ["Skewb", "ao5"],
+    sq1: ["Square-1", "ao5"],
+  };
+
+  return wca_events[event];
 };

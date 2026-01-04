@@ -1,0 +1,56 @@
+import dayjs from "dayjs";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useMemo } from "react";
+
+const ContestDateSelect = ({ value, onChange }) => {
+  const addDays = (date, days) => {
+    const d = new Date(date);
+    d.setDate(d.getDate() + days);
+    return d;
+  };
+
+  const today = useMemo(() => new Date(), []);
+  const minDate = useMemo(() => addDays(today, -7), []);
+
+  const canGoBack = value > minDate;
+  const canGoForw = value.toDateString() !== today.toDateString();
+
+  const handleBackBtnClick = (e) => {
+    if (!canGoBack) return;
+
+    onChange(addDays(value, -1));
+  };
+  const handleForwBtnClick = (e) => {
+    if (!canGoForw) return;
+
+    onChange(addDays(value, 1));
+  };
+
+  return (
+    <div className="flex items-center justify-center px-4 gap-5">
+      <button
+        disabled={!canGoBack}
+        onClick={(e) => {
+          handleBackBtnClick(e);
+        }}
+        className="text-zinc-300 hover:text-zinc-200 disabled:text-zinc-700 disabled:cursor-auto cursor-pointer transition-all duration-300"
+      >
+        <ChevronLeft size={30} />
+      </button>
+
+      <div className="text-lg font-semibold">{dayjs(value).format("LL")}</div>
+
+      <button
+        disabled={!canGoForw}
+        onClick={(e) => {
+          handleForwBtnClick(e);
+        }}
+        className="text-zinc-300 hover:text-zinc-200 disabled:text-zinc-700 disabled:cursor-auto cursor-pointer transition-all duration-300"
+      >
+        <ChevronRight size={30} />
+      </button>
+    </div>
+  );
+};
+
+export default ContestDateSelect;

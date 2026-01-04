@@ -13,6 +13,7 @@ import Profile from "./pages/profile/profile";
 import Loader from "./components/loader/loader";
 import WcaLinkSuccess from "./pages/profile/components/wca-link-success";
 import Test from "./pages/test/test";
+import Contests from "./pages/contests/contests";
 
 function App() {
   const { setUserData } = useAppStore();
@@ -48,7 +49,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
           <Route path="/rooms" element={<Main />} />
-          <Route path="/contests" element={<Main />} />
+          <Route path="/contests" element={<Contests />} />
 
           <Route path="/users/:id" element={<Profile />} />
         </Route>
