@@ -87,7 +87,7 @@ const Main = () => {
           ].map((item, i) => (
             <motion.div
               key={i}
-              className="rounded-xl bg-zinc-900/70 border border-zinc-800 p-6"
+              className="rounded-xl bg-linear-to-br from-zinc-800/70 to-zinc-900/70 border border-zinc-700 p-6"
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
