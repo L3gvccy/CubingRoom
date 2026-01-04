@@ -1,13 +1,17 @@
 import EventSelect from "@/components/event-select";
+import TimeInput from "@/components/timeInput/time-input";
+import TimerTypeSelect from "@/components/timer-type-select";
 import Timer from "@/components/timer/timer";
 import TimerFullscreen from "@/components/timer/timer-fullscreen";
 import TimerMini from "@/components/timer/timer-mini";
 import { apiClient } from "@/lib/api-client";
+import { useAppStore } from "@/store";
 import { GEN_SCR } from "@/utils/constants";
 import { formatTimeDisplay, getScrambler } from "@/utils/tools";
 import React, { useState, useEffect, useRef } from "react";
 
 const Test = () => {
+  const { userData } = useAppStore();
   const [event, setEvent] = useState("333");
   const [scramble, setScramble] = useState("");
   const [results, setResults] = useState([]);
@@ -44,7 +48,13 @@ const Test = () => {
   }, []);
   return (
     <>
-      <EventSelect value={event} setEvent={setEvent} />
+      <div className="flex w-full items-center justify-center p-2">
+        <div className="flex justify-between max-w-342 w-full">
+          <EventSelect value={event} setEvent={setEvent} />
+          <TimerTypeSelect />
+        </div>
+      </div>
+
       {scramble.scramble ? (
         <>
           <div className="p-4 text-center wrap-break-word">
@@ -64,7 +74,12 @@ const Test = () => {
       ) : (
         <div className="w-full h-32 text-center">Generating scramble</div>
       )}
-      <Timer handleSubmit={handleSubmit} />
+      {userData.timerType === "keyboard" ? (
+        <Timer handleSubmit={handleSubmit} />
+      ) : (
+        <TimeInput handleSubmit={handleSubmit} />
+      )}
+
       {results.map((res, i) => (
         <p key={i}>{formatTimeDisplay(res.time, res.penalty)}</p>
       ))}

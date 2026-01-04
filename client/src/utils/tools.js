@@ -62,3 +62,29 @@ export const formatTimeDisplay = (time, penalty) => {
   if (penalty === "+2") return `${formatted}+`;
   return formatted;
 };
+
+export const parseTimeInput = (value) => {
+  if (!value) return null;
+
+  const clean = value.toString().replace(/[^\d]/g, "");
+
+  if (!/^\d+$/.test(clean)) return null;
+
+  let minutes = 0;
+  let seconds = 0;
+  let centiseconds = 0;
+
+  if (clean.length <= 2) {
+    centiseconds = Number(clean.padStart(2, "0"));
+  } else if (clean.length <= 4) {
+    seconds = Number(clean.slice(0, -2));
+    centiseconds = Number(clean.slice(-2));
+  } else {
+    minutes = Number(clean.slice(0, -4));
+    seconds = Number(clean.slice(-4, -2));
+    centiseconds = Number(clean.slice(-2));
+  }
+
+  // 2️⃣ переводимо в мілісекунди
+  return minutes * 60 * 1000 + seconds * 1000 + centiseconds * 10;
+};

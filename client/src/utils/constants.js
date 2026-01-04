@@ -12,6 +12,7 @@ export const WCA_AUTH_ROUTE = `${WCA_ROUTES}/auth`;
 export const PROFILE_ROUTES = "/api/profile";
 export const GET_USER_ROUTE = `${PROFILE_ROUTES}/users`;
 export const UPDATE_NAME_ROUTE = `${PROFILE_ROUTES}/update-name`;
+export const UPDATE_TIMER_TYPE = `${PROFILE_ROUTES}/update-timer-type`;
 
 export const TEST_ROUTES = "/api/test";
 export const GEN_SCR = `${TEST_ROUTES}/gen-scr`;

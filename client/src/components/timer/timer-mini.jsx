@@ -1,5 +1,5 @@
 import React from "react";
-import { getTimerColor } from "@/utils/tools";
+import { formatTimeDisplay, getTimerColor } from "@/utils/tools";
 import { useGlobalTimer } from "@/context/timerContext";
 
 const TimerMini = () => {
@@ -10,7 +10,7 @@ const TimerMini = () => {
         state
       )}`}
     >
-      {(time / 1000).toFixed(2)}
+      {formatTimeDisplay(time)}
     </div>
   );
 };
