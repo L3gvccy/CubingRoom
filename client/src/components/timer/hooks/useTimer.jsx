@@ -37,11 +37,17 @@ export function useTimer({ onFinish } = {}) {
       return;
     }
 
+    let finalTime = pendingResult.time;
+
     if (penalty === "+2") {
-      pendingResult.time += 2000;
+      finalTime += 2000;
     }
 
-    const finalResult = { time: pendingResult.time, penalty };
+    if (penalty === "DNF") {
+      finalTime = Infinity;
+    }
+
+    const finalResult = { time: pendingResult.time, penalty, finalTime };
     setPendingResult(null);
     setIsFullscreen(false);
     setTime(0);

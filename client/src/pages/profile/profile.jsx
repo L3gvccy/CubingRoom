@@ -22,7 +22,7 @@ const Profile = () => {
   const { id } = useParams();
 
   const [editingName, setEditingName] = useState();
-  const [newName, setNewName] = useState(userData.displayName);
+  const [newName, setNewName] = useState(userData?.displayName);
 
   const getUser = async () => {
     await apiClient
@@ -34,6 +34,9 @@ const Profile = () => {
       .catch((err) => {
         if (err.response.status !== 500) {
           toast.error(err.response?.data);
+          if (err.response.status === 401) {
+            navigate("/auth");
+          }
         } else {
           console.error(err);
         }
@@ -62,9 +65,11 @@ const Profile = () => {
         setEditingName(false);
       })
       .catch((err) => {
-        if (err.response?.status !== 500) {
-          console.log(err);
+        if (err.response.status !== 500) {
           toast.error(err.response?.data);
+          if (err.response.status === 401) {
+            navigate("/auth");
+          }
         } else {
           console.error(err);
         }
@@ -75,7 +80,7 @@ const Profile = () => {
     getUser();
   }, []);
 
-  if (loading)
+  if (loading || !user)
     return (
       <div className="flex dark:bg-zinc-900 w-full min-h-screen items-center justify-center">
         <Loader />

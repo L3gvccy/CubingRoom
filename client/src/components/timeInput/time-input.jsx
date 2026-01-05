@@ -16,12 +16,17 @@ const TimeInput = ({ handleSubmit }) => {
     }
 
     let time = parseTimeInput(value);
+    let finalTime = time;
 
     if (penalty === "+2") {
-      time += 2000;
+      finalTime += 2000;
     }
 
-    const finalResult = { time, penalty };
+    if (penalty === "DNF") {
+      finalTime = Infinity;
+    }
+
+    const finalResult = { time, penalty, finalTime };
     setValue("");
 
     if (handleSubmit) handleSubmit(finalResult);

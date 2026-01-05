@@ -14,5 +14,11 @@ export const GET_USER_ROUTE = `${PROFILE_ROUTES}/users`;
 export const UPDATE_NAME_ROUTE = `${PROFILE_ROUTES}/update-name`;
 export const UPDATE_TIMER_TYPE = `${PROFILE_ROUTES}/update-timer-type`;
 
+export const CONTEST_ROUTES = "/api/contest";
+export const GET_ALL_CONTESTS_ROUTE = `${CONTEST_ROUTES}/get-all-contests`;
+export const GET_CONTEST_ROUTE = (contestId) => {
+  return `${CONTEST_ROUTES}/get-contest/${contestId}`;
+};
+
 export const TEST_ROUTES = "/api/test";
 export const GEN_SCR = `${TEST_ROUTES}/gen-scr`;

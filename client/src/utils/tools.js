@@ -41,9 +41,14 @@ export const getScrambler = (event) => {
 };
 
 export const formatTimeDisplay = (time, penalty) => {
-  const totalMs = Math.floor(time);
+  let totalMs = Math.floor(time);
+
+  if (penalty === "+2") {
+    totalMs += 2000;
+  }
 
   const ms = Math.floor((totalMs % 1000) / 10);
+
   const totalSeconds = Math.floor(totalMs / 1000);
   const seconds = totalSeconds % 60;
   const minutes = Math.floor(totalSeconds / 60);
@@ -86,6 +91,10 @@ export const parseTimeInput = (value) => {
   }
 
   return minutes * 60 * 1000 + seconds * 1000 + centiseconds * 10;
+};
+
+export const compareDate = (a, b) => {
+  return a.toDateString() === b.toDateString();
 };
 
 export const getNameAndFormat = (event) => {

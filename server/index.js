@@ -9,6 +9,7 @@ import wcaIdRoutes from "./routes/WcaIDRoutes.js";
 import profileRoutes from "./routes/ProfileRoutes.js";
 import testRoutes from "./routes/TestRoutes.js";
 import { createContests } from "./cron/createContests.js";
+import contestRoutes from "./routes/ContestRoutes.js";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/wca", wcaIdRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/contest", contestRoutes);
 
 app.use("/api/test", testRoutes);
 

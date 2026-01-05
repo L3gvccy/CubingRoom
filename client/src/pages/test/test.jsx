@@ -81,7 +81,14 @@ const Test = () => {
       )}
 
       {results.map((res, i) => (
-        <p key={i}>{formatTimeDisplay(res.time, res.penalty)}</p>
+        <p
+          key={i}
+          onClick={() => {
+            console.log(res);
+          }}
+        >
+          {formatTimeDisplay(res.time, res.penalty)}
+        </p>
       ))}
     </>
   );

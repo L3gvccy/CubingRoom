@@ -1,3 +1,4 @@
+import { compareDate } from "@/utils/tools";
 import dayjs from "dayjs";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import React, { useMemo } from "react";
@@ -11,15 +12,17 @@ const ContestDateSelect = ({ value, onChange }) => {
 
   const today = useMemo(() => new Date(), []);
   const minDate = useMemo(() => addDays(today, -7), []);
+  const maxDate = useMemo(() => addDays(today, 1), []);
 
   const canGoBack = value > minDate;
-  const canGoForw = value.toDateString() !== today.toDateString();
+  const canGoForw = !compareDate(value, maxDate);
 
   const handleBackBtnClick = (e) => {
     if (!canGoBack) return;
 
     onChange(addDays(value, -1));
   };
+
   const handleForwBtnClick = (e) => {
     if (!canGoForw) return;
 
@@ -27,7 +30,7 @@ const ContestDateSelect = ({ value, onChange }) => {
   };
 
   return (
-    <div className="flex items-center justify-center px-4 gap-5">
+    <div className="flex items-center justify-center px-4 gap-2 md:gap-5">
       <button
         disabled={!canGoBack}
         onClick={(e) => {
@@ -38,7 +41,15 @@ const ContestDateSelect = ({ value, onChange }) => {
         <ChevronLeft size={30} />
       </button>
 
-      <div className="text-lg font-semibold">{dayjs(value).format("LL")}</div>
+      <div className="flex flex-col gap items-center justify-center w-48">
+        <p
+          className={`text-lg font-semibold ${
+            compareDate(value, today) && "text-violet-700 dark:text-violet-400"
+          }`}
+        >
+          {dayjs(value).format("LL")}
+        </p>
+      </div>
 
       <button
         disabled={!canGoForw}
