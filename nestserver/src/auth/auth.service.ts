@@ -58,4 +58,14 @@ export class AuthService {
 
     return { user, token };
   }
+
+  async getMe(id: string) {
+    const user = await this.prisma.user.findUnique({ where: { id: id } });
+
+    if (!user) {
+      throw new UnauthorizedException("Потрібно увійти до акаунту");
+    }
+
+    return { user };
+  }
 }
