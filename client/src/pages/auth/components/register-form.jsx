@@ -44,7 +44,7 @@ const RegisterForm = ({ setAuthAction }) => {
         })
         .catch((err) => {
           if (err.response.status !== 500) {
-            toast.error(err.response?.data);
+            toast.error(err.response?.data?.message);
           } else {
             console.error(err);
           }

@@ -32,7 +32,7 @@ const EndMenu = ({ authorized }) => {
       .get(LOGOUT_ROUTE, { withCredentials: true })
       .then((res) => {
         setUserData(undefined);
-        toast.success(res.data);
+        toast.success(res.data.message);
         navigate("/");
       })
       .catch((err) => {
@@ -55,7 +55,7 @@ const EndMenu = ({ authorized }) => {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 onClick={() => {
-                  navigate(`/users/${userData._id}`);
+                  navigate(`/users/${userData.id}`);
                 }}
               >
                 Профіль

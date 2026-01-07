@@ -29,7 +29,7 @@ const LoginForm = ({ setAuthAction }) => {
     await apiClient
       .post(LOGIN_ROUTE, { email, password }, { withCredentials: true })
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           toast.success("Ви успішно увійшли");
           setUserData(res.data.user);
           navigate("/");
@@ -38,7 +38,7 @@ const LoginForm = ({ setAuthAction }) => {
       })
       .catch((err) => {
         if (err.response.status !== 500) {
-          toast.error(err.response?.data);
+          toast.error(err.response?.data?.message);
         } else {
           console.error(err);
         }
