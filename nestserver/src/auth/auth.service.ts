@@ -26,7 +26,7 @@ export class AuthService {
       throw new NotFoundException("Користувача з такою поштою не знайдено");
     }
 
-    const valid = bcrypt.compare(password, user.password);
+    const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) {
       throw new UnauthorizedException("Невірний пароль");

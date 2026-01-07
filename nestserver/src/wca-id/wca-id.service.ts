@@ -68,7 +68,7 @@ export class WcaIdService {
 
       const token = this.jwtService.sign({ sub: user.id });
 
-      return { user, token };
+      return token;
     } catch (error) {
       console.log(error);
       throw new BadRequestException("Не вдалось отримати токен авторизації");

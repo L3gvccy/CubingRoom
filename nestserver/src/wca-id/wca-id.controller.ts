@@ -29,7 +29,7 @@ export class WcaIdController {
       throw new BadRequestException("Не вдалось отримати код авторизації");
     }
 
-    const { user, token } = await this.wcaIdService.handleWcaIdCallback(code);
+    const token = await this.wcaIdService.handleWcaIdCallback(code);
 
     res.cookie("jwt", token, {
       maxAge,
@@ -37,6 +37,6 @@ export class WcaIdController {
       sameSite: "none",
     });
 
-    return user;
+    return res.redirect(`${process.env.ORIGIN}/wca-success`);
   }
 }
