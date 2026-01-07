@@ -40,11 +40,11 @@ const Test = () => {
 
   useEffect(() => {
     setResults([]);
-    getScramble();
+    // getScramble();
   }, [event]);
 
   useEffect(() => {
-    getScramble();
+    // getScramble();
   }, []);
   return (
     <>
@@ -74,7 +74,7 @@ const Test = () => {
       ) : (
         <div className="w-full h-32 text-center">Generating scramble</div>
       )}
-      {userData.timerType === "keyboard" ? (
+      {userData.timerType === "KEYBOARD" ? (
         <Timer handleSubmit={handleSubmit} />
       ) : (
         <TimeInput handleSubmit={handleSubmit} />

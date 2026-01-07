@@ -19,6 +19,12 @@ enum TimerType {
   TYPING
 }
 
+enum Penalty {
+  OK
+  PLUS2
+  DNF
+}
+
 model User {
   id String @id @default(ulid())
 
@@ -26,6 +32,7 @@ model User {
   password String?
   displayName String
   wcaId String? @unique
+  wcaName String?
   image String?
   countryCode String?
   timerType TimerType @default(KEYBOARD)

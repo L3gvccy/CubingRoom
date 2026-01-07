@@ -33,7 +33,7 @@ const Profile = () => {
       })
       .catch((err) => {
         if (err.response.status !== 500) {
-          toast.error(err.response?.data);
+          toast.error(err.response?.data?.message);
           if (err.response.status === 401) {
             navigate("/auth");
           }
@@ -66,7 +66,7 @@ const Profile = () => {
       })
       .catch((err) => {
         if (err.response.status !== 500) {
-          toast.error(err.response?.data);
+          toast.error(err.response?.data?.message);
           if (err.response.status === 401) {
             navigate("/auth");
           }

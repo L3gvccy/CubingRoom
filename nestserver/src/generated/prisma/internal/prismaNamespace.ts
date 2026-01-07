@@ -523,6 +523,7 @@ export const UserScalarFieldEnum = {
   password: 'password',
   displayName: 'displayName',
   wcaId: 'wcaId',
+  wcaName: 'wcaName',
   image: 'image',
   countryCode: 'countryCode',
   timerType: 'timerType',

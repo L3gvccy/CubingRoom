@@ -13,15 +13,15 @@ import {
 const TimerTypeSelect = () => {
   const { userData, setUserData } = useAppStore();
   const options = [
-    ["keyboard", "Таймер"],
-    ["typing", "Введення"],
+    ["KEYBOARD", "Таймер"],
+    ["TYPING", "Введення"],
   ];
 
   const updateTimerType = async (type) => {
     const currUserData = userData;
     setUserData({ ...userData, timerType: type });
     await apiClient
-      .post(UPDATE_TIMER_TYPE, { type }, { withCredentials: true })
+      .patch(UPDATE_TIMER_TYPE, { timerType: type }, { withCredentials: true })
       .catch((err) => {
         console.error(err);
         setUserData(currUserData);

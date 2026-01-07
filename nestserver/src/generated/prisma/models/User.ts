@@ -30,6 +30,7 @@ export type UserMinAggregateOutputType = {
   password: string | null
   displayName: string | null
   wcaId: string | null
+  wcaName: string | null
   image: string | null
   countryCode: string | null
   timerType: $Enums.TimerType | null
@@ -43,6 +44,7 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   displayName: string | null
   wcaId: string | null
+  wcaName: string | null
   image: string | null
   countryCode: string | null
   timerType: $Enums.TimerType | null
@@ -56,6 +58,7 @@ export type UserCountAggregateOutputType = {
   password: number
   displayName: number
   wcaId: number
+  wcaName: number
   image: number
   countryCode: number
   timerType: number
@@ -71,6 +74,7 @@ export type UserMinAggregateInputType = {
   password?: true
   displayName?: true
   wcaId?: true
+  wcaName?: true
   image?: true
   countryCode?: true
   timerType?: true
@@ -84,6 +88,7 @@ export type UserMaxAggregateInputType = {
   password?: true
   displayName?: true
   wcaId?: true
+  wcaName?: true
   image?: true
   countryCode?: true
   timerType?: true
@@ -97,6 +102,7 @@ export type UserCountAggregateInputType = {
   password?: true
   displayName?: true
   wcaId?: true
+  wcaName?: true
   image?: true
   countryCode?: true
   timerType?: true
@@ -183,6 +189,7 @@ export type UserGroupByOutputType = {
   password: string | null
   displayName: string
   wcaId: string | null
+  wcaName: string | null
   image: string | null
   countryCode: string | null
   timerType: $Enums.TimerType
@@ -217,6 +224,7 @@ export type UserWhereInput = {
   password?: Prisma.StringNullableFilter<"User"> | string | null
   displayName?: Prisma.StringFilter<"User"> | string
   wcaId?: Prisma.StringNullableFilter<"User"> | string | null
+  wcaName?: Prisma.StringNullableFilter<"User"> | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
   countryCode?: Prisma.StringNullableFilter<"User"> | string | null
   timerType?: Prisma.EnumTimerTypeFilter<"User"> | $Enums.TimerType
@@ -230,6 +238,7 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   displayName?: Prisma.SortOrder
   wcaId?: Prisma.SortOrderInput | Prisma.SortOrder
+  wcaName?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   countryCode?: Prisma.SortOrderInput | Prisma.SortOrder
   timerType?: Prisma.SortOrder
@@ -246,6 +255,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringNullableFilter<"User"> | string | null
   displayName?: Prisma.StringFilter<"User"> | string
+  wcaName?: Prisma.StringNullableFilter<"User"> | string | null
   image?: Prisma.StringNullableFilter<"User"> | string | null
   countryCode?: Prisma.StringNullableFilter<"User"> | string | null
   timerType?: Prisma.EnumTimerTypeFilter<"User"> | $Enums.TimerType
@@ -259,6 +269,7 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   displayName?: Prisma.SortOrder
   wcaId?: Prisma.SortOrderInput | Prisma.SortOrder
+  wcaName?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   countryCode?: Prisma.SortOrderInput | Prisma.SortOrder
   timerType?: Prisma.SortOrder
@@ -278,6 +289,7 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   displayName?: Prisma.StringWithAggregatesFilter<"User"> | string
   wcaId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  wcaName?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   countryCode?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   timerType?: Prisma.EnumTimerTypeWithAggregatesFilter<"User"> | $Enums.TimerType
@@ -291,6 +303,7 @@ export type UserCreateInput = {
   password?: string | null
   displayName: string
   wcaId?: string | null
+  wcaName?: string | null
   image?: string | null
   countryCode?: string | null
   timerType?: $Enums.TimerType
@@ -304,6 +317,7 @@ export type UserUncheckedCreateInput = {
   password?: string | null
   displayName: string
   wcaId?: string | null
+  wcaName?: string | null
   image?: string | null
   countryCode?: string | null
   timerType?: $Enums.TimerType
@@ -317,6 +331,7 @@ export type UserUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
@@ -330,6 +345,7 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
@@ -343,6 +359,7 @@ export type UserCreateManyInput = {
   password?: string | null
   displayName: string
   wcaId?: string | null
+  wcaName?: string | null
   image?: string | null
   countryCode?: string | null
   timerType?: $Enums.TimerType
@@ -356,6 +373,7 @@ export type UserUpdateManyMutationInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
@@ -369,6 +387,7 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   displayName?: Prisma.StringFieldUpdateOperationsInput | string
   wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
@@ -382,6 +401,7 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   wcaId?: Prisma.SortOrder
+  wcaName?: Prisma.SortOrder
   image?: Prisma.SortOrder
   countryCode?: Prisma.SortOrder
   timerType?: Prisma.SortOrder
@@ -395,6 +415,7 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   wcaId?: Prisma.SortOrder
+  wcaName?: Prisma.SortOrder
   image?: Prisma.SortOrder
   countryCode?: Prisma.SortOrder
   timerType?: Prisma.SortOrder
@@ -408,6 +429,7 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   wcaId?: Prisma.SortOrder
+  wcaName?: Prisma.SortOrder
   image?: Prisma.SortOrder
   countryCode?: Prisma.SortOrder
   timerType?: Prisma.SortOrder
@@ -439,6 +461,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   displayName?: boolean
   wcaId?: boolean
+  wcaName?: boolean
   image?: boolean
   countryCode?: boolean
   timerType?: boolean
@@ -452,6 +475,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   displayName?: boolean
   wcaId?: boolean
+  wcaName?: boolean
   image?: boolean
   countryCode?: boolean
   timerType?: boolean
@@ -465,6 +489,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   displayName?: boolean
   wcaId?: boolean
+  wcaName?: boolean
   image?: boolean
   countryCode?: boolean
   timerType?: boolean
@@ -478,6 +503,7 @@ export type UserSelectScalar = {
   password?: boolean
   displayName?: boolean
   wcaId?: boolean
+  wcaName?: boolean
   image?: boolean
   countryCode?: boolean
   timerType?: boolean
@@ -485,7 +511,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "displayName" | "wcaId" | "image" | "countryCode" | "timerType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "displayName" | "wcaId" | "wcaName" | "image" | "countryCode" | "timerType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
@@ -496,6 +522,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string | null
     displayName: string
     wcaId: string | null
+    wcaName: string | null
     image: string | null
     countryCode: string | null
     timerType: $Enums.TimerType
@@ -929,6 +956,7 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly displayName: Prisma.FieldRef<"User", 'String'>
   readonly wcaId: Prisma.FieldRef<"User", 'String'>
+  readonly wcaName: Prisma.FieldRef<"User", 'String'>
   readonly image: Prisma.FieldRef<"User", 'String'>
   readonly countryCode: Prisma.FieldRef<"User", 'String'>
   readonly timerType: Prisma.FieldRef<"User", 'TimerType'>

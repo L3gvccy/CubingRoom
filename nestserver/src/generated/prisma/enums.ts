@@ -15,3 +15,12 @@ export const TimerType = {
 } as const
 
 export type TimerType = (typeof TimerType)[keyof typeof TimerType]
+
+
+export const Penalty = {
+  OK: 'OK',
+  PLUS2: 'PLUS2',
+  DNF: 'DNF'
+} as const
+
+export type Penalty = (typeof Penalty)[keyof typeof Penalty]

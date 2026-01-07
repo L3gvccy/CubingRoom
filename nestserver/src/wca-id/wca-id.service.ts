@@ -60,6 +60,7 @@ export class WcaIdService {
           data: {
             displayName,
             wcaId: wca.wca_id,
+            wcaName: wca.name,
             image: wca.avatar.id ? wca.avatar.url : null,
             countryCode: wca.country_iso2,
           },
