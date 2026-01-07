@@ -22,10 +22,10 @@ enum TimerType {
 model User {
   id String @id @default(ulid())
 
-  email String @unique
-  password String
+  email String? @unique
+  password String?
   displayName String
-  wcaId String?
+  wcaId String? @unique
   image String?
   countryCode String?
   timerType TimerType @default(KEYBOARD)

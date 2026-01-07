@@ -5,7 +5,7 @@ import type { Request } from "express";
 import "dotenv/config";
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, "jwt") {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
