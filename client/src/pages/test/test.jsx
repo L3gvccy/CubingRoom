@@ -9,6 +9,7 @@ import { useAppStore } from "@/store";
 import { GEN_SCR } from "@/utils/constants";
 import { formatTimeDisplay, getScrambler } from "@/utils/tools";
 import React, { useState, useEffect, useRef } from "react";
+import { ScrambleDisplay } from "scramble-display";
 
 const Test = () => {
   const { userData } = useAppStore();
@@ -40,11 +41,11 @@ const Test = () => {
 
   useEffect(() => {
     setResults([]);
-    // getScramble();
+    getScramble();
   }, [event]);
 
   useEffect(() => {
-    // getScramble();
+    getScramble();
   }, []);
   return (
     <>
@@ -64,21 +65,28 @@ const Test = () => {
               scramble.scramble
             )}
           </div>
-          <div
+          {/* <div
             className="w-64 h-48 mx-auto flex items-center justify-center
              [&>svg]:max-h-full
              [&>svg]:max-w-full"
             dangerouslySetInnerHTML={{ __html: scramble.image }}
-          />
+          /> */}
+
+          <scramble-display
+            event={event}
+            scramble={scramble.scramble}
+          ></scramble-display>
         </>
       ) : (
         <div className="w-full h-32 text-center">Generating scramble</div>
       )}
-      {userData.timerType === "KEYBOARD" ? (
+      {/* {userData.timerType === "KEYBOARD" ? (
         <Timer handleSubmit={handleSubmit} />
       ) : (
         <TimeInput handleSubmit={handleSubmit} />
-      )}
+      )} */}
+
+      <Timer handleSubmit={handleSubmit} />
 
       {results.map((res, i) => (
         <p

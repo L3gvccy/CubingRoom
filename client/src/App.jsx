@@ -14,6 +14,18 @@ import Loader from "./components/loader/loader";
 import WcaLinkSuccess from "./pages/profile/components/wca-link-success";
 import Test from "./pages/test/test";
 import Contests from "./pages/contests/contests";
+import Rooms from "./pages/rooms/rooms";
+
+const PrivateRoute = ({ children }) => {
+  const { userData } = useAppStore();
+  const isAuthenticated = !!userData;
+  return isAuthenticated ? children : <Navigate to="/" />;
+};
+const AuthRoute = ({ children }) => {
+  const { userData } = useAppStore();
+  const isAuthenticated = !!userData;
+  return isAuthenticated ? <Navigate to="/" /> : children;
+};
 
 function App() {
   const { setUserData } = useAppStore();
@@ -48,8 +60,22 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
-          <Route path="/rooms" element={<Main />} />
-          <Route path="/contests" element={<Contests />} />
+          <Route
+            path="/rooms"
+            element={
+              <PrivateRoute>
+                <Rooms />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/contests"
+            element={
+              <PrivateRoute>
+                <Contests />
+              </PrivateRoute>
+            }
+          />
 
           <Route path="/users/:id" element={<Profile />} />
         </Route>

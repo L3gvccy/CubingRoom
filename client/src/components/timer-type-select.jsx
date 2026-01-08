@@ -30,7 +30,7 @@ const TimerTypeSelect = () => {
 
   return (
     <Select
-      value={userData.timerType}
+      value={userData?.timerType}
       onValueChange={(e) => {
         updateTimerType(e);
       }}

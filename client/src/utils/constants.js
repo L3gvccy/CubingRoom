@@ -20,5 +20,12 @@ export const GET_CONTEST_ROUTE = (contestId) => {
   return `${CONTEST_ROUTES}/get-contest/${contestId}`;
 };
 
+export const ROOM_ROUTES = "/api/room";
+export const GET_ALL_ROOMS = `${ROOM_ROUTES}/all`;
+export const GET_ROOM_BY_ID = (roomId) => {
+  return `${ROOM_ROUTES}/${roomId}`;
+};
+export const CREATE_ROOM = `${ROOM_ROUTES}/create`;
+
 export const TEST_ROUTES = "/api/test";
 export const GEN_SCR = `${TEST_ROUTES}/gen-scr`;
