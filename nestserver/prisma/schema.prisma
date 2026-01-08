@@ -25,6 +25,17 @@ enum Penalty {
   DNF
 }
 
+enum RoomUserStatus {
+  WAITING
+  SOLVING
+  LEFT
+}
+
+enum RoomUserRole {
+  ADMIN
+  MEMBER
+}
+
 model User {
   id String @id @default(ulid())
 
@@ -36,6 +47,177 @@ model User {
   image String?
   countryCode String?
   timerType TimerType @default(KEYBOARD)
+
+  roomUsers RoomUser[]
+  rooms Room[]
+  contestResults ContestResult[]
+  records UserRecord[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserRecord {
+  id Int @id @default(autoincrement())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  event String
+  single Int?
+  mo3 Int?
+  ao5 Int?
+  ao12 Int?
+  ao50 Int?
+  ao100 Int?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoomUser {
+  id Int @id @default(autoincrement())
+
+  user User @relation(fields: [userId], references: [id])
+  userId String
+
+  room Room @relation(fields: [roomId], references: [id])
+  roomId Int
+
+  status RoomUserStatus @default(SOLVING)
+  role RoomUserRole @default(MEMBER)
+
+  results RoomSolveResult[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([roomId, userId])
+}
+
+model Solve {
+  id Int @id @default(autoincrement())
+
+  contestResult ContestResult? @relation(fields: [contestResultId], references: [id])
+  contestResultId Int?
+
+  roomSolveResult RoomSolveResult?
+
+  time Int
+  penalty Penalty @default(OK)
+  finalTime Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Scramble {
+  id Int @id @default(autoincrement())
+
+  contestEvent ContestEvent? @relation(fields: [contestEventId], references: [id], onDelete: Cascade)
+  contestEventId Int?
+  
+  roomSolve RoomSolve? 
+
+  index Int
+  scramble String
+  image String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Contest {
+  id Int @id @default(autoincrement())
+
+  type String @default("weekly")
+  startDate DateTime @default(now())
+  endDate DateTime
+  isActive Boolean @default(true)
+  
+  contests ContestEvent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContestEvent {
+  id Int @id @default(autoincrement())
+
+  contest Contest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+  contestId Int
+
+  event String
+  format String
+  scrambles Scramble[]
+  results ContestResult[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContestResult {
+  id Int @id @default(autoincrement())
+
+  contestEvent ContestEvent @relation(fields: [contestEventId], references: [id], onDelete: Cascade)
+  contestEventId Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  results Solve[]
+  
+  best Int?
+  average Int?
+  submitted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Room {
+  id Int @id @default(autoincrement())
+
+  name String
+  event String
+  private Boolean @default(false)
+  password String?
+
+  owner User @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId String
+
+  users RoomUser[]
+  solves RoomSolve[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoomSolve {
+  id Int @id @default(autoincrement())
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  roomId Int
+
+  index Int
+  scramble Scramble @relation(fields: [scrambleId], references: [id], onDelete: Cascade)
+  scrambleId Int @unique
+  results RoomSolveResult[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model RoomSolveResult {
+  id Int @id @default(autoincrement())
+
+  roomSolve RoomSolve @relation(fields: [roomSolveId], references: [id], onDelete: Cascade)
+  roomSolveId Int
+
+  user RoomUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+ 
+  result Solve @relation(fields: [resultId], references: [id], onDelete: Cascade)
+  resultId Int @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

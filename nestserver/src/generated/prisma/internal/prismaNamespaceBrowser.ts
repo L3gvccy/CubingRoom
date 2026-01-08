@@ -51,7 +51,17 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  User: 'User',
+  UserRecord: 'UserRecord',
+  RoomUser: 'RoomUser',
+  Solve: 'Solve',
+  Scramble: 'Scramble',
+  Contest: 'Contest',
+  ContestEvent: 'ContestEvent',
+  ContestResult: 'ContestResult',
+  Room: 'Room',
+  RoomSolve: 'RoomSolve',
+  RoomSolveResult: 'RoomSolveResult'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -85,6 +95,139 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserRecordScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  event: 'event',
+  single: 'single',
+  mo3: 'mo3',
+  ao5: 'ao5',
+  ao12: 'ao12',
+  ao50: 'ao50',
+  ao100: 'ao100',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserRecordScalarFieldEnum = (typeof UserRecordScalarFieldEnum)[keyof typeof UserRecordScalarFieldEnum]
+
+
+export const RoomUserScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  roomId: 'roomId',
+  status: 'status',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomUserScalarFieldEnum = (typeof RoomUserScalarFieldEnum)[keyof typeof RoomUserScalarFieldEnum]
+
+
+export const SolveScalarFieldEnum = {
+  id: 'id',
+  contestResultId: 'contestResultId',
+  time: 'time',
+  penalty: 'penalty',
+  finalTime: 'finalTime',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SolveScalarFieldEnum = (typeof SolveScalarFieldEnum)[keyof typeof SolveScalarFieldEnum]
+
+
+export const ScrambleScalarFieldEnum = {
+  id: 'id',
+  contestEventId: 'contestEventId',
+  index: 'index',
+  scramble: 'scramble',
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ScrambleScalarFieldEnum = (typeof ScrambleScalarFieldEnum)[keyof typeof ScrambleScalarFieldEnum]
+
+
+export const ContestScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContestScalarFieldEnum = (typeof ContestScalarFieldEnum)[keyof typeof ContestScalarFieldEnum]
+
+
+export const ContestEventScalarFieldEnum = {
+  id: 'id',
+  contestId: 'contestId',
+  event: 'event',
+  format: 'format',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContestEventScalarFieldEnum = (typeof ContestEventScalarFieldEnum)[keyof typeof ContestEventScalarFieldEnum]
+
+
+export const ContestResultScalarFieldEnum = {
+  id: 'id',
+  contestEventId: 'contestEventId',
+  userId: 'userId',
+  best: 'best',
+  average: 'average',
+  submitted: 'submitted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContestResultScalarFieldEnum = (typeof ContestResultScalarFieldEnum)[keyof typeof ContestResultScalarFieldEnum]
+
+
+export const RoomScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  event: 'event',
+  private: 'private',
+  password: 'password',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomScalarFieldEnum = (typeof RoomScalarFieldEnum)[keyof typeof RoomScalarFieldEnum]
+
+
+export const RoomSolveScalarFieldEnum = {
+  id: 'id',
+  roomId: 'roomId',
+  index: 'index',
+  scrambleId: 'scrambleId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomSolveScalarFieldEnum = (typeof RoomSolveScalarFieldEnum)[keyof typeof RoomSolveScalarFieldEnum]
+
+
+export const RoomSolveResultScalarFieldEnum = {
+  id: 'id',
+  roomSolveId: 'roomSolveId',
+  userId: 'userId',
+  resultId: 'resultId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RoomSolveResultScalarFieldEnum = (typeof RoomSolveResultScalarFieldEnum)[keyof typeof RoomSolveResultScalarFieldEnum]
 
 
 export const SortOrder = {

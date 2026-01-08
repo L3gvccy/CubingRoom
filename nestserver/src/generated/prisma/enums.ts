@@ -24,3 +24,20 @@ export const Penalty = {
 } as const
 
 export type Penalty = (typeof Penalty)[keyof typeof Penalty]
+
+
+export const RoomUserStatus = {
+  WAITING: 'WAITING',
+  SOLVING: 'SOLVING',
+  LEFT: 'LEFT'
+} as const
+
+export type RoomUserStatus = (typeof RoomUserStatus)[keyof typeof RoomUserStatus]
+
+
+export const RoomUserRole = {
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER'
+} as const
+
+export type RoomUserRole = (typeof RoomUserRole)[keyof typeof RoomUserRole]

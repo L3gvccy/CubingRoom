@@ -230,6 +230,10 @@ export type UserWhereInput = {
   timerType?: Prisma.EnumTimerTypeFilter<"User"> | $Enums.TimerType
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  roomUsers?: Prisma.RoomUserListRelationFilter
+  rooms?: Prisma.RoomListRelationFilter
+  contestResults?: Prisma.ContestResultListRelationFilter
+  records?: Prisma.UserRecordListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -244,6 +248,10 @@ export type UserOrderByWithRelationInput = {
   timerType?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  roomUsers?: Prisma.RoomUserOrderByRelationAggregateInput
+  rooms?: Prisma.RoomOrderByRelationAggregateInput
+  contestResults?: Prisma.ContestResultOrderByRelationAggregateInput
+  records?: Prisma.UserRecordOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -261,6 +269,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   timerType?: Prisma.EnumTimerTypeFilter<"User"> | $Enums.TimerType
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  roomUsers?: Prisma.RoomUserListRelationFilter
+  rooms?: Prisma.RoomListRelationFilter
+  contestResults?: Prisma.ContestResultListRelationFilter
+  records?: Prisma.UserRecordListRelationFilter
 }, "id" | "email" | "wcaId">
 
 export type UserOrderByWithAggregationInput = {
@@ -309,6 +321,10 @@ export type UserCreateInput = {
   timerType?: $Enums.TimerType
   createdAt?: Date | string
   updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutOwnerInput
+  contestResults?: Prisma.ContestResultCreateNestedManyWithoutUserInput
+  records?: Prisma.UserRecordCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -323,6 +339,10 @@ export type UserUncheckedCreateInput = {
   timerType?: $Enums.TimerType
   createdAt?: Date | string
   updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutOwnerInput
+  contestResults?: Prisma.ContestResultUncheckedCreateNestedManyWithoutUserInput
+  records?: Prisma.UserRecordUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -337,6 +357,10 @@ export type UserUpdateInput = {
   timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutOwnerNestedInput
+  contestResults?: Prisma.ContestResultUpdateManyWithoutUserNestedInput
+  records?: Prisma.UserRecordUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -351,6 +375,10 @@ export type UserUncheckedUpdateInput = {
   timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutOwnerNestedInput
+  contestResults?: Prisma.ContestResultUncheckedUpdateManyWithoutUserNestedInput
+  records?: Prisma.UserRecordUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -437,6 +465,11 @@ export type UserMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -453,6 +486,454 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type UserCreateNestedOneWithoutRecordsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRecordsInput, Prisma.UserUncheckedCreateWithoutRecordsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecordsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRecordsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRecordsInput, Prisma.UserUncheckedCreateWithoutRecordsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecordsInput
+  upsert?: Prisma.UserUpsertWithoutRecordsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRecordsInput, Prisma.UserUpdateWithoutRecordsInput>, Prisma.UserUncheckedUpdateWithoutRecordsInput>
+}
+
+export type UserCreateNestedOneWithoutRoomUsersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomUsersInput, Prisma.UserUncheckedCreateWithoutRoomUsersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomUsersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRoomUsersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomUsersInput, Prisma.UserUncheckedCreateWithoutRoomUsersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomUsersInput
+  upsert?: Prisma.UserUpsertWithoutRoomUsersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoomUsersInput, Prisma.UserUpdateWithoutRoomUsersInput>, Prisma.UserUncheckedUpdateWithoutRoomUsersInput>
+}
+
+export type UserCreateNestedOneWithoutContestResultsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContestResultsInput, Prisma.UserUncheckedCreateWithoutContestResultsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContestResultsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutContestResultsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContestResultsInput, Prisma.UserUncheckedCreateWithoutContestResultsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContestResultsInput
+  upsert?: Prisma.UserUpsertWithoutContestResultsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutContestResultsInput, Prisma.UserUpdateWithoutContestResultsInput>, Prisma.UserUncheckedUpdateWithoutContestResultsInput>
+}
+
+export type UserCreateNestedOneWithoutRoomsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutRoomsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRoomsInput
+  upsert?: Prisma.UserUpsertWithoutRoomsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRoomsInput, Prisma.UserUpdateWithoutRoomsInput>, Prisma.UserUncheckedUpdateWithoutRoomsInput>
+}
+
+export type UserCreateWithoutRecordsInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutOwnerInput
+  contestResults?: Prisma.ContestResultCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRecordsInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutOwnerInput
+  contestResults?: Prisma.ContestResultUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRecordsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRecordsInput, Prisma.UserUncheckedCreateWithoutRecordsInput>
+}
+
+export type UserUpsertWithoutRecordsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRecordsInput, Prisma.UserUncheckedUpdateWithoutRecordsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRecordsInput, Prisma.UserUncheckedCreateWithoutRecordsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRecordsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRecordsInput, Prisma.UserUncheckedUpdateWithoutRecordsInput>
+}
+
+export type UserUpdateWithoutRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutOwnerNestedInput
+  contestResults?: Prisma.ContestResultUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRecordsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutOwnerNestedInput
+  contestResults?: Prisma.ContestResultUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRoomUsersInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  rooms?: Prisma.RoomCreateNestedManyWithoutOwnerInput
+  contestResults?: Prisma.ContestResultCreateNestedManyWithoutUserInput
+  records?: Prisma.UserRecordCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRoomUsersInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutOwnerInput
+  contestResults?: Prisma.ContestResultUncheckedCreateNestedManyWithoutUserInput
+  records?: Prisma.UserRecordUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRoomUsersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomUsersInput, Prisma.UserUncheckedCreateWithoutRoomUsersInput>
+}
+
+export type UserUpsertWithoutRoomUsersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoomUsersInput, Prisma.UserUncheckedUpdateWithoutRoomUsersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomUsersInput, Prisma.UserUncheckedCreateWithoutRoomUsersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRoomUsersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoomUsersInput, Prisma.UserUncheckedUpdateWithoutRoomUsersInput>
+}
+
+export type UserUpdateWithoutRoomUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rooms?: Prisma.RoomUpdateManyWithoutOwnerNestedInput
+  contestResults?: Prisma.ContestResultUpdateManyWithoutUserNestedInput
+  records?: Prisma.UserRecordUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoomUsersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutOwnerNestedInput
+  contestResults?: Prisma.ContestResultUncheckedUpdateManyWithoutUserNestedInput
+  records?: Prisma.UserRecordUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutContestResultsInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomCreateNestedManyWithoutOwnerInput
+  records?: Prisma.UserRecordCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutContestResultsInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserUncheckedCreateNestedManyWithoutUserInput
+  rooms?: Prisma.RoomUncheckedCreateNestedManyWithoutOwnerInput
+  records?: Prisma.UserRecordUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutContestResultsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutContestResultsInput, Prisma.UserUncheckedCreateWithoutContestResultsInput>
+}
+
+export type UserUpsertWithoutContestResultsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutContestResultsInput, Prisma.UserUncheckedUpdateWithoutContestResultsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutContestResultsInput, Prisma.UserUncheckedCreateWithoutContestResultsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutContestResultsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutContestResultsInput, Prisma.UserUncheckedUpdateWithoutContestResultsInput>
+}
+
+export type UserUpdateWithoutContestResultsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUpdateManyWithoutOwnerNestedInput
+  records?: Prisma.UserRecordUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutContestResultsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUncheckedUpdateManyWithoutUserNestedInput
+  rooms?: Prisma.RoomUncheckedUpdateManyWithoutOwnerNestedInput
+  records?: Prisma.UserRecordUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutRoomsInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserCreateNestedManyWithoutUserInput
+  contestResults?: Prisma.ContestResultCreateNestedManyWithoutUserInput
+  records?: Prisma.UserRecordCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutRoomsInput = {
+  id?: string
+  email?: string | null
+  password?: string | null
+  displayName: string
+  wcaId?: string | null
+  wcaName?: string | null
+  image?: string | null
+  countryCode?: string | null
+  timerType?: $Enums.TimerType
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roomUsers?: Prisma.RoomUserUncheckedCreateNestedManyWithoutUserInput
+  contestResults?: Prisma.ContestResultUncheckedCreateNestedManyWithoutUserInput
+  records?: Prisma.UserRecordUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutRoomsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput>
+}
+
+export type UserUpsertWithoutRoomsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutRoomsInput, Prisma.UserUncheckedUpdateWithoutRoomsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutRoomsInput, Prisma.UserUncheckedCreateWithoutRoomsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutRoomsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutRoomsInput, Prisma.UserUncheckedUpdateWithoutRoomsInput>
+}
+
+export type UserUpdateWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUpdateManyWithoutUserNestedInput
+  contestResults?: Prisma.ContestResultUpdateManyWithoutUserNestedInput
+  records?: Prisma.UserRecordUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutRoomsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  wcaId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  wcaName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  countryCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timerType?: Prisma.EnumTimerTypeFieldUpdateOperationsInput | $Enums.TimerType
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roomUsers?: Prisma.RoomUserUncheckedUpdateManyWithoutUserNestedInput
+  contestResults?: Prisma.ContestResultUncheckedUpdateManyWithoutUserNestedInput
+  records?: Prisma.UserRecordUncheckedUpdateManyWithoutUserNestedInput
+}
+
+
+/**
+ * Count Type UserCountOutputType
+ */
+
+export type UserCountOutputType = {
+  roomUsers: number
+  rooms: number
+  contestResults: number
+  records: number
+}
+
+export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  roomUsers?: boolean | UserCountOutputTypeCountRoomUsersArgs
+  rooms?: boolean | UserCountOutputTypeCountRoomsArgs
+  contestResults?: boolean | UserCountOutputTypeCountContestResultsArgs
+  records?: boolean | UserCountOutputTypeCountRecordsArgs
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserCountOutputType
+   */
+  select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRoomUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomUserWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.RoomWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountContestResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContestResultWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountRecordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserRecordWhereInput
+}
 
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -467,6 +948,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   timerType?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  roomUsers?: boolean | Prisma.User$roomUsersArgs<ExtArgs>
+  rooms?: boolean | Prisma.User$roomsArgs<ExtArgs>
+  contestResults?: boolean | Prisma.User$contestResultsArgs<ExtArgs>
+  records?: boolean | Prisma.User$recordsArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -512,10 +998,24 @@ export type UserSelectScalar = {
 }
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "displayName" | "wcaId" | "wcaName" | "image" | "countryCode" | "timerType" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  roomUsers?: boolean | Prisma.User$roomUsersArgs<ExtArgs>
+  rooms?: boolean | Prisma.User$roomsArgs<ExtArgs>
+  contestResults?: boolean | Prisma.User$contestResultsArgs<ExtArgs>
+  records?: boolean | Prisma.User$recordsArgs<ExtArgs>
+  _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
-  objects: {}
+  objects: {
+    roomUsers: Prisma.$RoomUserPayload<ExtArgs>[]
+    rooms: Prisma.$RoomPayload<ExtArgs>[]
+    contestResults: Prisma.$ContestResultPayload<ExtArgs>[]
+    records: Prisma.$UserRecordPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string | null
@@ -922,6 +1422,10 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  roomUsers<T extends Prisma.User$roomUsersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roomUsersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rooms<T extends Prisma.User$roomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$roomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contestResults<T extends Prisma.User$contestResultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contestResultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContestResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  records<T extends Prisma.User$recordsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$recordsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRecordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -979,6 +1483,10 @@ export type UserFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where: Prisma.UserWhereUniqueInput
@@ -997,6 +1505,10 @@ export type UserFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1014,6 +1526,10 @@ export type UserFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * Filter, which User to fetch.
    */
@@ -1063,6 +1579,10 @@ export type UserFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which User to fetch.
    */
   where?: Prisma.UserWhereInput
@@ -1111,6 +1631,10 @@ export type UserFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter, which Users to fetch.
    */
   where?: Prisma.UserWhereInput
@@ -1153,6 +1677,10 @@ export type UserCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * The data needed to create a User.
    */
@@ -1201,6 +1729,10 @@ export type UserUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
   /**
    * The data needed to update a User.
    */
@@ -1268,6 +1800,10 @@ export type UserUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * The filter to search for the User to update in case it exists.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1294,6 +1830,10 @@ export type UserDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  /**
    * Filter which User to delete.
    */
   where: Prisma.UserWhereUniqueInput
@@ -1314,6 +1854,102 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.roomUsers
+ */
+export type User$roomUsersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the RoomUser
+   */
+  select?: Prisma.RoomUserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the RoomUser
+   */
+  omit?: Prisma.RoomUserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomUserInclude<ExtArgs> | null
+  where?: Prisma.RoomUserWhereInput
+  orderBy?: Prisma.RoomUserOrderByWithRelationInput | Prisma.RoomUserOrderByWithRelationInput[]
+  cursor?: Prisma.RoomUserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomUserScalarFieldEnum | Prisma.RoomUserScalarFieldEnum[]
+}
+
+/**
+ * User.rooms
+ */
+export type User$roomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Room
+   */
+  select?: Prisma.RoomSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Room
+   */
+  omit?: Prisma.RoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.RoomInclude<ExtArgs> | null
+  where?: Prisma.RoomWhereInput
+  orderBy?: Prisma.RoomOrderByWithRelationInput | Prisma.RoomOrderByWithRelationInput[]
+  cursor?: Prisma.RoomWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.RoomScalarFieldEnum | Prisma.RoomScalarFieldEnum[]
+}
+
+/**
+ * User.contestResults
+ */
+export type User$contestResultsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContestResult
+   */
+  select?: Prisma.ContestResultSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContestResult
+   */
+  omit?: Prisma.ContestResultOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContestResultInclude<ExtArgs> | null
+  where?: Prisma.ContestResultWhereInput
+  orderBy?: Prisma.ContestResultOrderByWithRelationInput | Prisma.ContestResultOrderByWithRelationInput[]
+  cursor?: Prisma.ContestResultWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContestResultScalarFieldEnum | Prisma.ContestResultScalarFieldEnum[]
+}
+
+/**
+ * User.records
+ */
+export type User$recordsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserRecord
+   */
+  select?: Prisma.UserRecordSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserRecord
+   */
+  omit?: Prisma.UserRecordOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserRecordInclude<ExtArgs> | null
+  where?: Prisma.UserRecordWhereInput
+  orderBy?: Prisma.UserRecordOrderByWithRelationInput | Prisma.UserRecordOrderByWithRelationInput[]
+  cursor?: Prisma.UserRecordWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserRecordScalarFieldEnum | Prisma.UserRecordScalarFieldEnum[]
+}
+
+/**
  * User without action
  */
 export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1325,4 +1961,8 @@ export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
    * Omit specific fields from the User
    */
   omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
 }

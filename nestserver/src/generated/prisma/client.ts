@@ -42,3 +42,53 @@ export { Prisma }
  * 
  */
 export type User = Prisma.UserModel
+/**
+ * Model UserRecord
+ * 
+ */
+export type UserRecord = Prisma.UserRecordModel
+/**
+ * Model RoomUser
+ * 
+ */
+export type RoomUser = Prisma.RoomUserModel
+/**
+ * Model Solve
+ * 
+ */
+export type Solve = Prisma.SolveModel
+/**
+ * Model Scramble
+ * 
+ */
+export type Scramble = Prisma.ScrambleModel
+/**
+ * Model Contest
+ * 
+ */
+export type Contest = Prisma.ContestModel
+/**
+ * Model ContestEvent
+ * 
+ */
+export type ContestEvent = Prisma.ContestEventModel
+/**
+ * Model ContestResult
+ * 
+ */
+export type ContestResult = Prisma.ContestResultModel
+/**
+ * Model Room
+ * 
+ */
+export type Room = Prisma.RoomModel
+/**
+ * Model RoomSolve
+ * 
+ */
+export type RoomSolve = Prisma.RoomSolveModel
+/**
+ * Model RoomSolveResult
+ * 
+ */
+export type RoomSolveResult = Prisma.RoomSolveResultModel

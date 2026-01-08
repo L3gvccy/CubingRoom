@@ -9,4 +9,14 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/User.js'
+export type * from './models/UserRecord.js'
+export type * from './models/RoomUser.js'
+export type * from './models/Solve.js'
+export type * from './models/Scramble.js'
+export type * from './models/Contest.js'
+export type * from './models/ContestEvent.js'
+export type * from './models/ContestResult.js'
+export type * from './models/Room.js'
+export type * from './models/RoomSolve.js'
+export type * from './models/RoomSolveResult.js'
 export type * from './commonInputTypes.js'
