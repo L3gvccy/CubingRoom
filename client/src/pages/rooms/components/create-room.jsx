@@ -4,6 +4,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { apiClient } from "@/lib/api-client";
 import { CREATE_ROOM } from "@/utils/constants";
@@ -17,8 +24,24 @@ const CreateRoom = ({ onRoomCreate }) => {
 
   const [roomName, setRoomName] = useState("");
   const [password, setPassword] = useState("");
+  const [event, setEvent] = useState("333");
 
   const [canCreate, setCanCreate] = useState(false);
+
+  const options = [
+    ["333", "3x3"],
+    ["222", "2x2"],
+    ["444", "4x4"],
+    ["555", "5x5"],
+    ["666", "6x6"],
+    ["777", "7x7"],
+    ["333oh", "3x3 OH"],
+    ["megaminx", "Megaminx"],
+    ["pyraminx", "Pyraminx"],
+    ["clock", "Clock"],
+    ["skewb", "Skewb"],
+    ["sq1", "Square-1"],
+  ];
 
   useEffect(() => {
     if (roomName && ((password && passwordRequired) || !passwordRequired)) {
@@ -32,7 +55,12 @@ const CreateRoom = ({ onRoomCreate }) => {
     await apiClient
       .post(
         CREATE_ROOM,
-        { name: roomName, isPrivate: passwordRequired, password: password },
+        {
+          name: roomName,
+          event: event,
+          isPrivate: passwordRequired,
+          password: password,
+        },
         { withCredentials: true }
       )
       .then((res) => {
@@ -71,14 +99,14 @@ const CreateRoom = ({ onRoomCreate }) => {
           </DialogHeader>
           <div className="flex flex-col mt-4 gap-5">
             <div className="flex flex-col">
-              <label htmlFor="roomName" className="text-zinc-300">
+              <label htmlFor="roomName" className="text-zinc-300 mb-2">
                 Назва кімнати
               </label>
               <input
                 placeholder="Введіть назву"
                 name="roomName"
                 type="text"
-                className="py-2 border-b-2 border-zinc-400 focus:border-zinc-300 read-only:border-zinc-700  outline-0"
+                className="p-2 rounded-lg bg-zinc-800 outline-0"
                 value={roomName}
                 onChange={(e) => {
                   setRoomName(e.target.value);
@@ -93,7 +121,7 @@ const CreateRoom = ({ onRoomCreate }) => {
               <span>Приватна кімната</span>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="roomPassword" className="text-zinc-300">
+              <label htmlFor="roomPassword" className="text-zinc-300 mb-2">
                 Пароль
               </label>
               <input
@@ -101,12 +129,40 @@ const CreateRoom = ({ onRoomCreate }) => {
                 placeholder="Введіть пароль"
                 name="roomPassword"
                 type="text"
-                className="py-2 border-b-2 border-zinc-400 focus:border-zinc-300 focus:read-only:border-zinc-700 read-only:border-zinc-700 read-only:text-zinc-500 outline-0"
+                className="p-2 rounded-lg bg-zinc-800 outline-0 read-only:text-zinc-600 read-only:placeholder:text-zinc-700 read-only:bg-zinc-900"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
                 }}
               />
+            </div>
+            <div>
+              <Select
+                value={event}
+                onValueChange={(e) => {
+                  setEvent(e);
+                }}
+              >
+                <SelectTrigger className="w-full cursor-pointer bg-zinc-800 p-2 text-md">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent
+                  className="w-full"
+                  onCloseAutoFocus={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  {options.map((event, i) => (
+                    <SelectItem
+                      key={i}
+                      value={event[0]}
+                      className="hover:bg-cyan-700 cursor-pointer data-[state=checked]:bg-violet-700"
+                    >
+                      {event[1]}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
             <button
               disabled={!canCreate}

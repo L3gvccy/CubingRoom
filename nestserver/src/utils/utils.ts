@@ -1,0 +1,18 @@
+export const getScrambler = (event: string) => {
+  const wcaEvents = {
+    "333": { scrambler: "333", length: 0 },
+    "222": { scrambler: "222so", length: 0 },
+    "444": { scrambler: "444wca", length: 0 },
+    "555": { scrambler: "555wca", length: 60 },
+    "666": { scrambler: "666wca", length: 80 },
+    "777": { scrambler: "777wca", length: 100 },
+    "333oh": { scrambler: "333", extra: 0 },
+    clock: { scrambler: "clkwca", length: 0 },
+    megaminx: { scrambler: "mgmp", length: 70 },
+    pyraminx: { scrambler: "pyrso", length: 10 },
+    skewb: { scrambler: "skbso", length: 0 },
+    sq1: { scrambler: "sqrs", length: 0 },
+  };
+
+  return wcaEvents[event];
+};

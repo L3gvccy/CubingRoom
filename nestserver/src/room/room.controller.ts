@@ -11,6 +11,7 @@ import { RoomService } from "./room.service";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CurrentUser } from "src/common/decorators/current-user.decorator";
 import { CreateRoomDto } from "./dto/create-room.dto";
+import { JoinRoomDto } from "./dto/join-room.dto";
 
 @Controller("room")
 export class RoomController {
@@ -35,6 +36,21 @@ export class RoomController {
     @CurrentUser() currentUser: { id: string }
   ) {
     return await this.roomService.createRoom(currentUser.id, dto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("join")
+  async joinRoom(
+    @Body() dto: JoinRoomDto,
+    @CurrentUser() currentUser: { id: string }
+  ) {
+    const canJoin = await this.roomService.joinRoom(
+      currentUser.id,
+      dto.roomId,
+      dto?.password
+    );
+
+    return { ok: canJoin };
   }
 
   @UseGuards(JwtAuthGuard)

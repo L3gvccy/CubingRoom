@@ -27,5 +27,7 @@ export const GET_ROOM_BY_ID = (roomId) => {
 };
 export const CREATE_ROOM = `${ROOM_ROUTES}/create`;
 
-export const TEST_ROUTES = "/api/test";
-export const GEN_SCR = `${TEST_ROUTES}/gen-scr`;
+export const SCRAMBLE_ROUTES = "/api/scramble";
+export const GENERATE_SCRAMBLE = (event) => {
+  return `${SCRAMBLE_ROUTES}/generate-scramble/${event}`;
+};

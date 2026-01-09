@@ -6,7 +6,7 @@ import TimerFullscreen from "@/components/timer/timer-fullscreen";
 import TimerMini from "@/components/timer/timer-mini";
 import { apiClient } from "@/lib/api-client";
 import { useAppStore } from "@/store";
-import { GEN_SCR } from "@/utils/constants";
+import { GENERATE_SCRAMBLE } from "@/utils/constants";
 import { formatTimeDisplay, getDisplay, getScrambler } from "@/utils/tools";
 import React, { useState, useEffect, useRef } from "react";
 import { ScrambleDisplay } from "scramble-display";
@@ -23,13 +23,8 @@ const Test = () => {
   };
 
   const getScramble = async () => {
-    const scr = getScrambler(event);
     await apiClient
-      .post(
-        GEN_SCR,
-        { event: scr[0], length: scr[1] },
-        { withCredentials: true }
-      )
+      .get(GENERATE_SCRAMBLE(event), { withCredentials: true })
       .then((res) => {
         console.log(res.data.scramble);
         setScramble(res.data.scramble);
@@ -41,12 +36,9 @@ const Test = () => {
 
   useEffect(() => {
     setResults([]);
-    getScramble();
+    getScramble("");
   }, [event]);
 
-  useEffect(() => {
-    getScramble();
-  }, []);
   return (
     <>
       <div className="flex w-full items-center justify-center p-2">
@@ -56,15 +48,15 @@ const Test = () => {
         </div>
       </div>
 
-      {scramble.scramble ? (
+      {scramble ? (
         <>
           <div className="p-4 text-center wrap-break-word">
             {event === "megaminx" ? (
               <div className="flex justify-center">
-                <pre className="text-start w-fit">{scramble.scramble}</pre>
+                <pre className="text-start w-fit">{scramble}</pre>
               </div>
             ) : (
-              <div className="text-center">{scramble.scramble}</div>
+              <div className="text-center">{scramble}</div>
             )}
           </div>
           {/* <div
@@ -76,20 +68,18 @@ const Test = () => {
           <div className="flex w-full items-center justify-center">
             <scramble-display
               event={getDisplay(event)}
-              scramble={scramble.scramble}
+              scramble={scramble}
             ></scramble-display>
           </div>
         </>
       ) : (
         <div className="w-full h-32 text-center">Generating scramble</div>
       )}
-      {/* {userData.timerType === "KEYBOARD" ? (
+      {userData.timerType === "KEYBOARD" ? (
         <Timer handleSubmit={handleSubmit} />
       ) : (
         <TimeInput handleSubmit={handleSubmit} />
-      )} */}
-
-      <Timer handleSubmit={handleSubmit} />
+      )}
 
       {results.map((res, i) => (
         <p

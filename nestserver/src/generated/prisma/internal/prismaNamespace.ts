@@ -1332,7 +1332,6 @@ export const ScrambleScalarFieldEnum = {
   contestEventId: 'contestEventId',
   index: 'index',
   scramble: 'scramble',
-  image: 'image',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

@@ -78,10 +78,10 @@ model UserRecord {
 model RoomUser {
   id Int @id @default(autoincrement())
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  room Room @relation(fields: [roomId], references: [id])
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
   roomId Int
 
   status RoomUserStatus @default(SOLVING)

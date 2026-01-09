@@ -55,7 +55,8 @@ export class WcaIdService {
       });
 
       if (!user) {
-        const displayName = wca.name.split(" ")[0];
+        const arr = wca.name.split(" ");
+        const displayName = `${arr[0]} ${arr[1]}`;
         user = await this.prisma.user.create({
           data: {
             displayName,

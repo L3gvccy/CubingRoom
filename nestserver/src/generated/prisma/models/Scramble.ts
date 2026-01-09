@@ -43,7 +43,6 @@ export type ScrambleMinAggregateOutputType = {
   contestEventId: number | null
   index: number | null
   scramble: string | null
-  image: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,7 +52,6 @@ export type ScrambleMaxAggregateOutputType = {
   contestEventId: number | null
   index: number | null
   scramble: string | null
-  image: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -63,7 +61,6 @@ export type ScrambleCountAggregateOutputType = {
   contestEventId: number
   index: number
   scramble: number
-  image: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -87,7 +84,6 @@ export type ScrambleMinAggregateInputType = {
   contestEventId?: true
   index?: true
   scramble?: true
-  image?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -97,7 +93,6 @@ export type ScrambleMaxAggregateInputType = {
   contestEventId?: true
   index?: true
   scramble?: true
-  image?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -107,7 +102,6 @@ export type ScrambleCountAggregateInputType = {
   contestEventId?: true
   index?: true
   scramble?: true
-  image?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -204,7 +198,6 @@ export type ScrambleGroupByOutputType = {
   contestEventId: number | null
   index: number
   scramble: string
-  image: string | null
   createdAt: Date
   updatedAt: Date
   _count: ScrambleCountAggregateOutputType | null
@@ -237,7 +230,6 @@ export type ScrambleWhereInput = {
   contestEventId?: Prisma.IntNullableFilter<"Scramble"> | number | null
   index?: Prisma.IntFilter<"Scramble"> | number
   scramble?: Prisma.StringFilter<"Scramble"> | string
-  image?: Prisma.StringNullableFilter<"Scramble"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   contestEvent?: Prisma.XOR<Prisma.ContestEventNullableScalarRelationFilter, Prisma.ContestEventWhereInput> | null
@@ -249,7 +241,6 @@ export type ScrambleOrderByWithRelationInput = {
   contestEventId?: Prisma.SortOrderInput | Prisma.SortOrder
   index?: Prisma.SortOrder
   scramble?: Prisma.SortOrder
-  image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   contestEvent?: Prisma.ContestEventOrderByWithRelationInput
@@ -264,7 +255,6 @@ export type ScrambleWhereUniqueInput = Prisma.AtLeast<{
   contestEventId?: Prisma.IntNullableFilter<"Scramble"> | number | null
   index?: Prisma.IntFilter<"Scramble"> | number
   scramble?: Prisma.StringFilter<"Scramble"> | string
-  image?: Prisma.StringNullableFilter<"Scramble"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   contestEvent?: Prisma.XOR<Prisma.ContestEventNullableScalarRelationFilter, Prisma.ContestEventWhereInput> | null
@@ -276,7 +266,6 @@ export type ScrambleOrderByWithAggregationInput = {
   contestEventId?: Prisma.SortOrderInput | Prisma.SortOrder
   index?: Prisma.SortOrder
   scramble?: Prisma.SortOrder
-  image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ScrambleCountOrderByAggregateInput
@@ -294,7 +283,6 @@ export type ScrambleScalarWhereWithAggregatesInput = {
   contestEventId?: Prisma.IntNullableWithAggregatesFilter<"Scramble"> | number | null
   index?: Prisma.IntWithAggregatesFilter<"Scramble"> | number
   scramble?: Prisma.StringWithAggregatesFilter<"Scramble"> | string
-  image?: Prisma.StringNullableWithAggregatesFilter<"Scramble"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Scramble"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Scramble"> | Date | string
 }
@@ -302,7 +290,6 @@ export type ScrambleScalarWhereWithAggregatesInput = {
 export type ScrambleCreateInput = {
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contestEvent?: Prisma.ContestEventCreateNestedOneWithoutScramblesInput
@@ -314,7 +301,6 @@ export type ScrambleUncheckedCreateInput = {
   contestEventId?: number | null
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   roomSolve?: Prisma.RoomSolveUncheckedCreateNestedOneWithoutScrambleInput
@@ -323,7 +309,6 @@ export type ScrambleUncheckedCreateInput = {
 export type ScrambleUpdateInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contestEvent?: Prisma.ContestEventUpdateOneWithoutScramblesNestedInput
@@ -335,7 +320,6 @@ export type ScrambleUncheckedUpdateInput = {
   contestEventId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomSolve?: Prisma.RoomSolveUncheckedUpdateOneWithoutScrambleNestedInput
@@ -346,7 +330,6 @@ export type ScrambleCreateManyInput = {
   contestEventId?: number | null
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -354,7 +337,6 @@ export type ScrambleCreateManyInput = {
 export type ScrambleUpdateManyMutationInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,7 +346,6 @@ export type ScrambleUncheckedUpdateManyInput = {
   contestEventId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -374,7 +355,6 @@ export type ScrambleCountOrderByAggregateInput = {
   contestEventId?: Prisma.SortOrder
   index?: Prisma.SortOrder
   scramble?: Prisma.SortOrder
-  image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -390,7 +370,6 @@ export type ScrambleMaxOrderByAggregateInput = {
   contestEventId?: Prisma.SortOrder
   index?: Prisma.SortOrder
   scramble?: Prisma.SortOrder
-  image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -400,7 +379,6 @@ export type ScrambleMinOrderByAggregateInput = {
   contestEventId?: Prisma.SortOrder
   index?: Prisma.SortOrder
   scramble?: Prisma.SortOrder
-  image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -485,7 +463,6 @@ export type ScrambleUpdateOneRequiredWithoutRoomSolveNestedInput = {
 export type ScrambleCreateWithoutContestEventInput = {
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   roomSolve?: Prisma.RoomSolveCreateNestedOneWithoutScrambleInput
@@ -495,7 +472,6 @@ export type ScrambleUncheckedCreateWithoutContestEventInput = {
   id?: number
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   roomSolve?: Prisma.RoomSolveUncheckedCreateNestedOneWithoutScrambleInput
@@ -535,7 +511,6 @@ export type ScrambleScalarWhereInput = {
   contestEventId?: Prisma.IntNullableFilter<"Scramble"> | number | null
   index?: Prisma.IntFilter<"Scramble"> | number
   scramble?: Prisma.StringFilter<"Scramble"> | string
-  image?: Prisma.StringNullableFilter<"Scramble"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
 }
@@ -543,7 +518,6 @@ export type ScrambleScalarWhereInput = {
 export type ScrambleCreateWithoutRoomSolveInput = {
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   contestEvent?: Prisma.ContestEventCreateNestedOneWithoutScramblesInput
@@ -554,7 +528,6 @@ export type ScrambleUncheckedCreateWithoutRoomSolveInput = {
   contestEventId?: number | null
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -578,7 +551,6 @@ export type ScrambleUpdateToOneWithWhereWithoutRoomSolveInput = {
 export type ScrambleUpdateWithoutRoomSolveInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contestEvent?: Prisma.ContestEventUpdateOneWithoutScramblesNestedInput
@@ -589,7 +561,6 @@ export type ScrambleUncheckedUpdateWithoutRoomSolveInput = {
   contestEventId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -598,7 +569,6 @@ export type ScrambleCreateManyContestEventInput = {
   id?: number
   index: number
   scramble: string
-  image?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -606,7 +576,6 @@ export type ScrambleCreateManyContestEventInput = {
 export type ScrambleUpdateWithoutContestEventInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomSolve?: Prisma.RoomSolveUpdateOneWithoutScrambleNestedInput
@@ -616,7 +585,6 @@ export type ScrambleUncheckedUpdateWithoutContestEventInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomSolve?: Prisma.RoomSolveUncheckedUpdateOneWithoutScrambleNestedInput
@@ -626,7 +594,6 @@ export type ScrambleUncheckedUpdateManyWithoutContestEventInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -638,7 +605,6 @@ export type ScrambleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   contestEventId?: boolean
   index?: boolean
   scramble?: boolean
-  image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
@@ -650,7 +616,6 @@ export type ScrambleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   contestEventId?: boolean
   index?: boolean
   scramble?: boolean
-  image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
@@ -661,7 +626,6 @@ export type ScrambleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   contestEventId?: boolean
   index?: boolean
   scramble?: boolean
-  image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
@@ -672,12 +636,11 @@ export type ScrambleSelectScalar = {
   contestEventId?: boolean
   index?: boolean
   scramble?: boolean
-  image?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ScrambleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contestEventId" | "index" | "scramble" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["scramble"]>
+export type ScrambleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contestEventId" | "index" | "scramble" | "createdAt" | "updatedAt", ExtArgs["result"]["scramble"]>
 export type ScrambleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
   roomSolve?: boolean | Prisma.Scramble$roomSolveArgs<ExtArgs>
@@ -700,7 +663,6 @@ export type $ScramblePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     contestEventId: number | null
     index: number
     scramble: string
-    image: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["scramble"]>
@@ -1132,7 +1094,6 @@ export interface ScrambleFieldRefs {
   readonly contestEventId: Prisma.FieldRef<"Scramble", 'Int'>
   readonly index: Prisma.FieldRef<"Scramble", 'Int'>
   readonly scramble: Prisma.FieldRef<"Scramble", 'String'>
-  readonly image: Prisma.FieldRef<"Scramble", 'String'>
   readonly createdAt: Prisma.FieldRef<"Scramble", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Scramble", 'DateTime'>
 }

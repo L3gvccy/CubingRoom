@@ -3,7 +3,12 @@ import React from "react";
 
 const RoomLink = ({ room }) => {
   return (
-    <div className="rounded-lg bg-zinc-800 hover:bg-zinc-700 flex p-4 gap-4 cursor-pointer transition-all duration-300">
+    <div
+      className="rounded-lg bg-zinc-800 hover:bg-zinc-700 flex p-4 gap-4 cursor-pointer transition-all duration-300"
+      onClick={() => {
+        console.log(room);
+      }}
+    >
       <img
         src={`/event-icons/${room.event}.svg`}
         alt={room.event}

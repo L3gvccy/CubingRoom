@@ -60,7 +60,7 @@ const Rooms = () => {
 
   if (loading) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
+      <div className="w-full flex flex-1 items-center justify-center">
         <Loader />
       </div>
     );
@@ -84,7 +84,23 @@ const Rooms = () => {
         {myRooms.length > 0 ? (
           myRooms.map((r) => <RoomLink room={r} key={r.id} />)
         ) : (
-          <p>Власних кімнат не знайдено</p>
+          <p className="opacity-75">Власних кімнат не знайдено</p>
+        )}
+        <p className="text-xl py-2 border-b-2 border-zinc-700">
+          Відкриті кімнати
+        </p>
+        {publicRooms.length > 0 ? (
+          publicRooms.map((r) => <RoomLink room={r} key={r.id} />)
+        ) : (
+          <p className="opacity-75">Відкритих кімнат не знайдено</p>
+        )}
+        <p className="text-xl py-2 border-b-2 border-zinc-700">
+          Приватні кімнати
+        </p>
+        {privateRooms.length > 0 ? (
+          privateRooms.map((r) => <RoomLink room={r} key={r.id} />)
+        ) : (
+          <p className="opacity-75">Приватних кімнат не знайдено</p>
         )}
       </div>
     </div>
