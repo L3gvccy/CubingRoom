@@ -90,11 +90,8 @@ export class RoomService {
     return { room };
   }
 
-  async joinRoom(userId: string, roomId: string, password?: string) {
-    const id = parseInt(roomId);
-    if (!isNaN(id)) {
-      throw new NotFoundException("Кімната не знайдена");
-    }
+  async joinRoom(userId: string, roomId: number, password?: string) {
+    const id = roomId;
 
     const room = await this.prisma.room.findUnique({
       where: { id },
@@ -111,7 +108,11 @@ export class RoomService {
 
     if (!room?.private) {
       return true;
-    } else if (room.private && bcrypt.compare(password, room.password)) {
+    } else if (
+      room.private &&
+      password &&
+      bcrypt.compare(password, room.password)
+    ) {
       return true;
     }
 

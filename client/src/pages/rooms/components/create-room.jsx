@@ -21,6 +21,7 @@ import { toast } from "sonner";
 const CreateRoom = ({ onRoomCreate }) => {
   const [open, setOpen] = useState(false);
   const [passwordRequired, setPasswordRequired] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false);
 
   const [roomName, setRoomName] = useState("");
   const [password, setPassword] = useState("");
@@ -165,11 +166,11 @@ const CreateRoom = ({ onRoomCreate }) => {
               </Select>
             </div>
             <button
-              disabled={!canCreate}
+              disabled={!canCreate || btnLoading}
               className="text-lg items-center bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
               onClick={createRoom}
             >
-              Створити кімнату
+              {btnLoading ? "Ствоерння кімнати..." : "Створити кімнату"}
             </button>
           </div>
         </DialogContent>

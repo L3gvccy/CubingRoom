@@ -15,11 +15,13 @@ import WcaLinkSuccess from "./pages/profile/components/wca-link-success";
 import Test from "./pages/test/test";
 import Contests from "./pages/contests/contests";
 import Rooms from "./pages/rooms/rooms";
+import Room from "./pages/room/room";
+import RoomJoin from "./pages/room/room-join";
 
 const PrivateRoute = ({ children }) => {
   const { userData } = useAppStore();
   const isAuthenticated = !!userData;
-  return isAuthenticated ? children : <Navigate to="/" />;
+  return isAuthenticated ? children : <Navigate to="/auth" />;
 };
 const AuthRoute = ({ children }) => {
   const { userData } = useAppStore();
@@ -60,6 +62,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Main />} />
+
           <Route
             path="/rooms"
             element={
@@ -68,6 +71,23 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route
+            path="/rooms/:roomId"
+            element={
+              <PrivateRoute>
+                <Room />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/join-room/:roomId"
+            element={
+              <PrivateRoute>
+                <RoomJoin />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/contests"
             element={
@@ -80,7 +100,14 @@ function App() {
           <Route path="/users/:id" element={<Profile />} />
         </Route>
 
-        <Route path="/auth" element={<Auth />} />
+        <Route
+          path="/auth"
+          element={
+            <AuthRoute>
+              <Auth />
+            </AuthRoute>
+          }
+        />
 
         <Route path="/wca-success" element={<WcaSuccess />} />
         <Route path="/wca-link-success" element={<WcaLinkSuccess />} />
