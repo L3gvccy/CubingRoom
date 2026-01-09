@@ -35,7 +35,11 @@ const RoomLink = ({ room }) => {
 
   const handleBtnClick = async () => {
     await apiClient
-      .post(JOIN_ROOM, { roomId: room.id }, { withCredentials: true })
+      .post(
+        JOIN_ROOM,
+        { roomId: room.id, password: password },
+        { withCredentials: true }
+      )
       .then((res) => {
         console.log(res.data);
         if (!res.data.ok) {
