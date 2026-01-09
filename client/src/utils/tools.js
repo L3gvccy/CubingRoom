@@ -40,6 +40,25 @@ export const getScrambler = (event) => {
   return wca_events[event];
 };
 
+export const getDisplay = (event) => {
+  const wca_events = {
+    333: "333",
+    222: "222",
+    444: "444",
+    555: "555",
+    666: "666",
+    777: "777",
+    "333oh": "333",
+    clock: "clock",
+    megaminx: "minx",
+    pyraminx: "pyram",
+    skewb: "skewb",
+    sq1: "sq1",
+  };
+
+  return wca_events[event];
+};
+
 export const formatTimeDisplay = (time, penalty) => {
   let totalMs = Math.floor(time);
 

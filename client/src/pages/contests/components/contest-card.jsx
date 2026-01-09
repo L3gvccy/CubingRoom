@@ -23,7 +23,7 @@ const ContestCard = ({ event, _id, active }) => {
       <img
         src={`/event-icons/${event}.svg`}
         alt={event}
-        className="px-6 invert group-hover:scale-105 ease-out transition-all duration-500"
+        className="px-6 group-hover:scale-105 ease-out transition-all duration-500"
       />
       <p className="text-xl text-zinc-100 font-semibold text-center">{name}</p>
     </div>

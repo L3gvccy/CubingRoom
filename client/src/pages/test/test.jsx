@@ -7,7 +7,7 @@ import TimerMini from "@/components/timer/timer-mini";
 import { apiClient } from "@/lib/api-client";
 import { useAppStore } from "@/store";
 import { GEN_SCR } from "@/utils/constants";
-import { formatTimeDisplay, getScrambler } from "@/utils/tools";
+import { formatTimeDisplay, getDisplay, getScrambler } from "@/utils/tools";
 import React, { useState, useEffect, useRef } from "react";
 import { ScrambleDisplay } from "scramble-display";
 
@@ -60,9 +60,11 @@ const Test = () => {
         <>
           <div className="p-4 text-center wrap-break-word">
             {event === "megaminx" ? (
-              <pre>{scramble.scramble}</pre>
+              <div className="flex justify-center">
+                <pre className="text-start w-fit">{scramble.scramble}</pre>
+              </div>
             ) : (
-              scramble.scramble
+              <div className="text-center">{scramble.scramble}</div>
             )}
           </div>
           {/* <div
@@ -71,11 +73,12 @@ const Test = () => {
              [&>svg]:max-w-full"
             dangerouslySetInnerHTML={{ __html: scramble.image }}
           /> */}
-
-          <scramble-display
-            event={event}
-            scramble={scramble.scramble}
-          ></scramble-display>
+          <div className="flex w-full items-center justify-center">
+            <scramble-display
+              event={getDisplay(event)}
+              scramble={scramble.scramble}
+            ></scramble-display>
+          </div>
         </>
       ) : (
         <div className="w-full h-32 text-center">Generating scramble</div>
