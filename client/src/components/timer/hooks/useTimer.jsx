@@ -39,7 +39,7 @@ export function useTimer({ onFinish } = {}) {
 
     let finalTime = pendingResult.time;
 
-    if (penalty === "+2") {
+    if (penalty === "PLUS2") {
       finalTime += 2000;
     }
 
@@ -66,6 +66,7 @@ export function useTimer({ onFinish } = {}) {
 
   useEffect(() => {
     const onKeyDown = (e) => {
+      e.preventDefault();
       if (!e.code || e.code !== "Space" || e.repeat) return;
 
       const activeTag = document.activeElement?.tagName;

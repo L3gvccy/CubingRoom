@@ -50,6 +50,10 @@ export class RoomController {
       dto?.password
     );
 
+    if (canJoin) {
+      await this.roomService.createRoomUser(currentUser.id, dto.roomId);
+    }
+
     return { ok: canJoin };
   }
 

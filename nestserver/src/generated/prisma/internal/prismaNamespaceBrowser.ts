@@ -197,6 +197,7 @@ export const RoomScalarFieldEnum = {
   event: 'event',
   private: 'private',
   password: 'password',
+  currentSolveIndex: 'currentSolveIndex',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -209,7 +210,7 @@ export const RoomSolveScalarFieldEnum = {
   id: 'id',
   roomId: 'roomId',
   index: 'index',
-  scrambleId: 'scrambleId',
+  scramble: 'scramble',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

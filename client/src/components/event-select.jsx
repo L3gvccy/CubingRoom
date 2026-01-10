@@ -30,7 +30,7 @@ const EventSelect = ({ value, setEvent }) => {
           setEvent(e);
         }}
       >
-        <SelectTrigger className="max-w-32 cursor-pointer ">
+        <SelectTrigger className="w-32 cursor-pointer ">
           <SelectValue />
         </SelectTrigger>
         <SelectContent

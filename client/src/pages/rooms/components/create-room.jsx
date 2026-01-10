@@ -53,6 +53,7 @@ const CreateRoom = ({ onRoomCreate }) => {
   }, [roomName, password, passwordRequired]);
 
   const createRoom = async () => {
+    setBtnLoading(true);
     await apiClient
       .post(
         CREATE_ROOM,
@@ -72,6 +73,7 @@ const CreateRoom = ({ onRoomCreate }) => {
         setPassword("");
         setCanCreate(false);
         onRoomCreate();
+        setBtnLoading(false);
       })
       .catch((err) => {
         if (err.response.status !== 500) {

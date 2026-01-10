@@ -30,21 +30,19 @@ export type RoomSolveAvgAggregateOutputType = {
   id: number | null
   roomId: number | null
   index: number | null
-  scrambleId: number | null
 }
 
 export type RoomSolveSumAggregateOutputType = {
   id: number | null
   roomId: number | null
   index: number | null
-  scrambleId: number | null
 }
 
 export type RoomSolveMinAggregateOutputType = {
   id: number | null
   roomId: number | null
   index: number | null
-  scrambleId: number | null
+  scramble: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,7 +51,7 @@ export type RoomSolveMaxAggregateOutputType = {
   id: number | null
   roomId: number | null
   index: number | null
-  scrambleId: number | null
+  scramble: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,7 +60,7 @@ export type RoomSolveCountAggregateOutputType = {
   id: number
   roomId: number
   index: number
-  scrambleId: number
+  scramble: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -73,21 +71,19 @@ export type RoomSolveAvgAggregateInputType = {
   id?: true
   roomId?: true
   index?: true
-  scrambleId?: true
 }
 
 export type RoomSolveSumAggregateInputType = {
   id?: true
   roomId?: true
   index?: true
-  scrambleId?: true
 }
 
 export type RoomSolveMinAggregateInputType = {
   id?: true
   roomId?: true
   index?: true
-  scrambleId?: true
+  scramble?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -96,7 +92,7 @@ export type RoomSolveMaxAggregateInputType = {
   id?: true
   roomId?: true
   index?: true
-  scrambleId?: true
+  scramble?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -105,7 +101,7 @@ export type RoomSolveCountAggregateInputType = {
   id?: true
   roomId?: true
   index?: true
-  scrambleId?: true
+  scramble?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -201,7 +197,7 @@ export type RoomSolveGroupByOutputType = {
   id: number
   roomId: number
   index: number
-  scrambleId: number
+  scramble: string
   createdAt: Date
   updatedAt: Date
   _count: RoomSolveCountAggregateOutputType | null
@@ -233,11 +229,10 @@ export type RoomSolveWhereInput = {
   id?: Prisma.IntFilter<"RoomSolve"> | number
   roomId?: Prisma.IntFilter<"RoomSolve"> | number
   index?: Prisma.IntFilter<"RoomSolve"> | number
-  scrambleId?: Prisma.IntFilter<"RoomSolve"> | number
+  scramble?: Prisma.StringFilter<"RoomSolve"> | string
   createdAt?: Prisma.DateTimeFilter<"RoomSolve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomSolve"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
-  scramble?: Prisma.XOR<Prisma.ScrambleScalarRelationFilter, Prisma.ScrambleWhereInput>
   results?: Prisma.RoomSolveResultListRelationFilter
 }
 
@@ -245,34 +240,32 @@ export type RoomSolveOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
+  scramble?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   room?: Prisma.RoomOrderByWithRelationInput
-  scramble?: Prisma.ScrambleOrderByWithRelationInput
   results?: Prisma.RoomSolveResultOrderByRelationAggregateInput
 }
 
 export type RoomSolveWhereUniqueInput = Prisma.AtLeast<{
   id?: number
-  scrambleId?: number
   AND?: Prisma.RoomSolveWhereInput | Prisma.RoomSolveWhereInput[]
   OR?: Prisma.RoomSolveWhereInput[]
   NOT?: Prisma.RoomSolveWhereInput | Prisma.RoomSolveWhereInput[]
   roomId?: Prisma.IntFilter<"RoomSolve"> | number
   index?: Prisma.IntFilter<"RoomSolve"> | number
+  scramble?: Prisma.StringFilter<"RoomSolve"> | string
   createdAt?: Prisma.DateTimeFilter<"RoomSolve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomSolve"> | Date | string
   room?: Prisma.XOR<Prisma.RoomScalarRelationFilter, Prisma.RoomWhereInput>
-  scramble?: Prisma.XOR<Prisma.ScrambleScalarRelationFilter, Prisma.ScrambleWhereInput>
   results?: Prisma.RoomSolveResultListRelationFilter
-}, "id" | "scrambleId">
+}, "id">
 
 export type RoomSolveOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
+  scramble?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.RoomSolveCountOrderByAggregateInput
@@ -289,17 +282,17 @@ export type RoomSolveScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"RoomSolve"> | number
   roomId?: Prisma.IntWithAggregatesFilter<"RoomSolve"> | number
   index?: Prisma.IntWithAggregatesFilter<"RoomSolve"> | number
-  scrambleId?: Prisma.IntWithAggregatesFilter<"RoomSolve"> | number
+  scramble?: Prisma.StringWithAggregatesFilter<"RoomSolve"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"RoomSolve"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"RoomSolve"> | Date | string
 }
 
 export type RoomSolveCreateInput = {
   index: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutSolvesInput
-  scramble: Prisma.ScrambleCreateNestedOneWithoutRoomSolveInput
   results?: Prisma.RoomSolveResultCreateNestedManyWithoutRoomSolveInput
 }
 
@@ -307,7 +300,7 @@ export type RoomSolveUncheckedCreateInput = {
   id?: number
   roomId: number
   index: number
-  scrambleId: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
   results?: Prisma.RoomSolveResultUncheckedCreateNestedManyWithoutRoomSolveInput
@@ -315,10 +308,10 @@ export type RoomSolveUncheckedCreateInput = {
 
 export type RoomSolveUpdateInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutSolvesNestedInput
-  scramble?: Prisma.ScrambleUpdateOneRequiredWithoutRoomSolveNestedInput
   results?: Prisma.RoomSolveResultUpdateManyWithoutRoomSolveNestedInput
 }
 
@@ -326,7 +319,7 @@ export type RoomSolveUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
-  scrambleId?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   results?: Prisma.RoomSolveResultUncheckedUpdateManyWithoutRoomSolveNestedInput
@@ -336,13 +329,14 @@ export type RoomSolveCreateManyInput = {
   id?: number
   roomId: number
   index: number
-  scrambleId: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type RoomSolveUpdateManyMutationInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -351,14 +345,9 @@ export type RoomSolveUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
-  scrambleId?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type RoomSolveNullableScalarRelationFilter = {
-  is?: Prisma.RoomSolveWhereInput | null
-  isNot?: Prisma.RoomSolveWhereInput | null
 }
 
 export type RoomSolveListRelationFilter = {
@@ -375,7 +364,7 @@ export type RoomSolveCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
+  scramble?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -384,14 +373,13 @@ export type RoomSolveAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
 }
 
 export type RoomSolveMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
+  scramble?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -400,7 +388,7 @@ export type RoomSolveMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
+  scramble?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -409,44 +397,11 @@ export type RoomSolveSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   roomId?: Prisma.SortOrder
   index?: Prisma.SortOrder
-  scrambleId?: Prisma.SortOrder
 }
 
 export type RoomSolveScalarRelationFilter = {
   is?: Prisma.RoomSolveWhereInput
   isNot?: Prisma.RoomSolveWhereInput
-}
-
-export type RoomSolveCreateNestedOneWithoutScrambleInput = {
-  create?: Prisma.XOR<Prisma.RoomSolveCreateWithoutScrambleInput, Prisma.RoomSolveUncheckedCreateWithoutScrambleInput>
-  connectOrCreate?: Prisma.RoomSolveCreateOrConnectWithoutScrambleInput
-  connect?: Prisma.RoomSolveWhereUniqueInput
-}
-
-export type RoomSolveUncheckedCreateNestedOneWithoutScrambleInput = {
-  create?: Prisma.XOR<Prisma.RoomSolveCreateWithoutScrambleInput, Prisma.RoomSolveUncheckedCreateWithoutScrambleInput>
-  connectOrCreate?: Prisma.RoomSolveCreateOrConnectWithoutScrambleInput
-  connect?: Prisma.RoomSolveWhereUniqueInput
-}
-
-export type RoomSolveUpdateOneWithoutScrambleNestedInput = {
-  create?: Prisma.XOR<Prisma.RoomSolveCreateWithoutScrambleInput, Prisma.RoomSolveUncheckedCreateWithoutScrambleInput>
-  connectOrCreate?: Prisma.RoomSolveCreateOrConnectWithoutScrambleInput
-  upsert?: Prisma.RoomSolveUpsertWithoutScrambleInput
-  disconnect?: Prisma.RoomSolveWhereInput | boolean
-  delete?: Prisma.RoomSolveWhereInput | boolean
-  connect?: Prisma.RoomSolveWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomSolveUpdateToOneWithWhereWithoutScrambleInput, Prisma.RoomSolveUpdateWithoutScrambleInput>, Prisma.RoomSolveUncheckedUpdateWithoutScrambleInput>
-}
-
-export type RoomSolveUncheckedUpdateOneWithoutScrambleNestedInput = {
-  create?: Prisma.XOR<Prisma.RoomSolveCreateWithoutScrambleInput, Prisma.RoomSolveUncheckedCreateWithoutScrambleInput>
-  connectOrCreate?: Prisma.RoomSolveCreateOrConnectWithoutScrambleInput
-  upsert?: Prisma.RoomSolveUpsertWithoutScrambleInput
-  disconnect?: Prisma.RoomSolveWhereInput | boolean
-  delete?: Prisma.RoomSolveWhereInput | boolean
-  connect?: Prisma.RoomSolveWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.RoomSolveUpdateToOneWithWhereWithoutScrambleInput, Prisma.RoomSolveUpdateWithoutScrambleInput>, Prisma.RoomSolveUncheckedUpdateWithoutScrambleInput>
 }
 
 export type RoomSolveCreateNestedManyWithoutRoomInput = {
@@ -505,68 +460,18 @@ export type RoomSolveUpdateOneRequiredWithoutResultsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RoomSolveUpdateToOneWithWhereWithoutResultsInput, Prisma.RoomSolveUpdateWithoutResultsInput>, Prisma.RoomSolveUncheckedUpdateWithoutResultsInput>
 }
 
-export type RoomSolveCreateWithoutScrambleInput = {
-  index: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  room: Prisma.RoomCreateNestedOneWithoutSolvesInput
-  results?: Prisma.RoomSolveResultCreateNestedManyWithoutRoomSolveInput
-}
-
-export type RoomSolveUncheckedCreateWithoutScrambleInput = {
-  id?: number
-  roomId: number
-  index: number
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  results?: Prisma.RoomSolveResultUncheckedCreateNestedManyWithoutRoomSolveInput
-}
-
-export type RoomSolveCreateOrConnectWithoutScrambleInput = {
-  where: Prisma.RoomSolveWhereUniqueInput
-  create: Prisma.XOR<Prisma.RoomSolveCreateWithoutScrambleInput, Prisma.RoomSolveUncheckedCreateWithoutScrambleInput>
-}
-
-export type RoomSolveUpsertWithoutScrambleInput = {
-  update: Prisma.XOR<Prisma.RoomSolveUpdateWithoutScrambleInput, Prisma.RoomSolveUncheckedUpdateWithoutScrambleInput>
-  create: Prisma.XOR<Prisma.RoomSolveCreateWithoutScrambleInput, Prisma.RoomSolveUncheckedCreateWithoutScrambleInput>
-  where?: Prisma.RoomSolveWhereInput
-}
-
-export type RoomSolveUpdateToOneWithWhereWithoutScrambleInput = {
-  where?: Prisma.RoomSolveWhereInput
-  data: Prisma.XOR<Prisma.RoomSolveUpdateWithoutScrambleInput, Prisma.RoomSolveUncheckedUpdateWithoutScrambleInput>
-}
-
-export type RoomSolveUpdateWithoutScrambleInput = {
-  index?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  room?: Prisma.RoomUpdateOneRequiredWithoutSolvesNestedInput
-  results?: Prisma.RoomSolveResultUpdateManyWithoutRoomSolveNestedInput
-}
-
-export type RoomSolveUncheckedUpdateWithoutScrambleInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  roomId?: Prisma.IntFieldUpdateOperationsInput | number
-  index?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  results?: Prisma.RoomSolveResultUncheckedUpdateManyWithoutRoomSolveNestedInput
-}
-
 export type RoomSolveCreateWithoutRoomInput = {
   index: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  scramble: Prisma.ScrambleCreateNestedOneWithoutRoomSolveInput
   results?: Prisma.RoomSolveResultCreateNestedManyWithoutRoomSolveInput
 }
 
 export type RoomSolveUncheckedCreateWithoutRoomInput = {
   id?: number
   index: number
-  scrambleId: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
   results?: Prisma.RoomSolveResultUncheckedCreateNestedManyWithoutRoomSolveInput
@@ -605,24 +510,24 @@ export type RoomSolveScalarWhereInput = {
   id?: Prisma.IntFilter<"RoomSolve"> | number
   roomId?: Prisma.IntFilter<"RoomSolve"> | number
   index?: Prisma.IntFilter<"RoomSolve"> | number
-  scrambleId?: Prisma.IntFilter<"RoomSolve"> | number
+  scramble?: Prisma.StringFilter<"RoomSolve"> | string
   createdAt?: Prisma.DateTimeFilter<"RoomSolve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"RoomSolve"> | Date | string
 }
 
 export type RoomSolveCreateWithoutResultsInput = {
   index: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
   room: Prisma.RoomCreateNestedOneWithoutSolvesInput
-  scramble: Prisma.ScrambleCreateNestedOneWithoutRoomSolveInput
 }
 
 export type RoomSolveUncheckedCreateWithoutResultsInput = {
   id?: number
   roomId: number
   index: number
-  scrambleId: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -645,17 +550,17 @@ export type RoomSolveUpdateToOneWithWhereWithoutResultsInput = {
 
 export type RoomSolveUpdateWithoutResultsInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   room?: Prisma.RoomUpdateOneRequiredWithoutSolvesNestedInput
-  scramble?: Prisma.ScrambleUpdateOneRequiredWithoutRoomSolveNestedInput
 }
 
 export type RoomSolveUncheckedUpdateWithoutResultsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   roomId?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
-  scrambleId?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -663,23 +568,23 @@ export type RoomSolveUncheckedUpdateWithoutResultsInput = {
 export type RoomSolveCreateManyRoomInput = {
   id?: number
   index: number
-  scrambleId: number
+  scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
 
 export type RoomSolveUpdateWithoutRoomInput = {
   index?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  scramble?: Prisma.ScrambleUpdateOneRequiredWithoutRoomSolveNestedInput
   results?: Prisma.RoomSolveResultUpdateManyWithoutRoomSolveNestedInput
 }
 
 export type RoomSolveUncheckedUpdateWithoutRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
-  scrambleId?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   results?: Prisma.RoomSolveResultUncheckedUpdateManyWithoutRoomSolveNestedInput
@@ -688,7 +593,7 @@ export type RoomSolveUncheckedUpdateWithoutRoomInput = {
 export type RoomSolveUncheckedUpdateManyWithoutRoomInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   index?: Prisma.IntFieldUpdateOperationsInput | number
-  scrambleId?: Prisma.IntFieldUpdateOperationsInput | number
+  scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -728,11 +633,10 @@ export type RoomSolveSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   id?: boolean
   roomId?: boolean
   index?: boolean
-  scrambleId?: boolean
+  scramble?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  scramble?: boolean | Prisma.ScrambleDefaultArgs<ExtArgs>
   results?: boolean | Prisma.RoomSolve$resultsArgs<ExtArgs>
   _count?: boolean | Prisma.RoomSolveCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roomSolve"]>
@@ -741,61 +645,55 @@ export type RoomSolveSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   id?: boolean
   roomId?: boolean
   index?: boolean
-  scrambleId?: boolean
+  scramble?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  scramble?: boolean | Prisma.ScrambleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roomSolve"]>
 
 export type RoomSolveSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   roomId?: boolean
   index?: boolean
-  scrambleId?: boolean
+  scramble?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  scramble?: boolean | Prisma.ScrambleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["roomSolve"]>
 
 export type RoomSolveSelectScalar = {
   id?: boolean
   roomId?: boolean
   index?: boolean
-  scrambleId?: boolean
+  scramble?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type RoomSolveOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "index" | "scrambleId" | "createdAt" | "updatedAt", ExtArgs["result"]["roomSolve"]>
+export type RoomSolveOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "roomId" | "index" | "scramble" | "createdAt" | "updatedAt", ExtArgs["result"]["roomSolve"]>
 export type RoomSolveInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  scramble?: boolean | Prisma.ScrambleDefaultArgs<ExtArgs>
   results?: boolean | Prisma.RoomSolve$resultsArgs<ExtArgs>
   _count?: boolean | Prisma.RoomSolveCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RoomSolveIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  scramble?: boolean | Prisma.ScrambleDefaultArgs<ExtArgs>
 }
 export type RoomSolveIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   room?: boolean | Prisma.RoomDefaultArgs<ExtArgs>
-  scramble?: boolean | Prisma.ScrambleDefaultArgs<ExtArgs>
 }
 
 export type $RoomSolvePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RoomSolve"
   objects: {
     room: Prisma.$RoomPayload<ExtArgs>
-    scramble: Prisma.$ScramblePayload<ExtArgs>
     results: Prisma.$RoomSolveResultPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     roomId: number
     index: number
-    scrambleId: number
+    scramble: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["roomSolve"]>
@@ -1193,7 +1091,6 @@ readonly fields: RoomSolveFieldRefs;
 export interface Prisma__RoomSolveClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   room<T extends Prisma.RoomDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomDefaultArgs<ExtArgs>>): Prisma.Prisma__RoomClient<runtime.Types.Result.GetResult<Prisma.$RoomPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  scramble<T extends Prisma.ScrambleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ScrambleDefaultArgs<ExtArgs>>): Prisma.Prisma__ScrambleClient<runtime.Types.Result.GetResult<Prisma.$ScramblePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   results<T extends Prisma.RoomSolve$resultsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RoomSolve$resultsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoomSolveResultPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1227,7 +1124,7 @@ export interface RoomSolveFieldRefs {
   readonly id: Prisma.FieldRef<"RoomSolve", 'Int'>
   readonly roomId: Prisma.FieldRef<"RoomSolve", 'Int'>
   readonly index: Prisma.FieldRef<"RoomSolve", 'Int'>
-  readonly scrambleId: Prisma.FieldRef<"RoomSolve", 'Int'>
+  readonly scramble: Prisma.FieldRef<"RoomSolve", 'String'>
   readonly createdAt: Prisma.FieldRef<"RoomSolve", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"RoomSolve", 'DateTime'>
 }

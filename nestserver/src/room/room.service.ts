@@ -23,11 +23,14 @@ export class RoomService {
 
   async getRoomById(roomId: string) {
     const id = parseInt(roomId);
-    if (!isNaN(id)) {
+    if (isNaN(id)) {
       throw new NotFoundException("Кімната не знайдена");
     }
 
-    const room = await this.prisma.room.findUnique({ where: { id } });
+    const room = await this.prisma.room.findUnique({
+      where: { id },
+      include: { users: true },
+    });
     if (!room) {
       throw new NotFoundException("Кімната не знайдена");
     }
@@ -35,10 +38,12 @@ export class RoomService {
     const solves = await this.prisma.roomSolve.findMany({
       where: { roomId: room.id },
       include: {
-        scramble: true,
         results: {
           include: { user: { include: { user: true } }, result: true },
         },
+      },
+      orderBy: {
+        index: "desc",
       },
     });
 
@@ -72,17 +77,10 @@ export class RoomService {
 
     const generatedScr = this.scramble.generateScramble(dto.event);
 
-    const scramble = await this.prisma.scramble.create({
-      data: {
-        index: 1,
-        scramble: generatedScr.scramble,
-      },
-    });
-
     const firstSolve = await this.prisma.roomSolve.create({
       data: {
         roomId: room.id,
-        scrambleId: scramble.id,
+        scramble: generatedScr.scramble,
         index: 1,
       },
     });
@@ -117,6 +115,23 @@ export class RoomService {
     }
 
     return false;
+  }
+
+  async createRoomUser(userId: string, roomId: number) {
+    const exists = await this.prisma.roomUser.findUnique({
+      where: { roomId_userId: { roomId, userId } },
+    });
+
+    if (!exists) {
+      await this.prisma.roomUser.create({
+        data: {
+          role: RoomUserRole.MEMBER,
+          status: RoomUserStatus.LEFT,
+          roomId: roomId,
+          userId: userId,
+        },
+      });
+    }
   }
 
   async deleteRoom(userId: string, roomId: string) {

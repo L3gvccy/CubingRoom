@@ -1,7 +1,145 @@
-import React from "react";
+import EventSelect from "@/components/event-select";
+import GlobalTimer from "@/components/global-timer";
+import Loader from "@/components/loader/loader";
+import ShowScramble from "@/components/show-scramble";
+import TimerTypeSelect from "@/components/timer-type-select";
+import { useSocket } from "@/context/socketContext";
+import { apiClient } from "@/lib/api-client";
+import { useAppStore } from "@/store";
+import { GET_ROOM_BY_ID } from "@/utils/constants";
+import { getDisplay, getNameAndFormat } from "@/utils/tools";
+import { RotateCcw } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const Room = () => {
-  return <div>Room</div>;
+  const [loading, setLoading] = useState(true);
+  const socket = useSocket();
+  const navigate = useNavigate();
+  const joinedRef = useRef(false);
+  const { roomId } = useParams();
+  const { userData } = useAppStore();
+  const [roomUser, setroomUser] = useState({});
+  const [room, setRoom] = useState({});
+  const [solves, setSolves] = useState([]);
+  const [currentSolve, setCurrentSolve] = useState();
+
+  const isAdmin = roomUser.role === "ADMIN";
+
+  const getRoom = async () => {
+    await apiClient
+      .get(GET_ROOM_BY_ID(roomId), { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        if (!res.data.room.users.some((u) => u.userId === userData.id)) {
+          navigate(`/join-room/${roomId}`);
+          return;
+        }
+        setRoom(res.data.room);
+        setSolves(res.data.solves);
+        setroomUser(res.data.room.users.find((u) => u.userId === userData.id));
+      })
+      .catch((err) => {
+        toast.error("Кімната не знайдена");
+        navigate("/rooms");
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const handleSubmit = (res) => {
+    console.log(res);
+  };
+
+  useEffect(() => {
+    if (!socket || !roomUser || joinedRef.current) return;
+
+    socket.emit("room:join", { roomId });
+    joinedRef.current = true;
+
+    return () => {
+      socket.emit("room:leave", { roomId });
+    };
+  }, [socket, roomUser, roomId]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const onState = (state) => {
+      setRoom(state.room);
+      setSolves(state.solves);
+    };
+
+    socket.on("room:state", onState);
+
+    return () => {
+      socket.off("room:state", onState);
+    };
+  }, [socket]);
+
+  useEffect(() => {
+    getRoom();
+  }, []);
+
+  useEffect(() => {
+    setCurrentSolve(solves[0]);
+  }, [solves]);
+
+  if (loading)
+    return (
+      <div className="flex flex-col w-full items-center justify-center">
+        <Loader />
+      </div>
+    );
+
+  return (
+    <div className="flex w-full justify-center py-4">
+      <div className="flex flex-col max-w-342 w-full px-4">
+        <div className="flex flex-col md:flex-row w-full py-2 gap-2 items-center justify-between">
+          {isAdmin ? (
+            <EventSelect value={room.event} />
+          ) : (
+            <div className="py-1 px-8 border border-zinc-700 rounded-md">
+              {getNameAndFormat(room.event)[0]}
+            </div>
+          )}
+          <span className="text-xl font-semibold max-w-56 truncate">
+            {room.name}
+          </span>
+          <TimerTypeSelect />
+        </div>
+        {isAdmin && (
+          <div className="flex py-2 justify-center">
+            <button className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300">
+              <RotateCcw size={18} />
+              <span>Новий скрамбл</span>
+            </button>
+          </div>
+        )}
+
+        <div className="py-4">
+          <ShowScramble event={room.event} scramble={currentSolve?.scramble} />
+        </div>
+        <div className="flex justify-center items-center py-2">
+          <GlobalTimer handleSubmit={handleSubmit} />
+        </div>
+        <div className="h-[40vh] flex items-center justify-center border">
+          **Таблиця результатів **
+        </div>
+        <div className="flex flex-col md:flex-row items-center justify-center">
+          <div className="flex-1 border h-full p-4">**Власні результати**</div>
+          <scramble-display
+            event={getDisplay(room.event)}
+            scramble={currentSolve?.scramble}
+            className="max-w-86"
+          ></scramble-display>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Room;

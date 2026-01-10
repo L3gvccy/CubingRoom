@@ -40,7 +40,7 @@ const TimerFullscreen = () => {
         <div className="flex gap-2">
           <button
             className="text-lg py-2 px-6 rounded-md text-zinc-100 bg-orange-400 cursor-pointer"
-            onClick={() => chooseResult("+2")}
+            onClick={() => chooseResult("PLUS2")}
           >
             +2
           </button>

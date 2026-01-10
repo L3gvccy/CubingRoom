@@ -18,7 +18,7 @@ const TimeInput = ({ handleSubmit }) => {
     let time = parseTimeInput(value);
     let finalTime = time;
 
-    if (penalty === "+2") {
+    if (penalty === "PLUS2") {
       finalTime += 2000;
     }
 
@@ -42,7 +42,7 @@ const TimeInput = ({ handleSubmit }) => {
 
   return (
     <div
-      className={`flex flex-col gap-2 items-center justify-center px-4 bg-transparent font-mono text-4xl text-center`}
+      className={`flex flex-col gap-2 items-center justify-center px-4 bg-transparent font-mono text-2xl text-center`}
     >
       <input
         value={value}
@@ -58,19 +58,19 @@ const TimeInput = ({ handleSubmit }) => {
       />
       <div className="flex gap-2">
         <button
-          className="text-lg py-1 px-6 rounded-md text-zinc-100 bg-orange-400 cursor-pointer"
-          onClick={() => chooseResult("+2")}
+          className="text-[18px] py-1 px-6 rounded-md text-zinc-100 bg-orange-400 cursor-pointer"
+          onClick={() => chooseResult("PLUS2")}
         >
           +2
         </button>
         <button
-          className="text-lg py-1 px-6 rounded-md text-zinc-100 bg-red-400 cursor-pointer"
+          className="text-[18px] py-1 px-6 rounded-md text-zinc-100 bg-red-400 cursor-pointer"
           onClick={() => chooseResult("DNF")}
         >
           DNF
         </button>
         <button
-          className="text-lg py-1 px-6 rounded-md text-zinc-100 bg-emerald-400 cursor-pointer"
+          className="text-[18px] py-1 px-6 rounded-md text-zinc-100 bg-emerald-400 cursor-pointer"
           onClick={() => chooseResult("OK")}
         >
           OK

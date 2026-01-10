@@ -28,10 +28,12 @@ export type AggregateRoom = {
 
 export type RoomAvgAggregateOutputType = {
   id: number | null
+  currentSolveIndex: number | null
 }
 
 export type RoomSumAggregateOutputType = {
   id: number | null
+  currentSolveIndex: number | null
 }
 
 export type RoomMinAggregateOutputType = {
@@ -40,6 +42,7 @@ export type RoomMinAggregateOutputType = {
   event: string | null
   private: boolean | null
   password: string | null
+  currentSolveIndex: number | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -51,6 +54,7 @@ export type RoomMaxAggregateOutputType = {
   event: string | null
   private: boolean | null
   password: string | null
+  currentSolveIndex: number | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -62,6 +66,7 @@ export type RoomCountAggregateOutputType = {
   event: number
   private: number
   password: number
+  currentSolveIndex: number
   ownerId: number
   createdAt: number
   updatedAt: number
@@ -71,10 +76,12 @@ export type RoomCountAggregateOutputType = {
 
 export type RoomAvgAggregateInputType = {
   id?: true
+  currentSolveIndex?: true
 }
 
 export type RoomSumAggregateInputType = {
   id?: true
+  currentSolveIndex?: true
 }
 
 export type RoomMinAggregateInputType = {
@@ -83,6 +90,7 @@ export type RoomMinAggregateInputType = {
   event?: true
   private?: true
   password?: true
+  currentSolveIndex?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -94,6 +102,7 @@ export type RoomMaxAggregateInputType = {
   event?: true
   private?: true
   password?: true
+  currentSolveIndex?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -105,6 +114,7 @@ export type RoomCountAggregateInputType = {
   event?: true
   private?: true
   password?: true
+  currentSolveIndex?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -203,6 +213,7 @@ export type RoomGroupByOutputType = {
   event: string
   private: boolean
   password: string | null
+  currentSolveIndex: number
   ownerId: string
   createdAt: Date
   updatedAt: Date
@@ -237,6 +248,7 @@ export type RoomWhereInput = {
   event?: Prisma.StringFilter<"Room"> | string
   private?: Prisma.BoolFilter<"Room"> | boolean
   password?: Prisma.StringNullableFilter<"Room"> | string | null
+  currentSolveIndex?: Prisma.IntFilter<"Room"> | number
   ownerId?: Prisma.StringFilter<"Room"> | string
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
@@ -251,6 +263,7 @@ export type RoomOrderByWithRelationInput = {
   event?: Prisma.SortOrder
   private?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -268,6 +281,7 @@ export type RoomWhereUniqueInput = Prisma.AtLeast<{
   event?: Prisma.StringFilter<"Room"> | string
   private?: Prisma.BoolFilter<"Room"> | boolean
   password?: Prisma.StringNullableFilter<"Room"> | string | null
+  currentSolveIndex?: Prisma.IntFilter<"Room"> | number
   ownerId?: Prisma.StringFilter<"Room"> | string
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
@@ -282,6 +296,7 @@ export type RoomOrderByWithAggregationInput = {
   event?: Prisma.SortOrder
   private?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -301,6 +316,7 @@ export type RoomScalarWhereWithAggregatesInput = {
   event?: Prisma.StringWithAggregatesFilter<"Room"> | string
   private?: Prisma.BoolWithAggregatesFilter<"Room"> | boolean
   password?: Prisma.StringNullableWithAggregatesFilter<"Room"> | string | null
+  currentSolveIndex?: Prisma.IntWithAggregatesFilter<"Room"> | number
   ownerId?: Prisma.StringWithAggregatesFilter<"Room"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Room"> | Date | string
@@ -311,6 +327,7 @@ export type RoomCreateInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutRoomsInput
@@ -324,6 +341,7 @@ export type RoomUncheckedCreateInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -336,6 +354,7 @@ export type RoomUpdateInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutRoomsNestedInput
@@ -349,6 +368,7 @@ export type RoomUncheckedUpdateInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -362,6 +382,7 @@ export type RoomCreateManyInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -372,6 +393,7 @@ export type RoomUpdateManyMutationInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -382,6 +404,7 @@ export type RoomUncheckedUpdateManyInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -408,6 +431,7 @@ export type RoomCountOrderByAggregateInput = {
   event?: Prisma.SortOrder
   private?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -415,6 +439,7 @@ export type RoomCountOrderByAggregateInput = {
 
 export type RoomAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
 }
 
 export type RoomMaxOrderByAggregateInput = {
@@ -423,6 +448,7 @@ export type RoomMaxOrderByAggregateInput = {
   event?: Prisma.SortOrder
   private?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -434,6 +460,7 @@ export type RoomMinOrderByAggregateInput = {
   event?: Prisma.SortOrder
   private?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -441,6 +468,7 @@ export type RoomMinOrderByAggregateInput = {
 
 export type RoomSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  currentSolveIndex?: Prisma.SortOrder
 }
 
 export type RoomCreateNestedManyWithoutOwnerInput = {
@@ -518,6 +546,7 @@ export type RoomCreateWithoutOwnerInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.RoomUserCreateNestedManyWithoutRoomInput
@@ -530,6 +559,7 @@ export type RoomUncheckedCreateWithoutOwnerInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   users?: Prisma.RoomUserUncheckedCreateNestedManyWithoutRoomInput
@@ -571,6 +601,7 @@ export type RoomScalarWhereInput = {
   event?: Prisma.StringFilter<"Room"> | string
   private?: Prisma.BoolFilter<"Room"> | boolean
   password?: Prisma.StringNullableFilter<"Room"> | string | null
+  currentSolveIndex?: Prisma.IntFilter<"Room"> | number
   ownerId?: Prisma.StringFilter<"Room"> | string
   createdAt?: Prisma.DateTimeFilter<"Room"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Room"> | Date | string
@@ -581,6 +612,7 @@ export type RoomCreateWithoutUsersInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutRoomsInput
@@ -593,6 +625,7 @@ export type RoomUncheckedCreateWithoutUsersInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -620,6 +653,7 @@ export type RoomUpdateWithoutUsersInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutRoomsNestedInput
@@ -632,6 +666,7 @@ export type RoomUncheckedUpdateWithoutUsersInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -643,6 +678,7 @@ export type RoomCreateWithoutSolvesInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutRoomsInput
@@ -655,6 +691,7 @@ export type RoomUncheckedCreateWithoutSolvesInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -682,6 +719,7 @@ export type RoomUpdateWithoutSolvesInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutRoomsNestedInput
@@ -694,6 +732,7 @@ export type RoomUncheckedUpdateWithoutSolvesInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -706,6 +745,7 @@ export type RoomCreateManyOwnerInput = {
   event: string
   private?: boolean
   password?: string | null
+  currentSolveIndex?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -715,6 +755,7 @@ export type RoomUpdateWithoutOwnerInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.RoomUserUpdateManyWithoutRoomNestedInput
@@ -727,6 +768,7 @@ export type RoomUncheckedUpdateWithoutOwnerInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.RoomUserUncheckedUpdateManyWithoutRoomNestedInput
@@ -739,6 +781,7 @@ export type RoomUncheckedUpdateManyWithoutOwnerInput = {
   event?: Prisma.StringFieldUpdateOperationsInput | string
   private?: Prisma.BoolFieldUpdateOperationsInput | boolean
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentSolveIndex?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -789,6 +832,7 @@ export type RoomSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   event?: boolean
   private?: boolean
   password?: boolean
+  currentSolveIndex?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -804,6 +848,7 @@ export type RoomSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   event?: boolean
   private?: boolean
   password?: boolean
+  currentSolveIndex?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -816,6 +861,7 @@ export type RoomSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   event?: boolean
   private?: boolean
   password?: boolean
+  currentSolveIndex?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -828,12 +874,13 @@ export type RoomSelectScalar = {
   event?: boolean
   private?: boolean
   password?: boolean
+  currentSolveIndex?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "event" | "private" | "password" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["room"]>
+export type RoomOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "event" | "private" | "password" | "currentSolveIndex" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["room"]>
 export type RoomInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   users?: boolean | Prisma.Room$usersArgs<ExtArgs>
@@ -860,6 +907,7 @@ export type $RoomPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     event: string
     private: boolean
     password: string | null
+    currentSolveIndex: number
     ownerId: string
     createdAt: Date
     updatedAt: Date
@@ -1294,6 +1342,7 @@ export interface RoomFieldRefs {
   readonly event: Prisma.FieldRef<"Room", 'String'>
   readonly private: Prisma.FieldRef<"Room", 'Boolean'>
   readonly password: Prisma.FieldRef<"Room", 'String'>
+  readonly currentSolveIndex: Prisma.FieldRef<"Room", 'Int'>
   readonly ownerId: Prisma.FieldRef<"Room", 'String'>
   readonly createdAt: Prisma.FieldRef<"Room", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Room", 'DateTime'>

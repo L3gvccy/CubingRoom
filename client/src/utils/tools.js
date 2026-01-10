@@ -62,7 +62,7 @@ export const getDisplay = (event) => {
 export const formatTimeDisplay = (time, penalty) => {
   let totalMs = Math.floor(time);
 
-  if (penalty === "+2") {
+  if (penalty === "PLUS2") {
     totalMs += 2000;
   }
 
@@ -83,7 +83,7 @@ export const formatTimeDisplay = (time, penalty) => {
   }
 
   if (penalty === "DNF") return `DNF(${formatted})`;
-  if (penalty === "+2") return `${formatted}+`;
+  if (penalty === "PLUS2") return `${formatted}+`;
   return formatted;
 };
 

@@ -233,7 +233,6 @@ export type ScrambleWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   contestEvent?: Prisma.XOR<Prisma.ContestEventNullableScalarRelationFilter, Prisma.ContestEventWhereInput> | null
-  roomSolve?: Prisma.XOR<Prisma.RoomSolveNullableScalarRelationFilter, Prisma.RoomSolveWhereInput> | null
 }
 
 export type ScrambleOrderByWithRelationInput = {
@@ -244,7 +243,6 @@ export type ScrambleOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   contestEvent?: Prisma.ContestEventOrderByWithRelationInput
-  roomSolve?: Prisma.RoomSolveOrderByWithRelationInput
 }
 
 export type ScrambleWhereUniqueInput = Prisma.AtLeast<{
@@ -258,7 +256,6 @@ export type ScrambleWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
   contestEvent?: Prisma.XOR<Prisma.ContestEventNullableScalarRelationFilter, Prisma.ContestEventWhereInput> | null
-  roomSolve?: Prisma.XOR<Prisma.RoomSolveNullableScalarRelationFilter, Prisma.RoomSolveWhereInput> | null
 }, "id">
 
 export type ScrambleOrderByWithAggregationInput = {
@@ -293,7 +290,6 @@ export type ScrambleCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   contestEvent?: Prisma.ContestEventCreateNestedOneWithoutScramblesInput
-  roomSolve?: Prisma.RoomSolveCreateNestedOneWithoutScrambleInput
 }
 
 export type ScrambleUncheckedCreateInput = {
@@ -303,7 +299,6 @@ export type ScrambleUncheckedCreateInput = {
   scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  roomSolve?: Prisma.RoomSolveUncheckedCreateNestedOneWithoutScrambleInput
 }
 
 export type ScrambleUpdateInput = {
@@ -312,7 +307,6 @@ export type ScrambleUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contestEvent?: Prisma.ContestEventUpdateOneWithoutScramblesNestedInput
-  roomSolve?: Prisma.RoomSolveUpdateOneWithoutScrambleNestedInput
 }
 
 export type ScrambleUncheckedUpdateInput = {
@@ -322,7 +316,6 @@ export type ScrambleUncheckedUpdateInput = {
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roomSolve?: Prisma.RoomSolveUncheckedUpdateOneWithoutScrambleNestedInput
 }
 
 export type ScrambleCreateManyInput = {
@@ -399,11 +392,6 @@ export type ScrambleOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type ScrambleScalarRelationFilter = {
-  is?: Prisma.ScrambleWhereInput
-  isNot?: Prisma.ScrambleWhereInput
-}
-
 export type ScrambleCreateNestedManyWithoutContestEventInput = {
   create?: Prisma.XOR<Prisma.ScrambleCreateWithoutContestEventInput, Prisma.ScrambleUncheckedCreateWithoutContestEventInput> | Prisma.ScrambleCreateWithoutContestEventInput[] | Prisma.ScrambleUncheckedCreateWithoutContestEventInput[]
   connectOrCreate?: Prisma.ScrambleCreateOrConnectWithoutContestEventInput | Prisma.ScrambleCreateOrConnectWithoutContestEventInput[]
@@ -446,26 +434,11 @@ export type ScrambleUncheckedUpdateManyWithoutContestEventNestedInput = {
   deleteMany?: Prisma.ScrambleScalarWhereInput | Prisma.ScrambleScalarWhereInput[]
 }
 
-export type ScrambleCreateNestedOneWithoutRoomSolveInput = {
-  create?: Prisma.XOR<Prisma.ScrambleCreateWithoutRoomSolveInput, Prisma.ScrambleUncheckedCreateWithoutRoomSolveInput>
-  connectOrCreate?: Prisma.ScrambleCreateOrConnectWithoutRoomSolveInput
-  connect?: Prisma.ScrambleWhereUniqueInput
-}
-
-export type ScrambleUpdateOneRequiredWithoutRoomSolveNestedInput = {
-  create?: Prisma.XOR<Prisma.ScrambleCreateWithoutRoomSolveInput, Prisma.ScrambleUncheckedCreateWithoutRoomSolveInput>
-  connectOrCreate?: Prisma.ScrambleCreateOrConnectWithoutRoomSolveInput
-  upsert?: Prisma.ScrambleUpsertWithoutRoomSolveInput
-  connect?: Prisma.ScrambleWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.ScrambleUpdateToOneWithWhereWithoutRoomSolveInput, Prisma.ScrambleUpdateWithoutRoomSolveInput>, Prisma.ScrambleUncheckedUpdateWithoutRoomSolveInput>
-}
-
 export type ScrambleCreateWithoutContestEventInput = {
   index: number
   scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  roomSolve?: Prisma.RoomSolveCreateNestedOneWithoutScrambleInput
 }
 
 export type ScrambleUncheckedCreateWithoutContestEventInput = {
@@ -474,7 +447,6 @@ export type ScrambleUncheckedCreateWithoutContestEventInput = {
   scramble: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  roomSolve?: Prisma.RoomSolveUncheckedCreateNestedOneWithoutScrambleInput
 }
 
 export type ScrambleCreateOrConnectWithoutContestEventInput = {
@@ -515,56 +487,6 @@ export type ScrambleScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Scramble"> | Date | string
 }
 
-export type ScrambleCreateWithoutRoomSolveInput = {
-  index: number
-  scramble: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  contestEvent?: Prisma.ContestEventCreateNestedOneWithoutScramblesInput
-}
-
-export type ScrambleUncheckedCreateWithoutRoomSolveInput = {
-  id?: number
-  contestEventId?: number | null
-  index: number
-  scramble: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ScrambleCreateOrConnectWithoutRoomSolveInput = {
-  where: Prisma.ScrambleWhereUniqueInput
-  create: Prisma.XOR<Prisma.ScrambleCreateWithoutRoomSolveInput, Prisma.ScrambleUncheckedCreateWithoutRoomSolveInput>
-}
-
-export type ScrambleUpsertWithoutRoomSolveInput = {
-  update: Prisma.XOR<Prisma.ScrambleUpdateWithoutRoomSolveInput, Prisma.ScrambleUncheckedUpdateWithoutRoomSolveInput>
-  create: Prisma.XOR<Prisma.ScrambleCreateWithoutRoomSolveInput, Prisma.ScrambleUncheckedCreateWithoutRoomSolveInput>
-  where?: Prisma.ScrambleWhereInput
-}
-
-export type ScrambleUpdateToOneWithWhereWithoutRoomSolveInput = {
-  where?: Prisma.ScrambleWhereInput
-  data: Prisma.XOR<Prisma.ScrambleUpdateWithoutRoomSolveInput, Prisma.ScrambleUncheckedUpdateWithoutRoomSolveInput>
-}
-
-export type ScrambleUpdateWithoutRoomSolveInput = {
-  index?: Prisma.IntFieldUpdateOperationsInput | number
-  scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  contestEvent?: Prisma.ContestEventUpdateOneWithoutScramblesNestedInput
-}
-
-export type ScrambleUncheckedUpdateWithoutRoomSolveInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  contestEventId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  index?: Prisma.IntFieldUpdateOperationsInput | number
-  scramble?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type ScrambleCreateManyContestEventInput = {
   id?: number
   index: number
@@ -578,7 +500,6 @@ export type ScrambleUpdateWithoutContestEventInput = {
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roomSolve?: Prisma.RoomSolveUpdateOneWithoutScrambleNestedInput
 }
 
 export type ScrambleUncheckedUpdateWithoutContestEventInput = {
@@ -587,7 +508,6 @@ export type ScrambleUncheckedUpdateWithoutContestEventInput = {
   scramble?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roomSolve?: Prisma.RoomSolveUncheckedUpdateOneWithoutScrambleNestedInput
 }
 
 export type ScrambleUncheckedUpdateManyWithoutContestEventInput = {
@@ -608,7 +528,6 @@ export type ScrambleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   createdAt?: boolean
   updatedAt?: boolean
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
-  roomSolve?: boolean | Prisma.Scramble$roomSolveArgs<ExtArgs>
 }, ExtArgs["result"]["scramble"]>
 
 export type ScrambleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -643,7 +562,6 @@ export type ScrambleSelectScalar = {
 export type ScrambleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contestEventId" | "index" | "scramble" | "createdAt" | "updatedAt", ExtArgs["result"]["scramble"]>
 export type ScrambleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
-  roomSolve?: boolean | Prisma.Scramble$roomSolveArgs<ExtArgs>
 }
 export type ScrambleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contestEvent?: boolean | Prisma.Scramble$contestEventArgs<ExtArgs>
@@ -656,7 +574,6 @@ export type $ScramblePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "Scramble"
   objects: {
     contestEvent: Prisma.$ContestEventPayload<ExtArgs> | null
-    roomSolve: Prisma.$RoomSolvePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1060,7 +977,6 @@ readonly fields: ScrambleFieldRefs;
 export interface Prisma__ScrambleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   contestEvent<T extends Prisma.Scramble$contestEventArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Scramble$contestEventArgs<ExtArgs>>): Prisma.Prisma__ContestEventClient<runtime.Types.Result.GetResult<Prisma.$ContestEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  roomSolve<T extends Prisma.Scramble$roomSolveArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Scramble$roomSolveArgs<ExtArgs>>): Prisma.Prisma__RoomSolveClient<runtime.Types.Result.GetResult<Prisma.$RoomSolvePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1508,25 +1424,6 @@ export type Scramble$contestEventArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.ContestEventInclude<ExtArgs> | null
   where?: Prisma.ContestEventWhereInput
-}
-
-/**
- * Scramble.roomSolve
- */
-export type Scramble$roomSolveArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RoomSolve
-   */
-  select?: Prisma.RoomSolveSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RoomSolve
-   */
-  omit?: Prisma.RoomSolveOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RoomSolveInclude<ExtArgs> | null
-  where?: Prisma.RoomSolveWhereInput
 }
 
 /**
