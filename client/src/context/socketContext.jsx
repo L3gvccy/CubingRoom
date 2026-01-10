@@ -1,6 +1,6 @@
 import { useAppStore } from "@/store";
 import { HOST } from "@/utils/constants";
-import { createContext, useContext, useEffect, useRef } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
 const SocketContext = createContext(null);
@@ -10,25 +10,32 @@ export const useSocket = () => {
 };
 
 export const SocketProvider = ({ children }) => {
-  const socket = useRef();
+  const socketRef = useRef(null);
+  const [socketState, setSocketState] = useState(null);
   const { userData } = useAppStore();
 
   useEffect(() => {
-    if (userData && !socket.current) {
-      socket.current = io(HOST, {
-        withCredentials: true,
-        query: { userId: userData.id },
-      });
+    if (!userData) return;
 
-      return () => {
-        socket.current.disconnect();
-        socket.current = null;
-      };
-    }
+    const socket = io(HOST, {
+      withCredentials: true,
+      query: { userId: userData.id },
+    });
+
+    socketRef.current = socket;
+    setSocketState(socket);
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect();
+        socketRef.current = null;
+        setSocketState(null);
+      }
+    };
   }, [userData?.id]);
 
   return (
-    <SocketContext.Provider value={socket.current}>
+    <SocketContext.Provider value={socketState}>
       {children}
     </SocketContext.Provider>
   );

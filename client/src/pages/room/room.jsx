@@ -12,20 +12,22 @@ import { RotateCcw } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
+import ResultsTable from "./components/results-table";
 
 const Room = () => {
   const [loading, setLoading] = useState(true);
   const socket = useSocket();
   const navigate = useNavigate();
   const joinedRef = useRef(false);
-  const { roomId } = useParams();
+  const { roomId: roomIdStr } = useParams();
+  const roomId = Number(roomIdStr);
   const { userData } = useAppStore();
-  const [roomUser, setroomUser] = useState({});
+  const [roomUser, setRoomUser] = useState(null);
   const [room, setRoom] = useState({});
-  const [solves, setSolves] = useState([]);
+  const [solves, setSolves] = useState(null);
   const [currentSolve, setCurrentSolve] = useState();
 
-  const isAdmin = roomUser.role === "ADMIN";
+  const isAdmin = roomUser?.role === "ADMIN";
 
   const getRoom = async () => {
     await apiClient
@@ -38,7 +40,7 @@ const Room = () => {
         }
         setRoom(res.data.room);
         setSolves(res.data.solves);
-        setroomUser(res.data.room.users.find((u) => u.userId === userData.id));
+        setRoomUser(res.data.room.users.find((u) => u.userId === userData.id));
       })
       .catch((err) => {
         toast.error("Кімната не знайдена");
@@ -52,40 +54,44 @@ const Room = () => {
 
   const handleSubmit = (res) => {
     console.log(res);
+    socket.emit("room:submit", { roomId, finalResult: res });
+  };
+
+  const newScramble = () => {
+    socket.emit("room:update-scramble", { roomId });
   };
 
   useEffect(() => {
-    if (!socket || !roomUser || joinedRef.current) return;
+    if (!socket || joinedRef.current) return;
 
     socket.emit("room:join", { roomId });
     joinedRef.current = true;
 
-    return () => {
-      socket.emit("room:leave", { roomId });
-    };
-  }, [socket, roomUser, roomId]);
-
-  useEffect(() => {
-    if (!socket) return;
-
     const onState = (state) => {
+      console.log("room:state", state);
       setRoom(state.room);
       setSolves(state.solves);
+
+      const ru = state.room.users.find((u) => u.userId === userData.id);
+      setRoomUser(ru);
     };
 
     socket.on("room:state", onState);
 
     return () => {
+      socket.emit("room:leave", { roomId });
       socket.off("room:state", onState);
     };
-  }, [socket]);
+  }, [socket, roomId, userData.id]);
 
   useEffect(() => {
     getRoom();
   }, []);
 
   useEffect(() => {
-    setCurrentSolve(solves[0]);
+    if (solves) {
+      setCurrentSolve(solves[0]);
+    }
   }, [solves]);
 
   if (loading)
@@ -113,7 +119,10 @@ const Room = () => {
         </div>
         {isAdmin && (
           <div className="flex py-2 justify-center">
-            <button className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300">
+            <button
+              className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300"
+              onClick={newScramble}
+            >
               <RotateCcw size={18} />
               <span>Новий скрамбл</span>
             </button>
@@ -126,8 +135,15 @@ const Room = () => {
         <div className="flex justify-center items-center py-2">
           <GlobalTimer handleSubmit={handleSubmit} />
         </div>
-        <div className="h-[40vh] flex items-center justify-center border">
-          **Таблиця результатів **
+        <div
+          className="h-[40vh] flex items-center justify-center scrollbar-thin"
+          key={room?.updatedAt || room?.id}
+        >
+          <ResultsTable
+            users={room.users}
+            solves={solves}
+            currentSolve={currentSolve}
+          />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center">
           <div className="flex-1 border h-full p-4">**Власні результати**</div>

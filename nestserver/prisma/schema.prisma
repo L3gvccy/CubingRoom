@@ -102,9 +102,9 @@ model Solve {
 
   roomSolveResult RoomSolveResult?
 
-  time Int
+  time Float
   penalty Penalty @default(OK)
-  finalTime Int
+  finalTime Float
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

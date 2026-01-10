@@ -6,16 +6,13 @@ import { toast } from "sonner";
 
 const RoomJoin = () => {
   const navigate = useNavigate();
-  const { roomId } = useParams();
+  const { roomId: roomIdStr } = useParams();
+  const roomId = Number(roomIdStr);
   const [password, setPassword] = useState("");
 
   const joinRoom = async () => {
     await apiClient
-      .post(
-        JOIN_ROOM,
-        { roomId: parseInt(roomId), password },
-        { withCredentials: true }
-      )
+      .post(JOIN_ROOM, { roomId: roomId, password }, { withCredentials: true })
       .then((res) => {
         if (!res.data.ok) {
           if (password !== "") {

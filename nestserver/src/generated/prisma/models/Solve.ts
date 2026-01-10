@@ -239,9 +239,9 @@ export type SolveWhereInput = {
   NOT?: Prisma.SolveWhereInput | Prisma.SolveWhereInput[]
   id?: Prisma.IntFilter<"Solve"> | number
   contestResultId?: Prisma.IntNullableFilter<"Solve"> | number | null
-  time?: Prisma.IntFilter<"Solve"> | number
+  time?: Prisma.FloatFilter<"Solve"> | number
   penalty?: Prisma.EnumPenaltyFilter<"Solve"> | $Enums.Penalty
-  finalTime?: Prisma.IntFilter<"Solve"> | number
+  finalTime?: Prisma.FloatFilter<"Solve"> | number
   createdAt?: Prisma.DateTimeFilter<"Solve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Solve"> | Date | string
   contestResult?: Prisma.XOR<Prisma.ContestResultNullableScalarRelationFilter, Prisma.ContestResultWhereInput> | null
@@ -266,9 +266,9 @@ export type SolveWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SolveWhereInput[]
   NOT?: Prisma.SolveWhereInput | Prisma.SolveWhereInput[]
   contestResultId?: Prisma.IntNullableFilter<"Solve"> | number | null
-  time?: Prisma.IntFilter<"Solve"> | number
+  time?: Prisma.FloatFilter<"Solve"> | number
   penalty?: Prisma.EnumPenaltyFilter<"Solve"> | $Enums.Penalty
-  finalTime?: Prisma.IntFilter<"Solve"> | number
+  finalTime?: Prisma.FloatFilter<"Solve"> | number
   createdAt?: Prisma.DateTimeFilter<"Solve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Solve"> | Date | string
   contestResult?: Prisma.XOR<Prisma.ContestResultNullableScalarRelationFilter, Prisma.ContestResultWhereInput> | null
@@ -296,9 +296,9 @@ export type SolveScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SolveScalarWhereWithAggregatesInput | Prisma.SolveScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"Solve"> | number
   contestResultId?: Prisma.IntNullableWithAggregatesFilter<"Solve"> | number | null
-  time?: Prisma.IntWithAggregatesFilter<"Solve"> | number
+  time?: Prisma.FloatWithAggregatesFilter<"Solve"> | number
   penalty?: Prisma.EnumPenaltyWithAggregatesFilter<"Solve"> | $Enums.Penalty
-  finalTime?: Prisma.IntWithAggregatesFilter<"Solve"> | number
+  finalTime?: Prisma.FloatWithAggregatesFilter<"Solve"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Solve"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Solve"> | Date | string
 }
@@ -325,9 +325,9 @@ export type SolveUncheckedCreateInput = {
 }
 
 export type SolveUpdateInput = {
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contestResult?: Prisma.ContestResultUpdateOneWithoutResultsNestedInput
@@ -337,9 +337,9 @@ export type SolveUpdateInput = {
 export type SolveUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contestResultId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomSolveResult?: Prisma.RoomSolveResultUncheckedUpdateOneWithoutResultNestedInput
@@ -356,9 +356,9 @@ export type SolveCreateManyInput = {
 }
 
 export type SolveUpdateManyMutationInput = {
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -366,9 +366,9 @@ export type SolveUpdateManyMutationInput = {
 export type SolveUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contestResultId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -430,6 +430,14 @@ export type SolveOrderByRelationAggregateInput = {
 export type SolveScalarRelationFilter = {
   is?: Prisma.SolveWhereInput
   isNot?: Prisma.SolveWhereInput
+}
+
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type EnumPenaltyFieldUpdateOperationsInput = {
@@ -543,9 +551,9 @@ export type SolveScalarWhereInput = {
   NOT?: Prisma.SolveScalarWhereInput | Prisma.SolveScalarWhereInput[]
   id?: Prisma.IntFilter<"Solve"> | number
   contestResultId?: Prisma.IntNullableFilter<"Solve"> | number | null
-  time?: Prisma.IntFilter<"Solve"> | number
+  time?: Prisma.FloatFilter<"Solve"> | number
   penalty?: Prisma.EnumPenaltyFilter<"Solve"> | $Enums.Penalty
-  finalTime?: Prisma.IntFilter<"Solve"> | number
+  finalTime?: Prisma.FloatFilter<"Solve"> | number
   createdAt?: Prisma.DateTimeFilter<"Solve"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Solve"> | Date | string
 }
@@ -586,9 +594,9 @@ export type SolveUpdateToOneWithWhereWithoutRoomSolveResultInput = {
 }
 
 export type SolveUpdateWithoutRoomSolveResultInput = {
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   contestResult?: Prisma.ContestResultUpdateOneWithoutResultsNestedInput
@@ -597,9 +605,9 @@ export type SolveUpdateWithoutRoomSolveResultInput = {
 export type SolveUncheckedUpdateWithoutRoomSolveResultInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   contestResultId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -614,9 +622,9 @@ export type SolveCreateManyContestResultInput = {
 }
 
 export type SolveUpdateWithoutContestResultInput = {
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomSolveResult?: Prisma.RoomSolveResultUpdateOneWithoutResultNestedInput
@@ -624,9 +632,9 @@ export type SolveUpdateWithoutContestResultInput = {
 
 export type SolveUncheckedUpdateWithoutContestResultInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roomSolveResult?: Prisma.RoomSolveResultUncheckedUpdateOneWithoutResultNestedInput
@@ -634,9 +642,9 @@ export type SolveUncheckedUpdateWithoutContestResultInput = {
 
 export type SolveUncheckedUpdateManyWithoutContestResultInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  time?: Prisma.IntFieldUpdateOperationsInput | number
+  time?: Prisma.FloatFieldUpdateOperationsInput | number
   penalty?: Prisma.EnumPenaltyFieldUpdateOperationsInput | $Enums.Penalty
-  finalTime?: Prisma.IntFieldUpdateOperationsInput | number
+  finalTime?: Prisma.FloatFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1140,9 +1148,9 @@ export interface Prisma__SolveClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface SolveFieldRefs {
   readonly id: Prisma.FieldRef<"Solve", 'Int'>
   readonly contestResultId: Prisma.FieldRef<"Solve", 'Int'>
-  readonly time: Prisma.FieldRef<"Solve", 'Int'>
+  readonly time: Prisma.FieldRef<"Solve", 'Float'>
   readonly penalty: Prisma.FieldRef<"Solve", 'Penalty'>
-  readonly finalTime: Prisma.FieldRef<"Solve", 'Int'>
+  readonly finalTime: Prisma.FieldRef<"Solve", 'Float'>
   readonly createdAt: Prisma.FieldRef<"Solve", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Solve", 'DateTime'>
 }

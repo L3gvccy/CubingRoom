@@ -3,6 +3,9 @@ import { SocketService } from "./socket.service";
 import { SocketGateway } from "./socket.gateway";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
+import { RoomService } from "src/room/room.service";
+import { PrismaService } from "src/prisma.service";
+import { ScrambleService } from "src/scramble/scramble.service";
 
 @Module({
   imports: [
@@ -12,7 +15,13 @@ import { PassportModule } from "@nestjs/passport";
     }),
     PassportModule,
   ],
-  providers: [SocketService, SocketGateway],
+  providers: [
+    SocketService,
+    SocketGateway,
+    RoomService,
+    PrismaService,
+    ScrambleService,
+  ],
   exports: [SocketGateway],
 })
 export class SocketModule {}

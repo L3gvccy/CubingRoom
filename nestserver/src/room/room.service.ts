@@ -29,7 +29,33 @@ export class RoomService {
 
     const room = await this.prisma.room.findUnique({
       where: { id },
-      include: { users: true },
+      include: { users: { include: { user: true } } },
+    });
+    if (!room) {
+      throw new NotFoundException("Кімната не знайдена");
+    }
+
+    const solves = await this.prisma.roomSolve.findMany({
+      where: { roomId: room.id },
+      include: {
+        results: {
+          include: { user: { include: { user: true } }, result: true },
+        },
+      },
+      orderBy: {
+        index: "desc",
+      },
+    });
+
+    return { room, solves };
+  }
+
+  async getRoomState(roomId: number) {
+    const id = roomId;
+
+    const room = await this.prisma.room.findUnique({
+      where: { id },
+      include: { users: { include: { user: true } } },
     });
     if (!room) {
       throw new NotFoundException("Кімната не знайдена");
@@ -86,6 +112,44 @@ export class RoomService {
     });
 
     return { room };
+  }
+
+  async generateNewScramble(roomId: number) {
+    const room = await this.prisma.room.findUnique({ where: { id: roomId } });
+    if (!room) {
+      throw new NotFoundException("Кімната не знайдена");
+    }
+
+    const generatedScr = this.scramble.generateScramble(room.event);
+
+    const newSolve = await this.prisma.roomSolve.create({
+      data: {
+        roomId: room.id,
+        scramble: generatedScr.scramble,
+        index: room.currentSolveIndex + 1,
+      },
+    });
+
+    await this.prisma.room.update({
+      where: { id: roomId },
+      data: {
+        currentSolveIndex: newSolve.index,
+      },
+    });
+  }
+
+  async updateScramble(roomId: number) {
+    const room = await this.prisma.room.findUnique({ where: { id: roomId } });
+    if (!room) {
+      throw new NotFoundException("Кімната не знайдена");
+    }
+
+    const generatedScr = this.scramble.generateScramble(room.event);
+
+    await this.prisma.roomSolve.updateMany({
+      where: { roomId, index: room.currentSolveIndex },
+      data: { scramble: generatedScr.scramble },
+    });
   }
 
   async joinRoom(userId: string, roomId: number, password?: string) {
