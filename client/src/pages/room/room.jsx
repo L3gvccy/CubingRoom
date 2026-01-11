@@ -13,6 +13,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import ResultsTable from "./components/results-table";
+import PersonalResults from "./components/personal-results";
 
 const Room = () => {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,8 @@ const Room = () => {
   const [room, setRoom] = useState({});
   const [solves, setSolves] = useState(null);
   const [currentSolve, setCurrentSolve] = useState();
+
+  const newScrBtnRef = useRef();
 
   const isAdmin = roomUser?.role === "ADMIN";
 
@@ -58,7 +61,18 @@ const Room = () => {
   };
 
   const newScramble = () => {
+    newScrBtnRef.current.blur();
     socket.emit("room:update-scramble", { roomId });
+  };
+
+  const changeEvent = (event) => {
+    if (
+      window.confirm(
+        `Ви дійсно хочете змінити дисципліну на "${event}"?\nВсі результати буде видалено`
+      )
+    ) {
+      socket.emit("room:update-event", { roomId, event });
+    }
   };
 
   useEffect(() => {
@@ -73,6 +87,7 @@ const Room = () => {
       setSolves(state.solves);
 
       const ru = state.room.users.find((u) => u.userId === userData.id);
+      console.log(ru);
       setRoomUser(ru);
     };
 
@@ -106,7 +121,12 @@ const Room = () => {
       <div className="flex flex-col max-w-342 w-full px-4">
         <div className="flex flex-col md:flex-row w-full py-2 gap-2 items-center justify-between">
           {isAdmin ? (
-            <EventSelect value={room.event} />
+            <EventSelect
+              value={room.event}
+              setEvent={(e) => {
+                changeEvent(e);
+              }}
+            />
           ) : (
             <div className="py-1 px-8 border border-zinc-700 rounded-md">
               {getNameAndFormat(room.event)[0]}
@@ -120,6 +140,7 @@ const Room = () => {
         {isAdmin && (
           <div className="flex py-2 justify-center">
             <button
+              ref={newScrBtnRef}
               className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300"
               onClick={newScramble}
             >
@@ -132,11 +153,17 @@ const Room = () => {
         <div className="py-4">
           <ShowScramble event={room.event} scramble={currentSolve?.scramble} />
         </div>
-        <div className="flex justify-center items-center py-2">
-          <GlobalTimer handleSubmit={handleSubmit} />
+        <div className="flex justify-center items-center py-2 h-22.5">
+          {roomUser.status === "WAITING" ? (
+            <p className="font-mono text-lg text-zinc-100/75">
+              Очікування інших учасників
+            </p>
+          ) : (
+            <GlobalTimer handleSubmit={handleSubmit} />
+          )}
         </div>
         <div
-          className="h-[40vh] flex items-center justify-center scrollbar-thin"
+          className="h-[40vh] my-2 flex items-center justify-center scrollbar-thin"
           key={room?.updatedAt || room?.id}
         >
           <ResultsTable
@@ -145,8 +172,16 @@ const Room = () => {
             currentSolve={currentSolve}
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center">
-          <div className="flex-1 border h-full p-4">**Власні результати**</div>
+        <div className="flex flex-col-reverse md:flex-row items-center justify-center">
+          <div className="flex-1 h-full p-4">
+            {solves.length > 0 && (
+              <PersonalResults
+                solves={solves}
+                event={room.event}
+                userId={roomUser.id}
+              />
+            )}
+          </div>
           <scramble-display
             event={getDisplay(room.event)}
             scramble={currentSolve?.scramble}

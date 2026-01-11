@@ -25,3 +25,7 @@
 .results-table-container::-webkit-scrollbar-thumb:hover {
   background-color: #52525b;
 }
+
+.personal-table td {
+  padding: 6px;
+}

@@ -59,7 +59,12 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
       include: { results: true },
     });
 
-    const hasResult = currentSolve?.results.some((r) => r.userId === userId);
+    const ru = await this.prisma.roomUser.findUnique({
+      where: { roomId_userId: { roomId, userId } },
+    });
+
+    const hasResult = currentSolve?.results.some((r) => r.userId === ru?.id);
+
     await this.prisma.roomUser.update({
       where: { roomId_userId: { roomId, userId } },
       data: {
@@ -71,7 +76,6 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     console.log(`${userId} joined room ${roomId}`);
 
     const state = await this.roomService.getRoomState(roomId);
-    console.log(state);
 
     this.server.to(`room:${roomId}`).emit("room:state", state);
   }
@@ -197,6 +201,17 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage("room:update-scramble")
   async updateScr(@MessageBody() { roomId }: { roomId: number }) {
     await this.roomService.updateScramble(roomId);
+
+    const state = await this.roomService.getRoomState(roomId);
+
+    this.server.to(`room:${roomId}`).emit("room:state", state);
+  }
+
+  @SubscribeMessage("room:update-event")
+  async updateEvent(
+    @MessageBody() { roomId, event }: { roomId: number; event: string }
+  ) {
+    await this.roomService.updateEvent(roomId, event);
 
     const state = await this.roomService.getRoomState(roomId);
 

@@ -33,7 +33,7 @@ const TimerFullscreen = () => {
           state
         )}`}
       >
-        {formatTimeDisplay(time)}
+        {formatTimeDisplay(time, "OK")}
       </div>
 
       {state === "stopped" && pendingResult && (

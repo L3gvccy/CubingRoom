@@ -11,7 +11,8 @@ export function useTimer({ onFinish } = {}) {
   const holdTimeout = useRef(null);
 
   const tick = () => {
-    setTime(performance.now() - startTime.current);
+    const t = performance.now() - startTime.current;
+    setTime(t);
     raf.current = requestAnimationFrame(tick);
   };
 
@@ -24,9 +25,19 @@ export function useTimer({ onFinish } = {}) {
 
   const stop = () => {
     cancelAnimationFrame(raf.current);
-    const finalTime = performance.now() - startTime.current;
+
+    const finalRawTime = performance.now() - startTime.current;
+    const floored = Math.floor(finalRawTime);
+
+    // 🔑 КЛЮЧОВЕ: синхронізуємо дисплей і фінал
+    setTime(floored);
+
+    setPendingResult({
+      time: floored,
+      penalty: "OK",
+    });
+
     setState("stopped");
-    setPendingResult({ time: finalTime, penalty: "OK" });
   };
 
   const chooseResult = (penalty) => {
@@ -47,7 +58,12 @@ export function useTimer({ onFinish } = {}) {
       finalTime = Number.MAX_SAFE_INTEGER;
     }
 
-    const finalResult = { time: pendingResult.time, penalty, finalTime };
+    const finalResult = {
+      time: pendingResult.time,
+      penalty,
+      finalTime,
+    };
+
     setPendingResult(null);
     setIsFullscreen(false);
     setTime(0);
@@ -67,15 +83,15 @@ export function useTimer({ onFinish } = {}) {
   useEffect(() => {
     const onKeyDown = (e) => {
       e.preventDefault();
-      if (!e.code || e.code !== "Space" || e.repeat) return;
+      if (e.code !== "Space" || e.repeat) return;
 
-      const activeTag = document.activeElement?.tagName;
-      const editable = document.activeElement?.isContentEditable;
+      const el = document.activeElement;
       if (
-        activeTag === "INPUT" ||
-        activeTag === "TEXTAREA" ||
-        activeTag === "SELECT" ||
-        editable
+        el &&
+        (el.tagName === "INPUT" ||
+          el.tagName === "TEXTAREA" ||
+          el.tagName === "SELECT" ||
+          el.isContentEditable)
       ) {
         return;
       }
@@ -99,6 +115,7 @@ export function useTimer({ onFinish } = {}) {
 
     window.addEventListener("keydown", onKeyDown);
     window.addEventListener("keyup", onKeyUp);
+
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);

@@ -3,20 +3,12 @@ import { formatTimeDisplay } from "@/utils/tools";
 import "./table.css";
 
 const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
-  /**
-   * Активні користувачі
-   * Порядок фіксований
-   */
   const activeUsers = useMemo(() => {
     return [...users]
       .filter((u) => u.status !== "LEFT")
       .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
   }, [users]);
 
-  /**
-   * Переможець КОЖНОЇ збірки
-   * solveId -> userId
-   */
   const winnersBySolveId = useMemo(() => {
     const map = {};
 
@@ -34,9 +26,6 @@ const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
     return map;
   }, [solves]);
 
-  /**
-   * Кількість перемог
-   */
   const winsByUserId = useMemo(() => {
     const wins = {};
     activeUsers.forEach((u) => (wins[u.id] = 0));

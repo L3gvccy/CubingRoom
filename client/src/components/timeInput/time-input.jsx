@@ -23,7 +23,7 @@ const TimeInput = ({ handleSubmit }) => {
     }
 
     if (penalty === "DNF") {
-      finalTime = Infinity;
+      finalTime = Number.MAX_SAFE_INTEGER;
     }
 
     const finalResult = { time, penalty, finalTime };

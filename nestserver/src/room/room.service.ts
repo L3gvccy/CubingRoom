@@ -152,6 +152,33 @@ export class RoomService {
     });
   }
 
+  async updateEvent(roomId: number, event: string) {
+    const room = await this.prisma.room.update({
+      where: { id: roomId },
+      data: { event: event, currentSolveIndex: 1 },
+    });
+    if (!room) {
+      throw new NotFoundException("Кімната не знайдена");
+    }
+
+    await this.prisma.roomSolve.deleteMany({ where: { roomId } });
+
+    const generatedScr = this.scramble.generateScramble(room.event);
+
+    await this.prisma.roomSolve.create({
+      data: {
+        roomId: room.id,
+        scramble: generatedScr.scramble,
+        index: 1,
+      },
+    });
+
+    await this.prisma.roomUser.updateMany({
+      where: { roomId, status: RoomUserStatus.WAITING },
+      data: { status: RoomUserStatus.SOLVING },
+    });
+  }
+
   async joinRoom(userId: string, roomId: number, password?: string) {
     const id = roomId;
 
