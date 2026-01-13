@@ -8,6 +8,7 @@ import { RoomModule } from "./room/room.module";
 import { ScrambleService } from "./scramble/scramble.service";
 import { ScrambleController } from "./scramble/scramble.controller";
 import { ScrambleModule } from "./scramble/scramble.module";
+import { ScheduleModule } from "@nestjs/schedule";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ScrambleModule } from "./scramble/scramble.module";
     SocketModule,
     RoomModule,
     ScrambleModule,
+    ScheduleModule.forRoot(),
   ],
   providers: [ScrambleService],
   controllers: [ScrambleController],

@@ -218,10 +218,44 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     this.server.to(`room:${roomId}`).emit("room:state", state);
   }
 
-  handleDisconnect(socket: Socket) {
+  async handleDisconnect(socket: Socket) {
     const userId = Array.from(this.userSocketMap.entries()).find(
       ([_, sId]) => sId === socket.id
     )?.[0];
+
+    const roomUsers = await this.prisma.roomUser.findMany({
+      where: {
+        userId,
+        status: { in: [RoomUserStatus.SOLVING, RoomUserStatus.WAITING] },
+      },
+    });
+
+    for (const ru of roomUsers) {
+      await this.prisma.roomUser.update({
+        where: { id: ru.id },
+        data: { status: RoomUserStatus.LEFT },
+      });
+      const stillSolving = await this.prisma.roomUser.count({
+        where: { roomId: ru.roomId, status: RoomUserStatus.SOLVING },
+      });
+      const activeUsers = await this.prisma.roomUser.count({
+        where: {
+          roomId: ru.roomId,
+          status: { in: [RoomUserStatus.SOLVING, RoomUserStatus.WAITING] },
+        },
+      });
+      if (stillSolving === 0 && activeUsers > 0) {
+        await this.roomService.generateNewScramble(ru.roomId);
+        await this.prisma.roomUser.updateMany({
+          where: { roomId: ru.roomId, status: RoomUserStatus.WAITING },
+          data: {
+            status: RoomUserStatus.SOLVING,
+          },
+        });
+      }
+      const state = await this.roomService.getRoomState(ru.roomId);
+      this.server.to(`room:${ru.roomId}`).emit("room:state", state);
+    }
 
     if (userId) {
       this.userSocketMap.delete(userId);

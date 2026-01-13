@@ -16,3 +16,18 @@ export const getScrambler = (event: string) => {
 
   return wcaEvents[event];
 };
+
+export const event_format = [
+  ["333", "ao5"],
+  ["222", "ao5"],
+  ["444", "ao5"],
+  ["555", "ao5"],
+  ["666", "ao5"],
+  ["777", "ao5"],
+  ["333oh", "ao5"],
+  ["clock", "ao5"],
+  ["megaminx", "ao5"],
+  ["pyraminx", "ao5"],
+  ["skewb", "ao5"],
+  ["sq1", "ao5"],
+];
