@@ -24,7 +24,7 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()
   server: Server;
 
-  private userSocketMap = new Map<string, string>();
+  private userSocketMap = new Map<string, Set<string>>();
 
   constructor(
     private jwtService: JwtService,
@@ -42,7 +42,11 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }
 
     socket.data.userId = userId;
-    this.userSocketMap.set(userId, socket.id);
+    if (!this.userSocketMap.has(userId)) {
+      this.userSocketMap.set(userId, new Set());
+    }
+
+    this.userSocketMap.get(userId)!.add(socket.id);
     console.log(`User connected: ${userId} with socket ID ${socket.id}`);
   }
 
@@ -219,9 +223,19 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   async handleDisconnect(socket: Socket) {
-    const userId = Array.from(this.userSocketMap.entries()).find(
-      ([_, sId]) => sId === socket.id
-    )?.[0];
+    const userId = socket.data.userId;
+    if (!userId) return;
+
+    const sockets = this.userSocketMap.get(userId);
+    if (!sockets) return;
+
+    sockets.delete(socket.id);
+
+    if (sockets.size > 0) {
+      return;
+    }
+
+    this.userSocketMap.delete(userId);
 
     const roomUsers = await this.prisma.roomUser.findMany({
       where: {

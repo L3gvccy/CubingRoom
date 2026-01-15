@@ -51,7 +51,9 @@ const Room = () => {
         console.error(err);
       })
       .finally(() => {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 100);
       });
   };
 

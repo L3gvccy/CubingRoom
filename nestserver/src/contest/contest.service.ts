@@ -12,42 +12,50 @@ export class ContestService {
     private scrambleService: ScrambleService
   ) {}
 
-  @Cron("15 * * * * *")
+  // @Cron("15 * * * * *")
   async CreateContest() {
-    await this.prisma.contest.updateMany({
-      where: { isActive: true },
-      data: { isActive: false },
-    });
+    try {
+      await this.prisma.$transaction(async (tx) => {
+        await tx.contest.updateMany({
+          where: { isActive: true },
+          data: { isActive: false },
+        });
 
-    const contest = await this.prisma.contest.create({
-      data: {
-        startDate: new Date(),
-        endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-        isActive: true,
-      },
-    });
-
-    event_format.forEach(async ([event, format]: [string, string]) => {
-      const contestEvent = await this.prisma.contestEvent.create({
-        data: {
-          contestId: contest.id,
-          event,
-          format,
-        },
-      });
-      const numberOfScrambles = format === "ao5" ? 5 : 3;
-      for (let i = 0; i < numberOfScrambles; i++) {
-        const scramble = await this.scrambleService.generateScramble(event);
-
-        await this.prisma.scramble.create({
+        const contest = await tx.contest.create({
           data: {
-            contestEventId: contestEvent.id,
-            scramble: scramble.scramble,
-            index: i + 1,
+            startDate: new Date(),
+            endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+            isActive: true,
           },
         });
-      }
-    });
+
+        for (const [event, format] of event_format) {
+          const contestEvent = await tx.contestEvent.create({
+            data: {
+              contestId: contest.id,
+              event,
+              format,
+            },
+          });
+          const numberOfScrambles = format === "ao5" ? 5 : 3;
+          for (let i = 0; i < numberOfScrambles; i++) {
+            const scramble = await this.scrambleService.generateScramble(event);
+
+            await tx.scramble.create({
+              data: {
+                contestEventId: contestEvent.id,
+                scramble: scramble.scramble,
+                index: i + 1,
+              },
+            });
+          }
+        }
+      });
+
+      console.log("\n--- New contest created ---\n");
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async getAllContests() {
