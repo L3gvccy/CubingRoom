@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { formatTimeDisplay } from "@/utils/tools";
 import "./table.css";
+import { Link } from "react-router-dom";
 
 const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
   const activeUsers = useMemo(() => {
@@ -44,23 +45,29 @@ const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
       className="results-table-container h-full w-full overflow-auto relative
       scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900"
     >
-      <table className="border-collapse min-w-max text-sm">
+      <table className="border-collapse min-w-max w-full text-sm">
         <thead>
           <tr>
-            <th className="sticky top-0 left-0 bg-zinc-900 border px-2 py-1 z-40"></th>
+            <th className="sticky top-0 left-0 bg-zinc-900 border px-2 py-1 z-40 w-12"></th>
 
             {activeUsers.map((user) => (
               <th
                 key={user.userId}
                 className="sticky top-0 bg-zinc-900 border px-3 py-1 z-30 text-center"
               >
-                {user.user?.displayName || "?"}
+                <a
+                  className="cursor-pointer"
+                  href={`/users/${user.user.id}`}
+                  target="_blank"
+                >
+                  {user.user?.displayName || "?"}
+                </a>
               </th>
             ))}
           </tr>
 
           <tr>
-            <th className="sticky top-8 left-0 bg-zinc-900 border px-2 py-1 z-40 text-xs">
+            <th className="sticky top-8 left-0 bg-zinc-900 border px-2 py-1 z-40 text-xs w-12">
               🏆
             </th>
 
@@ -83,7 +90,7 @@ const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
             return (
               <tr key={solve.id}>
                 <td
-                  className={`sticky left-0 bg-zinc-900 border px-2 py-1 z-20 text-center font-bold
+                  className={`sticky left-0 bg-zinc-900 border px-2 py-1 z-20 text-center font-bold w-12
                     ${isCurrent ? "bg-zinc-800" : ""}`}
                 >
                   {solve.index}
