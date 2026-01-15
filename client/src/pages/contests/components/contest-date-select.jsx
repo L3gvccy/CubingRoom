@@ -1,32 +1,31 @@
 import { compareDate } from "@/utils/tools";
 import dayjs from "dayjs";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useMemo } from "react";
+import React from "react";
 
-const ContestDateSelect = ({ value, onChange }) => {
-  const addDays = (date, days) => {
-    const d = new Date(date);
-    d.setDate(d.getDate() + days);
-    return d;
-  };
-
-  const today = useMemo(() => new Date(), []);
-  const minDate = useMemo(() => addDays(today, -7), []);
-  const maxDate = useMemo(() => addDays(today, 1), []);
-
-  const canGoBack = value > minDate;
-  const canGoForw = !compareDate(value, maxDate);
+const ContestDateSelect = ({
+  contests,
+  selectedContest,
+  setSelectedContest,
+}) => {
+  const canGoBack = selectedContest.id !== contests[0].id;
+  const canGoForw = selectedContest.id !== contests[contests.length - 1].id;
 
   const handleBackBtnClick = (e) => {
+    e.preventDefault();
     if (!canGoBack) return;
-
-    onChange(addDays(value, -1));
+    const currentIndex = contests.findIndex(
+      (contest) => contest.id === selectedContest.id
+    );
+    setSelectedContest(contests[currentIndex - 1]);
   };
-
   const handleForwBtnClick = (e) => {
+    e.preventDefault();
     if (!canGoForw) return;
-
-    onChange(addDays(value, 1));
+    const currentIndex = contests.findIndex(
+      (contest) => contest.id === selectedContest.id
+    );
+    setSelectedContest(contests[currentIndex + 1]);
   };
 
   return (
@@ -41,13 +40,27 @@ const ContestDateSelect = ({ value, onChange }) => {
         <ChevronLeft size={30} />
       </button>
 
-      <div className="flex flex-col gap items-center justify-center w-48">
+      <div className="flex flex-col md:flex-row md:gap-2 gap items-center justify-center w-48 md:w-102">
         <p
           className={`text-lg font-semibold ${
-            compareDate(value, today) && "text-violet-700 dark:text-violet-400"
+            selectedContest.isActive && "text-violet-700 dark:text-violet-400"
           }`}
         >
-          {dayjs(value).format("LL")}
+          {dayjs(selectedContest.startDate).format("LL")}
+        </p>
+        <p
+          className={`text-lg font-semibold ${
+            selectedContest.isActive && "text-violet-700 dark:text-violet-400"
+          }`}
+        >
+          {" - "}
+        </p>
+        <p
+          className={`text-lg font-semibold ${
+            selectedContest.isActive && "text-violet-700 dark:text-violet-400"
+          }`}
+        >
+          {dayjs(selectedContest.endDate).format("LL")}
         </p>
       </div>
 

@@ -2,30 +2,38 @@ import React, { useState, useEffect } from "react";
 import ContestDateSelect from "./components/contest-date-select";
 import ContestCard from "./components/contest-card";
 import Loader from "@/components/loader/loader";
+import { apiClient } from "@/lib/api-client";
+import { GET_ALL_CONTESTS } from "@/utils/constants";
 
 const Contests = () => {
-  const [date, setDate] = useState(new Date());
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [contests, setContests] = useState([]);
-  const [contestsToDisplay, setContestsToDisplay] = useState([]);
+  const [selectedContest, setSelectedContest] = useState();
 
-  const events_test = [
-    "333",
-    "222",
-    "444",
-    "555",
-    "666",
-    "777",
-    "333oh",
-    "clock",
-    "megaminx",
-    "pyraminx",
-    "skewb",
-    "sq1",
-  ];
+  const getAllContests = async () => {
+    await apiClient
+      .get(GET_ALL_CONTESTS, { withCredentials: true })
+      .then((res) => {
+        const contests = res.data.contests;
+        setContests(res.data.contests);
+        const activeContest = contests.find((contest) => contest.isActive);
+        console.log(activeContest);
+        if (activeContest) {
+          setSelectedContest(activeContest);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
-  const getAllContests = async () => {};
+  useEffect(() => {
+    getAllContests();
+  }, []);
 
   if (loading) {
     return (
@@ -35,14 +43,29 @@ const Contests = () => {
     );
   }
 
+  if (!selectedContest || contests.length === 0) {
+    return (
+      <div className="flex flex-col gap-5 w-full justify-center py-4">
+        <p className="text-2xl font-bold text-center">Контести</p>
+        <p className="opacity-75 text-lg text-center">
+          Немає доступних контестів
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex w-full justify-center py-4">
       <div className="flex flex-col w-full max-w-342 gap-5">
         <p className="text-2xl font-bold text-center">Контести</p>
-        <ContestDateSelect value={date} onChange={setDate} />
+        <ContestDateSelect
+          contests={contests}
+          selectedContest={selectedContest}
+          setSelectedContest={setSelectedContest}
+        />
         <div className="flex gap-5 justify-center flex-wrap">
-          {events_test.map((event) => (
-            <ContestCard event={event} active={1} key={event} />
+          {selectedContest.contests.map((c) => (
+            <ContestCard event={c.event} active={1} key={c.id} />
           ))}
         </div>
       </div>

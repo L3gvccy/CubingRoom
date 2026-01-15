@@ -113,7 +113,7 @@ const Room = () => {
 
   if (loading)
     return (
-      <div className="flex flex-col w-full items-center justify-center">
+      <div className="flex flex-col flex-1 w-full items-center justify-center">
         <Loader />
       </div>
     );
@@ -165,7 +165,7 @@ const Room = () => {
           )}
         </div>
         <div
-          className="h-[40vh] my-2 flex items-center justify-center scrollbar-thin"
+          className="h-[37vh] my-2 flex items-center justify-center scrollbar-thin"
           key={room?.updatedAt || room?.id}
         >
           <ResultsTable
