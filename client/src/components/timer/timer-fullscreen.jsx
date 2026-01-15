@@ -7,6 +7,7 @@ const TimerFullscreen = () => {
     useGlobalTimer();
 
   const onEnterPress = (e) => {
+    e.preventDefault();
     if (e.key === "Enter") {
       chooseResult("OK");
     } else if (e.key === "Escape") {

@@ -50,6 +50,7 @@ const TimeInput = ({ handleSubmit }) => {
           handleInput(e);
         }}
         onKeyDown={(e) => {
+          e.preventDefault();
           handleKeyDown(e);
         }}
         type="text"
