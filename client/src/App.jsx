@@ -17,6 +17,7 @@ import Contests from "./pages/contests/contests";
 import Rooms from "./pages/rooms/rooms";
 import Room from "./pages/room/room";
 import RoomJoin from "./pages/room/room-join";
+import Contest from "./pages/contests/contest";
 
 const PrivateRoute = ({ children }) => {
   const { userData } = useAppStore();
@@ -93,6 +94,15 @@ function App() {
             element={
               <PrivateRoute>
                 <Contests />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/contests/:contestEventId"
+            element={
+              <PrivateRoute>
+                <Contest />
               </PrivateRoute>
             }
           />
