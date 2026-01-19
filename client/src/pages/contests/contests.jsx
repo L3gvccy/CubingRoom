@@ -65,7 +65,12 @@ const Contests = () => {
         />
         <div className="flex gap-5 justify-center flex-wrap">
           {selectedContest.contests.map((c) => (
-            <ContestCard event={c.event} active={1} key={c.id} />
+            <ContestCard
+              event={c.event}
+              id={c.id}
+              active={selectedContest.isActive}
+              key={c.id}
+            />
           ))}
         </div>
       </div>

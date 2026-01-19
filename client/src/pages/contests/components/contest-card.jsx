@@ -3,7 +3,7 @@ import { getNameAndFormat } from "@/utils/tools";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ContestCard = ({ event, _id, active }) => {
+const ContestCard = ({ event, id, active }) => {
   //   const { event, _id, active } = contest;
   const navigate = useNavigate();
   const [name, _] = getNameAndFormat(event);
@@ -14,7 +14,7 @@ const ContestCard = ({ event, _id, active }) => {
   return (
     <div
       onClick={() => {
-        navigate(`/`);
+        navigate(`/contests/${id}`);
       }}
       className={`py-6 w-28 md:w-42 flex flex-col gap-4 justify-center rounded-xl group bg-size-[200%_200%] ease-out bg-linear-to-br ${
         active ? bgActive : bgInactive
