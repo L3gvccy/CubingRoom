@@ -69,6 +69,7 @@ export class ContestService {
   async getContestEventById(contestEventId: number) {
     const contestEvent = await this.prisma.contestEvent.findUnique({
       where: { id: contestEventId },
+      include: { contest: true },
     });
 
     if (!contestEvent) {

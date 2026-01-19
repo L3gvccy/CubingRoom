@@ -38,7 +38,7 @@ export const GET_CONTEST_RESULT = (contestEventId) => {
 export const ADD_CONTEST_TIME = (contestEventId) => {
   return `${CONTESTS_ROUTES}/add-time/${contestEventId}`;
 };
-export const SOBMIT_CONTEST_RESULT = (contestEventId) => {
+export const SUBMIT_CONTEST_RESULT = (contestEventId) => {
   return `${CONTESTS_ROUTES}/submit-result/${contestEventId}`;
 };
 
