@@ -130,7 +130,7 @@ const Room = () => {
               }}
             />
           ) : (
-            <div className="py-1 px-8 border border-zinc-700 rounded-md">
+            <div className="py-1 w-32 flex justify-center border border-zinc-700 rounded-md">
               {getNameAndFormat(room.event)[0]}
             </div>
           )}
