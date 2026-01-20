@@ -13,6 +13,7 @@ import { formatTimeDisplay, getDisplay, getNameAndFormat } from "@/utils/tools";
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ContestResultTable from "./components/contest-result-table";
 
 const Contest = () => {
   const naviagate = useNavigate();
@@ -70,10 +71,13 @@ const Contest = () => {
   }, []);
 
   useEffect(() => {
-    if (contest && contest.isActive) {
-      getMyContestResult();
-    }
-    setLoading(false);
+    const fetchData = async () => {
+      if (contest && contest.isActive) {
+        await getMyContestResult();
+      }
+      setLoading(false);
+    };
+    fetchData();
   }, [contest]);
 
   if (!loading && contest && event)
@@ -98,7 +102,9 @@ const Contest = () => {
               {dayjs(contest.endDate).format("L")}
             </p>
           </div>
-          {solves &&
+          {/* Контест активний і користувач може збирати */}
+          {contest.isActive &&
+            solves &&
             solves.length < getNameAndFormat(event.event)[1].slice(2) && (
               <>
                 <div className="flex justify-end">
@@ -108,7 +114,7 @@ const Contest = () => {
                   <ShowScramble
                     scramble={
                       scrambles.find((s) => s.index === solves.length + 1)
-                        .scramble
+                        ?.scramble
                     }
                     event={event.event}
                   />
@@ -118,36 +124,11 @@ const Contest = () => {
                 </div>
 
                 <div className="flex justify-center">
-                  <table className="table w-full max-w-64 text-center">
-                    <thead>
-                      <tr>
-                        <td className="border font-semibold">#</td>
-                        <td className="border font-semibold">Час</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Array.from(
-                        {
-                          length: Number(
-                            getNameAndFormat(event.event)[1].slice(2)
-                          ),
-                        },
-                        (_, i) => (
-                          <tr key={i}>
-                            <td className="border">{i + 1}</td>
-                            <td className="border">
-                              {solves.length > i
-                                ? formatTimeDisplay(
-                                    solves[i].time,
-                                    solves[i].penalty
-                                  )
-                                : "–"}
-                            </td>
-                          </tr>
-                        )
-                      )}
-                    </tbody>
-                  </table>
+                  <ContestResultTable
+                    event={event.event}
+                    solves={solves}
+                    editable={true}
+                  />
                 </div>
 
                 <div className="flex justify-end">
@@ -162,6 +143,9 @@ const Contest = () => {
                 </div>
               </>
             )}
+          {/* Контест активний, але користувач завершив всі спроби, але не підтвердив результат */}
+          {/* Контест активний і користувач підтвердив результат */}
+          {/* Контест завершено */}
         </div>
       </div>
     );
