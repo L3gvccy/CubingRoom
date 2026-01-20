@@ -82,9 +82,6 @@ export function useTimer({ onFinish } = {}) {
 
   useEffect(() => {
     const onKeyDown = (e) => {
-      e.preventDefault();
-      if (e.code !== "Space" || e.repeat) return;
-
       const el = document.activeElement;
       if (
         el &&
@@ -95,6 +92,9 @@ export function useTimer({ onFinish } = {}) {
       ) {
         return;
       }
+
+      e.preventDefault();
+      if (e.code !== "Space" || e.repeat) return;
 
       if (state === "idle") {
         setState("holding");
