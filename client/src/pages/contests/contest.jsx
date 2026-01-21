@@ -8,12 +8,19 @@ import {
   ADD_CONTEST_TIME,
   GET_CONTEST_EVENT,
   GET_CONTEST_RESULT,
+  SUBMIT_CONTEST_RESULT,
 } from "@/utils/constants";
-import { formatTimeDisplay, getDisplay, getNameAndFormat } from "@/utils/tools";
+import {
+  calculateAverage,
+  formatTimeDisplay,
+  getDisplay,
+  getNameAndFormat,
+} from "@/utils/tools";
 import dayjs from "dayjs";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ContestResultTable from "./components/contest-result-table";
+import { toast } from "sonner";
 
 const Contest = () => {
   const naviagate = useNavigate();
@@ -66,6 +73,41 @@ const Contest = () => {
       });
   };
 
+  const getSingleFromSolves = (solves) => {
+    let single = Number.MAX_SAFE_INTEGER;
+    solves.forEach((solve) => {
+      if (solve.finalTime < single) {
+        single = solve.finalTime;
+      }
+    });
+    return single;
+  };
+
+  const getAverageFromSolves = (solves) => {
+    const length = Number(getNameAndFormat(event.event)[1].slice(2));
+    return calculateAverage([...solves], length);
+  };
+
+  const submitResult = async () => {
+    const single = getSingleFromSolves(solves);
+
+    const average = getAverageFromSolves(solves);
+
+    await apiClient
+      .post(
+        SUBMIT_CONTEST_RESULT(contestEventId),
+        { best: single, average },
+        {
+          withCredentials: true,
+        },
+      )
+      .then((res) => {
+        setMyResult(res.data.updatedResult);
+        setResults(res.data.updatedResults);
+        toast.success("Результат успішно підтверджено");
+      });
+  };
+
   useEffect(() => {
     getContestEvent();
   }, []);
@@ -82,7 +124,7 @@ const Contest = () => {
 
   if (!loading && contest && event)
     return (
-      <div className="flex w-full justify-center py-4">
+      <div className="flex w-full justify-center py-4 px-2">
         <div className="flex flex-col w-full max-w-342 gap-5">
           <div className="flex flex-col gap-2 items-center border-b pb-4">
             <img
@@ -127,6 +169,7 @@ const Contest = () => {
                   <ContestResultTable
                     event={event.event}
                     solves={solves}
+                    setSolves={setSolves}
                     editable={true}
                   />
                 </div>
@@ -143,9 +186,120 @@ const Contest = () => {
                 </div>
               </>
             )}
-          {/* Контест активний, але користувач завершив всі спроби, але не підтвердив результат */}
+          {/* Контест активний, користувач завершив всі спроби, але не підтвердив результат */}
+
+          {contest.isActive &&
+            myResult &&
+            !myResult.submitted &&
+            solves.length >= getNameAndFormat(event.event)[1].slice(2) && (
+              <div className="flex flex-col gap-4 items-center">
+                <h2 className="text-lg font-semibold">Усі спроби завершено!</h2>
+                <p className="text-center opacity-90">
+                  Ви все ще можете редагувати результати до підтвердження.
+                </p>
+                <ContestResultTable
+                  event={event.event}
+                  solves={solves}
+                  setSolves={setSolves}
+                  editable={true}
+                />
+                <div className="flex flex-col text-lg justify-center items-center">
+                  <div className="flex gap-2">
+                    <span className="font-semibold">Single: </span>
+                    <span>
+                      {formatTimeDisplay(getSingleFromSolves(solves))}
+                    </span>
+                  </div>
+                  <div className="flex gap-2">
+                    <span className="font-semibold">
+                      {getNameAndFormat(event.event)[1]}:{" "}
+                    </span>
+                    <span>
+                      {getAverageFromSolves(solves)
+                        ? formatTimeDisplay(getAverageFromSolves(solves))
+                        : "DNF"}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  className="text-lg items-center bg-violet-700 hover:bg-violet-600 px-4 py-2 w-full max-w-64 rounded-lg cursor-pointer transition-all duration-300"
+                  onClick={submitResult}
+                >
+                  Підтвердити
+                </button>
+              </div>
+            )}
+
           {/* Контест активний і користувач підтвердив результат */}
+
+          {contest.isActive && myResult && myResult.submitted && (
+            <div className="flex flex-col gap-4 items-center">
+              <h2 className="text-lg font-semibold">Скрамбли:</h2>
+              <div className="flex flex-col gap-2 w-full">
+                {scrambles.map((s) => (
+                  <div
+                    key={s.index}
+                    className="flex gap-2 px-4 py-2 bg-zinc-800 rounded-lg"
+                  >
+                    <span>{s.index}.</span>
+                    {event.event === "megaminx" ? (
+                      <pre className="text-start w-fit">{s.scramble}</pre>
+                    ) : (
+                      <div className="px-4">{s.scramble}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <h2 className="text-lg font-semibold">Результат підтверджено!</h2>
+              <ContestResultTable
+                event={event.event}
+                solves={solves}
+                setSolves={setSolves}
+                editable={false}
+              />
+
+              <div className="flex flex-col text-lg justify-center items-center">
+                <div className="flex gap-2">
+                  <span className="font-semibold">Single: </span>
+                  <span>{formatTimeDisplay(getSingleFromSolves(solves))}</span>
+                </div>
+                <div className="flex gap-2">
+                  <span className="font-semibold">
+                    {getNameAndFormat(event.event)[1]}:{" "}
+                  </span>
+                  <span>
+                    {getAverageFromSolves(solves)
+                      ? formatTimeDisplay(getAverageFromSolves(solves))
+                      : "DNF"}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Контест завершено */}
+          {!contest.isActive && (
+            <div className="flex flex-col gap-4 items-center">
+              <h2 className="text-lg font-semibold">Контест завершено!</h2>
+              <h2 className="text-lg font-semibold">Скрамбли:</h2>
+              <div className="flex flex-col gap-2 w-full">
+                {scrambles.map((s) => (
+                  <div
+                    key={s.index}
+                    className="flex gap-2 px-4 py-2 bg-zinc-800 rounded-lg"
+                  >
+                    <span>{s.index}.</span>
+                    {event.event === "megaminx" ? (
+                      <pre className="text-start w-fit">{s.scramble}</pre>
+                    ) : (
+                      <div className="px-4">{s.scramble}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
