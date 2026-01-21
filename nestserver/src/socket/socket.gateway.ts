@@ -29,7 +29,7 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   constructor(
     private jwtService: JwtService,
     private roomService: RoomService,
-    private prisma: PrismaService
+    private prisma: PrismaService,
   ) {}
 
   handleConnection(socket: Socket) {
@@ -53,7 +53,7 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage("room:join")
   async join(
     @ConnectedSocket() client: Socket,
-    @MessageBody() { roomId }: { roomId: number }
+    @MessageBody() { roomId }: { roomId: number },
   ) {
     const userId = client.data.userId;
 
@@ -87,7 +87,7 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @SubscribeMessage("room:leave")
   async leave(
     @ConnectedSocket() client: Socket,
-    @MessageBody() { roomId }: { roomId: number }
+    @MessageBody() { roomId }: { roomId: number },
   ) {
     const userId = client.data.userId;
     await this.prisma.roomUser.update({
@@ -136,7 +136,7 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     }: {
       roomId: number;
       finalResult: { time: number; penalty: Penalty; finalTime: number };
-    }
+    },
   ) {
     const userId = client.data.userId;
 
@@ -202,6 +202,33 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
     this.server.to(`room:${roomId}`).emit("room:state", state);
   }
 
+  @SubscribeMessage("room:update-solve")
+  async updateSolve(
+    @ConnectedSocket() client: Socket,
+    @MessageBody()
+    {
+      roomId,
+      solveId,
+      finalResult,
+    }: {
+      roomId: number;
+      solveId: number;
+      finalResult: { time: number; penalty: Penalty; finalTime: number };
+    },
+  ) {
+    await this.prisma.solve.update({
+      where: { id: solveId },
+      data: {
+        time: finalResult.time,
+        penalty: finalResult.penalty,
+        finalTime: finalResult.finalTime,
+      },
+    });
+
+    const state = await this.roomService.getRoomState(roomId);
+    this.server.to(`room:${roomId}`).emit("room:state", state);
+  }
+
   @SubscribeMessage("room:update-scramble")
   async updateScr(@MessageBody() { roomId }: { roomId: number }) {
     await this.roomService.updateScramble(roomId);
@@ -213,13 +240,20 @@ export class SocketGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage("room:update-event")
   async updateEvent(
-    @MessageBody() { roomId, event }: { roomId: number; event: string }
+    @MessageBody() { roomId, event }: { roomId: number; event: string },
   ) {
     await this.roomService.updateEvent(roomId, event);
 
     const state = await this.roomService.getRoomState(roomId);
 
     this.server.to(`room:${roomId}`).emit("room:state", state);
+  }
+
+  @SubscribeMessage("room:delete")
+  async deleteRoom(@MessageBody() { roomId }: { roomId: number }) {
+    await this.prisma.room.delete({ where: { id: roomId } });
+
+    this.server.to(`room:${roomId}`).emit("room:deleted");
   }
 
   async handleDisconnect(socket: Socket) {

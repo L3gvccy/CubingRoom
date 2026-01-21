@@ -8,12 +8,18 @@ import { apiClient } from "@/lib/api-client";
 import { useAppStore } from "@/store";
 import { GET_ROOM_BY_ID } from "@/utils/constants";
 import { getDisplay, getNameAndFormat } from "@/utils/tools";
-import { RotateCcw } from "lucide-react";
+import { Info, RotateCcw, Settings, Trash } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "sonner";
 import ResultsTable from "./components/results-table";
 import PersonalResults from "./components/personal-results";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Room = () => {
   const [loading, setLoading] = useState(true);
@@ -70,10 +76,20 @@ const Room = () => {
   const changeEvent = (event) => {
     if (
       window.confirm(
-        `Ви дійсно хочете змінити дисципліну на "${event}"?\nВсі результати буде видалено`
+        `Ви дійсно хочете змінити дисципліну на "${event}"?\nВсі результати буде видалено`,
       )
     ) {
       socket.emit("room:update-event", { roomId, event });
+    }
+  };
+
+  const deleteRoom = () => {
+    if (
+      window.confirm(
+        `Ви дійсно хочете видалити кімнату?\nВсі результати буде втрачено`,
+      )
+    ) {
+      socket.emit("room:delete", { roomId });
     }
   };
 
@@ -93,7 +109,14 @@ const Room = () => {
       setRoomUser(ru);
     };
 
+    const onRoomDelete = () => {
+      navigate("/rooms");
+      toast.warning("Кімната була видалена");
+    };
+
     socket.on("room:state", onState);
+
+    socket.on("room:deleted", onRoomDelete);
 
     return () => {
       socket.emit("room:leave", { roomId });
@@ -139,18 +162,47 @@ const Room = () => {
           </span>
           <TimerTypeSelect />
         </div>
-        {isAdmin && (
-          <div className="flex py-2 justify-center">
-            <button
-              ref={newScrBtnRef}
-              className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300"
-              onClick={newScramble}
-            >
-              <RotateCcw size={18} />
-              <span>Новий скрамбл</span>
-            </button>
-          </div>
-        )}
+
+        <div className="flex py-2 justify-between items-center">
+          <Info className="opacity-80 cursor-pointer" size={22} />
+          {isAdmin && (
+            <>
+              <button
+                ref={newScrBtnRef}
+                className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300"
+                onClick={newScramble}
+              >
+                <RotateCcw size={18} />
+                <span>Новий скрамбл</span>
+              </button>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Settings className="opacity-80 cursor-pointer" size={22} />
+                </DropdownMenuTrigger>
+
+                <DropdownMenuContent
+                  className="w-[90vw] max-w-56"
+                  align="end"
+                  onCloseAutoFocus={(e) => {
+                    e.preventDefault();
+                    if (document.activeElement instanceof HTMLElement) {
+                      document.activeElement.blur();
+                    }
+                  }}
+                >
+                  <DropdownMenuItem
+                    onClick={() => {
+                      deleteRoom();
+                    }}
+                  >
+                    <Trash size={18} /> Видалити кімнату
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          )}
+        </div>
 
         <div className="py-4">
           <ShowScramble event={room.event} scramble={currentSolve?.scramble} />
