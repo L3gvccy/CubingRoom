@@ -9,7 +9,7 @@ import { SolveDto } from "./dto/solve.dto";
 export class ContestService {
   constructor(
     private prisma: PrismaService,
-    private scrambleService: ScrambleService
+    private scrambleService: ScrambleService,
   ) {}
 
   // @Cron("15 * * * * *")
@@ -82,7 +82,8 @@ export class ContestService {
     });
 
     const results = await this.prisma.contestResult.findMany({
-      where: { contestEventId: contestEvent.id },
+      where: { contestEventId: contestEvent.id, submitted: true },
+      include: { user: true },
       orderBy: { average: "desc" },
     });
 
@@ -136,11 +137,29 @@ export class ContestService {
     return { solves };
   }
 
+  async updateContestTime(solveId: number, dto: SolveDto) {
+    const updatedSolve = await this.prisma.solve.update({
+      where: { id: solveId },
+      data: {
+        time: dto.time,
+        penalty: dto.penalty,
+        finalTime: dto.finalTime,
+      },
+    });
+
+    const solves = await this.prisma.solve.findMany({
+      where: { contestResultId: updatedSolve.contestResultId },
+      orderBy: { createdAt: "asc" },
+    });
+
+    return { solves };
+  }
+
   async submitContestResult(
     userId: string,
     contestEventId: number,
     best: number | null,
-    average: number | null
+    average: number | null,
   ) {
     const contestResult = await this.prisma.contestResult.findFirst({
       where: { contestEventId, userId },
@@ -156,10 +175,11 @@ export class ContestService {
     });
 
     const updatedResults = await this.prisma.contestResult.findMany({
-      where: { contestEventId: updatedResult.contestEventId },
+      where: { contestEventId: updatedResult.contestEventId, submitted: true },
+      include: { user: true },
       orderBy: { average: "desc" },
     });
 
-    return { updatedResults };
+    return { updatedResult, updatedResults };
   }
 }

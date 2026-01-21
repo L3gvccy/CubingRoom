@@ -26,7 +26,7 @@ export class ContestController {
   @UseGuards(JwtAuthGuard)
   @Get("get/:contestEventId")
   async getContestEventById(
-    @Param("contestEventId", ParseIntPipe) contestEventId: number
+    @Param("contestEventId", ParseIntPipe) contestEventId: number,
   ) {
     return await this.contestService.getContestEventById(contestEventId);
   }
@@ -35,11 +35,11 @@ export class ContestController {
   @Get("get-result/:contestEventId")
   async getContestResultByEventId(
     @CurrentUser() currentUser: { id: string },
-    @Param("contestEventId", ParseIntPipe) contestEventId: number
+    @Param("contestEventId", ParseIntPipe) contestEventId: number,
   ) {
     return await this.contestService.getOrCreateResult(
       currentUser.id,
-      contestEventId
+      contestEventId,
     );
   }
 
@@ -48,13 +48,22 @@ export class ContestController {
   async addContestTime(
     @CurrentUser() currentUser: { id: string },
     @Param("contestEventId", ParseIntPipe) contestEventId: number,
-    @Body() dto: SolveDto
+    @Body() dto: SolveDto,
   ) {
     return await this.contestService.addContestTime(
       currentUser.id,
       contestEventId,
-      dto
+      dto,
     );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post("edit-time/:solveId")
+  async editContestTime(
+    @Param("solveId", ParseIntPipe) solveId: number,
+    @Body() dto: SolveDto,
+  ) {
+    return await this.contestService.updateContestTime(solveId, dto);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -62,13 +71,13 @@ export class ContestController {
   async submitContestResult(
     @CurrentUser() currentUser: { id: string },
     @Param("contestEventId", ParseIntPipe) contestEventId: number,
-    @Body() dto: SubmitResultDto
+    @Body() dto: SubmitResultDto,
   ) {
     return await this.contestService.submitContestResult(
       currentUser.id,
       contestEventId,
       dto.best,
-      dto.average
+      dto.average,
     );
   }
 }
