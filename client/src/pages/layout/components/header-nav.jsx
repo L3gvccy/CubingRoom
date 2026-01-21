@@ -48,7 +48,16 @@ const HeaderNav = ({ authorized }) => {
               <IoReorderThree />
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[90vw] max-w-56" align="start">
+          <DropdownMenuContent
+            className="w-[90vw] max-w-56"
+            align="start"
+            onCloseAutoFocus={(e) => {
+              e.preventDefault();
+              if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur();
+              }
+            }}
+          >
             <DropdownMenuItem asChild>
               <NavLink
                 to="/rooms"

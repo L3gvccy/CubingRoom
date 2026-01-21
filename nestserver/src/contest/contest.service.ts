@@ -87,7 +87,25 @@ export class ContestService {
       orderBy: { average: "asc" },
     });
 
-    return { contestEvent, scrambles, results };
+    const sortedResults = results.sort((a, b) => {
+      if (a.average !== null && b.average !== null) {
+        return a.average - b.average;
+      }
+
+      if (a.average !== null && b.average === null) return -1;
+      if (a.average === null && b.average !== null) return 1;
+
+      if (a.best !== null && b.best !== null) {
+        return a.best - b.best;
+      }
+
+      if (a.best !== null && b.best === null) return -1;
+      if (a.best === null && b.best !== null) return 1;
+
+      return 0;
+    });
+
+    return { contestEvent, scrambles, results: sortedResults };
   }
 
   async getOrCreateResult(userId: string, contestEventId: number) {
@@ -180,6 +198,24 @@ export class ContestService {
       orderBy: { average: "asc" },
     });
 
-    return { updatedResult, updatedResults };
+    const sortedResults = updatedResults.sort((a, b) => {
+      if (a.average !== null && b.average !== null) {
+        return a.average - b.average;
+      }
+
+      if (a.average !== null && b.average === null) return -1;
+      if (a.average === null && b.average !== null) return 1;
+
+      if (a.best !== null && b.best !== null) {
+        return a.best - b.best;
+      }
+
+      if (a.best !== null && b.best === null) return -1;
+      if (a.best === null && b.best !== null) return 1;
+
+      return 0;
+    });
+
+    return { updatedResult, updatedResults: sortedResults };
   }
 }

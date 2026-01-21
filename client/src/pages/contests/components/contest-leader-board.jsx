@@ -1,8 +1,10 @@
+import { useAppStore } from "@/store";
 import { formatTimeDisplay, getNameAndFormat } from "@/utils/tools";
 import { Trophy } from "lucide-react";
 import React from "react";
 
 const ContestLeaderBoard = ({ results, event }) => {
+  const { userData } = useAppStore();
   const [name, format] = getNameAndFormat(event);
 
   const displaySolves = (solves) => {
@@ -62,7 +64,10 @@ const ContestLeaderBoard = ({ results, event }) => {
           </thead>
           <tbody>
             {results.map((result, index) => (
-              <tr key={index} className="border-b">
+              <tr
+                key={index}
+                className={`border-b ${userData?.id === result.user.id ? "bg-white/10" : ""} `}
+              >
                 <td className="p-2 min-w-12 text-center">
                   {index + 1}
                   {index === 0 && <span>🥇</span>}

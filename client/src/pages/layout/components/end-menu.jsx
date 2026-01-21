@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import UserAvatar from "@/components/user-avatar";
 import { useAppStore } from "@/store";
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@/context/themeContext";
 import {
   IoLogOutOutline,
@@ -25,6 +25,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 const EndMenu = ({ authorized }) => {
   const { userData, setUserData } = useAppStore();
   const { theme, toggleTheme } = useTheme();
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
   const logout = async () => {
@@ -44,11 +45,30 @@ const EndMenu = ({ authorized }) => {
     <div className="flex gap-3">
       {authorized ? (
         <>
-          <DropdownMenu>
+          <DropdownMenu
+            open={open}
+            onOpenChange={() => {
+              setOpen(!open);
+              if (document.activeElement instanceof HTMLElement) {
+                requestAnimationFrame(() => {
+                  document.activeElement?.blur();
+                });
+              }
+            }}
+          >
             <DropdownMenuTrigger className="cursor-pointer outline-0">
               <UserAvatar size="md" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[90vw] max-w-56" align="end">
+            <DropdownMenuContent
+              className="w-[90vw] max-w-56"
+              align="end"
+              onCloseAutoFocus={(e) => {
+                e.preventDefault();
+                if (document.activeElement instanceof HTMLElement) {
+                  document.activeElement.blur();
+                }
+              }}
+            >
               <DropdownMenuLabel className="truncate">
                 {userData.displayName}
               </DropdownMenuLabel>

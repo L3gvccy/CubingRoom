@@ -69,7 +69,7 @@ const EditResult = ({ solve, onClose, onSubmit }) => {
                 <button
                   key={p}
                   onClick={() => setPenalty(p)}
-                  className={`px-3 py-1 rounded ${
+                  className={`px-3 py-1 cursor-pointer rounded ${
                     penalty === p
                       ? "bg-violet-500 text-white"
                       : "bg-zinc-700 text-zinc-300"
