@@ -1,4 +1,8 @@
-import { formatTimeDisplay, getNameAndFormat } from "@/utils/tools";
+import {
+  calculateAverage,
+  formatTimeDisplay,
+  getNameAndFormat,
+} from "@/utils/tools";
 import React, { useEffect, useState } from "react";
 import "./table.css";
 
@@ -8,32 +12,6 @@ const PersonalResults = ({ solves, event, userId }) => {
     single: null,
     stats: {},
   });
-
-  const calculateAverage = (solves, length) => {
-    if (solves.length !== length) return;
-
-    const numberOfDnfs = solves.filter((s) => s.penalty === "DNF").length;
-
-    if (length === 3) {
-      if (numberOfDnfs >= 1) {
-        return undefined;
-      }
-      const sum = solves.reduce((acc, s) => acc + s.finalTime, 0);
-      return Math.round(sum / length);
-    }
-    const solvesToRemove = Math.ceil(length * 0.05);
-    if (numberOfDnfs > solvesToRemove) {
-      return undefined;
-    }
-    console.log(solvesToRemove);
-
-    solves.sort((a, b) => a.finalTime - b.finalTime);
-    solves.splice(0, solvesToRemove);
-    solves.splice(-solvesToRemove);
-
-    const sum = solves.reduce((acc, s) => acc + s.finalTime, 0);
-    return Math.round(sum / (length - 2 * solvesToRemove));
-  };
 
   const mySolves = solves
     .map((solve) => {
@@ -121,13 +99,13 @@ const PersonalResults = ({ solves, event, userId }) => {
                 <td className="text-center">
                   {formatTimeDisplay(
                     stats.single?.current.time,
-                    stats.single?.current.penalty
+                    stats.single?.current.penalty,
                   )}
                 </td>
                 <td className="text-center">
                   {formatTimeDisplay(
                     stats.single?.best.time,
-                    stats.single?.best.penalty
+                    stats.single?.best.penalty,
                   )}
                 </td>
               </>

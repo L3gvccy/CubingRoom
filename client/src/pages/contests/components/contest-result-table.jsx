@@ -1,9 +1,64 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { formatTimeDisplay, getNameAndFormat } from "@/utils/tools";
 import EditResult from "@/components/edit-result";
+import { apiClient } from "@/lib/api-client";
+import { EDIT_CONTEST_TIME } from "@/utils/constants";
+import { toast } from "sonner";
 
-const ContestResultTable = ({ event, solves, editable }) => {
+const ContestResultTable = ({ event, solves, setSolves, editable }) => {
   const [editingIndex, setEditingIndex] = useState(null);
+  const [bestIndex, setBestIndex] = useState(null);
+  const [worstIndex, setWorstIndex] = useState();
+
+  const calculateBestAndWorst = () => {
+    let best = Number.MAX_SAFE_INTEGER;
+    let worst = -1;
+    let bestIdx = null;
+    let worstIdx = null;
+    if (solves.length === 0) return;
+
+    const format = getNameAndFormat(event)[1];
+    if (format === "mo3") return;
+
+    if (solves.length === 1) {
+      setBestIndex(0);
+      setWorstIndex(null);
+      return;
+    }
+
+    solves.forEach((solve, index) => {
+      if (solve.finalTime < best) {
+        best = solve.finalTime;
+        bestIdx = index;
+      }
+      if (solve.finalTime > worst) {
+        worst = solve.finalTime;
+        worstIdx = index;
+      }
+    });
+
+    setBestIndex(bestIdx);
+    setWorstIndex(worstIdx);
+  };
+
+  const editTime = async (data) => {
+    await apiClient
+      .post(EDIT_CONTEST_TIME(data.solveId), data.finalResult, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setSolves(res.data.solves);
+        toast.success("Результат успішно оновлено");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Помилка при оновленні результату");
+      });
+  };
+
+  useEffect(() => {
+    calculateBestAndWorst();
+  }, [solves]);
 
   if (solves.length > 0)
     return (
@@ -23,7 +78,9 @@ const ContestResultTable = ({ event, solves, editable }) => {
               (_, i) => (
                 <tr key={i}>
                   <td className="border">{i + 1}</td>
-                  <td className="border flex items-center justify-center py-1">
+                  <td
+                    className={`border flex items-center justify-center py-1 ${i === bestIndex ? "text-emerald-400" : i === worstIndex ? "text-red-400" : ""}`}
+                  >
                     {solves.length > i ? (
                       editable ? (
                         <button
@@ -51,6 +108,7 @@ const ContestResultTable = ({ event, solves, editable }) => {
           <EditResult
             solve={solves[editingIndex]}
             onClose={() => setEditingIndex(null)}
+            onSubmit={editTime}
           />
         )}
       </>

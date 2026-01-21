@@ -134,3 +134,28 @@ export const getNameAndFormat = (event) => {
 
   return wca_events[event];
 };
+
+export const calculateAverage = (solves, length) => {
+  if (solves.length !== length) return;
+
+  const numberOfDnfs = solves.filter((s) => s.penalty === "DNF").length;
+
+  if (length === 3) {
+    if (numberOfDnfs >= 1) {
+      return undefined;
+    }
+    const sum = solves.reduce((acc, s) => acc + s.finalTime, 0);
+    return Math.round(sum / length);
+  }
+  const solvesToRemove = Math.ceil(length * 0.05);
+  if (numberOfDnfs > solvesToRemove) {
+    return undefined;
+  }
+
+  solves.sort((a, b) => a.finalTime - b.finalTime);
+  solves.splice(0, solvesToRemove);
+  solves.splice(-solvesToRemove);
+
+  const sum = solves.reduce((acc, s) => acc + s.finalTime, 0);
+  return Math.round(sum / (length - 2 * solvesToRemove));
+};
