@@ -21,6 +21,8 @@ const Contests = () => {
         console.log(activeContest);
         if (activeContest) {
           setSelectedContest(activeContest);
+        } else if (contests.length > 0) {
+          setSelectedContest(contests[0]);
         }
       })
       .catch((err) => {
