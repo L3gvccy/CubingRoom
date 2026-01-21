@@ -8,21 +8,23 @@ import {
 import { formatTimeDisplay, parseTimeInput } from "@/utils/tools";
 
 const EditResult = ({ solve, onClose, onSubmit }) => {
-  const [time, setTime] = useState(formatTimeDisplay(solve.time, "OK"));
+  const [rawTime, setRawTime] = useState(formatTimeDisplay(solve.time, "OK"));
   const [penalty, setPenalty] = useState(solve.penalty);
 
   const handleInput = (e) => {
     console.log(e);
     const regex = /^[0-9.,:]*$/;
     if (e.target.value === "" || regex.test(e.target.value)) {
-      setTime(e.target.value);
+      setRawTime(e.target.value);
     }
   };
 
   const handleSubmit = () => {
-    if (!time) return;
+    if (!rawTime) return;
 
-    let finalTime = parseTimeInput(time);
+    let time = parseTimeInput(rawTime);
+
+    let finalTime = time;
     if (penalty === "PLUS2") {
       finalTime += 2000;
     }
@@ -33,7 +35,7 @@ const EditResult = ({ solve, onClose, onSubmit }) => {
     const finalResult = { time, penalty, finalTime };
 
     onSubmit({
-      ...solve,
+      solveId: solve.id,
       finalResult,
     });
 
@@ -54,7 +56,7 @@ const EditResult = ({ solve, onClose, onSubmit }) => {
             <input
               type="text"
               placeholder="0.00"
-              value={time}
+              value={rawTime}
               onChange={handleInput}
               className="p-2 rounded-lg bg-zinc-800 outline-none"
               autoFocus
@@ -81,11 +83,11 @@ const EditResult = ({ solve, onClose, onSubmit }) => {
 
           <div className="mt-2">
             <strong>Фінальний час: </strong>
-            {formatTimeDisplay(parseTimeInput(time), penalty)}
+            {formatTimeDisplay(parseTimeInput(rawTime), penalty)}
           </div>
 
           <button
-            disabled={!time}
+            disabled={!rawTime}
             className="text-lg items-center bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
             onClick={handleSubmit}
           >
