@@ -21,6 +21,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ContestResultTable from "./components/contest-result-table";
 import { toast } from "sonner";
+import ContestLeaderBoard from "./components/contest-leader-board";
 
 const Contest = () => {
   const naviagate = useNavigate();
@@ -300,6 +301,8 @@ const Contest = () => {
               </div>
             </div>
           )}
+
+          <ContestLeaderBoard results={results} event={event.event} />
         </div>
       </div>
     );

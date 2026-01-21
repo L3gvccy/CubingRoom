@@ -83,8 +83,8 @@ export class ContestService {
 
     const results = await this.prisma.contestResult.findMany({
       where: { contestEventId: contestEvent.id, submitted: true },
-      include: { user: true },
-      orderBy: { average: "desc" },
+      include: { user: true, results: { orderBy: { createdAt: "asc" } } },
+      orderBy: { average: "asc" },
     });
 
     return { contestEvent, scrambles, results };
@@ -176,8 +176,8 @@ export class ContestService {
 
     const updatedResults = await this.prisma.contestResult.findMany({
       where: { contestEventId: updatedResult.contestEventId, submitted: true },
-      include: { user: true },
-      orderBy: { average: "desc" },
+      include: { user: true, results: { orderBy: { createdAt: "asc" } } },
+      orderBy: { average: "asc" },
     });
 
     return { updatedResult, updatedResults };
