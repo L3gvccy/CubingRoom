@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 export function useTimer({ onFinish } = {}) {
   const [state, setState] = useState("idle");
@@ -126,6 +126,21 @@ export function useTimer({ onFinish } = {}) {
     };
   }, [state]);
 
+  const onPointerDown = useCallback(() => {
+    if (state === "idle") {
+      setState("holding");
+      holdTimeout.current = setTimeout(() => setState("ready"), 300);
+    }
+    if (state === "running") stop();
+  }, [state, stop]);
+
+  const onPointerUp = useCallback(() => {
+    if (holdTimeout.current) clearTimeout(holdTimeout.current);
+
+    if (state === "ready") start();
+    if (state === "holding") setState("idle");
+  }, [state, start]);
+
   return {
     time,
     state,
@@ -133,5 +148,7 @@ export function useTimer({ onFinish } = {}) {
     pendingResult,
     chooseResult,
     reset,
+    onPointerDown,
+    onPointerUp,
   };
 }

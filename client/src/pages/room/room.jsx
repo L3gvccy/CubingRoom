@@ -144,129 +144,132 @@ const Room = () => {
     }
   }, [solves]);
 
-  if (loading)
+  if (!loading && room && roomUser && currentSolve)
     return (
-      <div className="flex flex-col flex-1 w-full items-center justify-center">
-        <Loader />
+      <div className="flex w-full justify-center py-4">
+        <div className="flex flex-col max-w-342 w-full px-4">
+          <div className="flex flex-col md:flex-row w-full py-2 gap-2 items-center justify-between">
+            {isAdmin ? (
+              <EventSelect
+                value={room.event}
+                setEvent={(e) => {
+                  changeEvent(e);
+                }}
+              />
+            ) : (
+              <div className="py-1 w-32 flex justify-center border border-zinc-700 rounded-md">
+                {getNameAndFormat(room.event)[0]}
+              </div>
+            )}
+            <span className="text-xl font-semibold max-w-56 truncate">
+              {room.name}
+            </span>
+            <TimerTypeSelect />
+          </div>
+
+          <div className="flex py-2 justify-between items-center">
+            <Tooltip>
+              <TooltipTrigger>
+                <div>
+                  <Info className="opacity-65 cursor-pointer" size={22} />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="dark:bg-zinc-800 dark:text-zinc-100">
+                <div>
+                  Для підтвердження результату можна використовувати "Enter"
+                </div>
+              </TooltipContent>
+            </Tooltip>
+
+            {isAdmin && (
+              <>
+                <button
+                  ref={newScrBtnRef}
+                  className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer transition-all duration-300"
+                  onClick={newScramble}
+                >
+                  <RotateCcw size={18} />
+                  <span>Новий скрамбл</span>
+                </button>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Settings className="opacity-80 cursor-pointer" size={22} />
+                  </DropdownMenuTrigger>
+
+                  <DropdownMenuContent
+                    className="w-[90vw] max-w-56"
+                    align="end"
+                    onCloseAutoFocus={(e) => {
+                      e.preventDefault();
+                      if (document.activeElement instanceof HTMLElement) {
+                        document.activeElement.blur();
+                      }
+                    }}
+                  >
+                    <DropdownMenuItem
+                      onClick={() => {
+                        deleteRoom();
+                      }}
+                    >
+                      <Trash size={18} /> Видалити кімнату
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            )}
+          </div>
+
+          <div className="py-4">
+            <ShowScramble
+              event={room.event}
+              scramble={currentSolve?.scramble}
+            />
+          </div>
+          <div className="flex justify-center items-center py-2 h-22.5 w-full">
+            {roomUser.status === "WAITING" ? (
+              <p className="font-mono text-lg text-zinc-100/75">
+                Очікування інших учасників
+              </p>
+            ) : (
+              <GlobalTimer handleSubmit={handleSubmit} />
+            )}
+          </div>
+          <div
+            className="h-[37vh] my-2 flex items-center justify-center scrollbar-thin"
+            key={room?.updatedAt || room?.id}
+          >
+            <ResultsTable
+              users={room.users}
+              solves={solves}
+              currentSolve={currentSolve}
+              onSolveEdit={editSolve}
+              event={room.event}
+            />
+          </div>
+          <div className="flex flex-col-reverse md:flex-row items-center justify-center">
+            <div className="flex-1 h-full p-4">
+              {solves.length > 0 && (
+                <PersonalResults
+                  solves={solves}
+                  event={room.event}
+                  userId={roomUser.id}
+                />
+              )}
+            </div>
+            <scramble-display
+              event={getDisplay(room.event)}
+              scramble={currentSolve?.scramble}
+              className="max-w-86"
+            ></scramble-display>
+          </div>
+        </div>
       </div>
     );
 
   return (
-    <div className="flex w-full justify-center py-4">
-      <div className="flex flex-col max-w-342 w-full px-4">
-        <div className="flex flex-col md:flex-row w-full py-2 gap-2 items-center justify-between">
-          {isAdmin ? (
-            <EventSelect
-              value={room.event}
-              setEvent={(e) => {
-                changeEvent(e);
-              }}
-            />
-          ) : (
-            <div className="py-1 w-32 flex justify-center border border-zinc-700 rounded-md">
-              {getNameAndFormat(room.event)[0]}
-            </div>
-          )}
-          <span className="text-xl font-semibold max-w-56 truncate">
-            {room.name}
-          </span>
-          <TimerTypeSelect />
-        </div>
-
-        <div className="flex py-2 justify-between items-center">
-          <Tooltip>
-            <TooltipTrigger>
-              <div>
-                <Info className="opacity-65 cursor-pointer" size={22} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent className="dark:bg-zinc-800 dark:text-zinc-100">
-              <div>
-                Для підтвердження результату можна використовувати "Enter"
-              </div>
-            </TooltipContent>
-          </Tooltip>
-
-          {isAdmin && (
-            <>
-              <button
-                ref={newScrBtnRef}
-                className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer transition-all duration-300"
-                onClick={newScramble}
-              >
-                <RotateCcw size={18} />
-                <span>Новий скрамбл</span>
-              </button>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Settings className="opacity-80 cursor-pointer" size={22} />
-                </DropdownMenuTrigger>
-
-                <DropdownMenuContent
-                  className="w-[90vw] max-w-56"
-                  align="end"
-                  onCloseAutoFocus={(e) => {
-                    e.preventDefault();
-                    if (document.activeElement instanceof HTMLElement) {
-                      document.activeElement.blur();
-                    }
-                  }}
-                >
-                  <DropdownMenuItem
-                    onClick={() => {
-                      deleteRoom();
-                    }}
-                  >
-                    <Trash size={18} /> Видалити кімнату
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
-          )}
-        </div>
-
-        <div className="py-4">
-          <ShowScramble event={room.event} scramble={currentSolve?.scramble} />
-        </div>
-        <div className="flex justify-center items-center py-2 h-22.5">
-          {roomUser.status === "WAITING" ? (
-            <p className="font-mono text-lg text-zinc-100/75">
-              Очікування інших учасників
-            </p>
-          ) : (
-            <GlobalTimer handleSubmit={handleSubmit} />
-          )}
-        </div>
-        <div
-          className="h-[37vh] my-2 flex items-center justify-center scrollbar-thin"
-          key={room?.updatedAt || room?.id}
-        >
-          <ResultsTable
-            users={room.users}
-            solves={solves}
-            currentSolve={currentSolve}
-            onSolveEdit={editSolve}
-            event={room.event}
-          />
-        </div>
-        <div className="flex flex-col-reverse md:flex-row items-center justify-center">
-          <div className="flex-1 h-full p-4">
-            {solves.length > 0 && (
-              <PersonalResults
-                solves={solves}
-                event={room.event}
-                userId={roomUser.id}
-              />
-            )}
-          </div>
-          <scramble-display
-            event={getDisplay(room.event)}
-            scramble={currentSolve?.scramble}
-            className="max-w-86"
-          ></scramble-display>
-        </div>
-      </div>
+    <div className="flex flex-col flex-1 w-full items-center justify-center">
+      <Loader />
     </div>
   );
 };

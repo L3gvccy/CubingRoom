@@ -6,7 +6,7 @@ import TimeInput from "./timeInput/time-input";
 const GlobalTimer = ({ handleSubmit }) => {
   const { userData } = useAppStore();
   return (
-    <div>
+    <div className="w-full">
       {userData.timerType === "KEYBOARD" ? (
         <Timer handleSubmit={handleSubmit} />
       ) : (
