@@ -5,7 +5,13 @@ import { apiClient } from "@/lib/api-client";
 import { EDIT_CONTEST_TIME } from "@/utils/constants";
 import { toast } from "sonner";
 
-const ContestResultTable = ({ event, solves, setSolves, editable }) => {
+const ContestResultTable = ({
+  event,
+  solves,
+  setSolves,
+  editable,
+  scrambles,
+}) => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [bestIndex, setBestIndex] = useState(null);
   const [worstIndex, setWorstIndex] = useState();
@@ -108,6 +114,8 @@ const ContestResultTable = ({ event, solves, setSolves, editable }) => {
           solve={solves[editingIndex]}
           onClose={() => setEditingIndex(null)}
           onSubmit={editTime}
+          scramble={scrambles[editingIndex].scramble}
+          event={event}
         />
       )}
     </>

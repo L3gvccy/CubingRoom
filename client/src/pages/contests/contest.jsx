@@ -169,6 +169,7 @@ const Contest = () => {
                 <div className="flex justify-center">
                   <ContestResultTable
                     event={event.event}
+                    scrambles={scrambles}
                     solves={solves}
                     setSolves={setSolves}
                     editable={true}
@@ -200,6 +201,7 @@ const Contest = () => {
                 </p>
                 <ContestResultTable
                   event={event.event}
+                  scrambles={scrambles}
                   solves={solves}
                   setSolves={setSolves}
                   editable={true}
@@ -255,6 +257,7 @@ const Contest = () => {
               <h2 className="text-lg font-semibold">Результат підтверджено!</h2>
               <ContestResultTable
                 event={event.event}
+                scrambles={scrambles}
                 solves={solves}
                 setSolves={setSolves}
                 editable={false}

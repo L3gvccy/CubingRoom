@@ -52,10 +52,14 @@ const EditResult = ({ solve, onClose, onSubmit, scramble = null, event }) => {
 
         {scramble && event === "megaminx" ? (
           <div className="flex justify-center">
-            <pre className="text-[14px] text-start w-fit">{scramble}</pre>
+            <pre className="text-[14px] text-start w-fit opacity-90">
+              {scramble}
+            </pre>
           </div>
         ) : (
-          <div className="text-[14px] text-center px-4">{scramble}</div>
+          <div className="text-[14px] text-center px-4 opacity-90">
+            {scramble}
+          </div>
         )}
 
         <div className="flex flex-col mt-4 gap-4">
