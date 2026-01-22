@@ -126,20 +126,30 @@ export function useTimer({ onFinish } = {}) {
     };
   }, [state]);
 
-  const onPointerDown = useCallback(() => {
-    if (state === "idle") {
-      setState("holding");
-      holdTimeout.current = setTimeout(() => setState("ready"), 300);
-    }
-    if (state === "running") stop();
-  }, [state, stop]);
+  const onPointerDown = useCallback(
+    (e) => {
+      if (e.pointerType === "mouse") return;
 
-  const onPointerUp = useCallback(() => {
-    if (holdTimeout.current) clearTimeout(holdTimeout.current);
+      if (state === "idle") {
+        setState("holding");
+        holdTimeout.current = setTimeout(() => setState("ready"), 300);
+      }
+      if (state === "running") stop();
+    },
+    [state, stop],
+  );
 
-    if (state === "ready") start();
-    if (state === "holding") setState("idle");
-  }, [state, start]);
+  const onPointerUp = useCallback(
+    (e) => {
+      if (e.pointerType === "mouse") return;
+
+      if (holdTimeout.current) clearTimeout(holdTimeout.current);
+
+      if (state === "ready") start();
+      if (state === "holding") setState("idle");
+    },
+    [state, start],
+  );
 
   return {
     time,
