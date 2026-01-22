@@ -3,10 +3,14 @@ import {
   Controller,
   Get,
   Query,
+  Req,
   Res,
+  UseGuards,
 } from "@nestjs/common";
 import { WcaIdService } from "./wca-id.service";
-import type { Response } from "express";
+import type { Request, Response } from "express";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
+import { CurrentUser } from "src/common/decorators/current-user.decorator";
 
 const maxAge = 7 * 24 * 60 * 60 * 1000;
 
@@ -23,7 +27,7 @@ export class WcaIdController {
   @Get("callback")
   async wcaCallback(
     @Query("code") code: string,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     if (!code) {
       throw new BadRequestException("Не вдалось отримати код авторизації");
@@ -38,5 +42,20 @@ export class WcaIdController {
     });
 
     return res.redirect(`${process.env.ORIGIN}/wca-success`);
+  }
+
+  @Get("/link")
+  getWcaUrlLink(@Req() req: Request, @Res() res: Response) {
+    return this.wcaIdService.getWcaUrlLink(req, res);
+  }
+
+  @Get("/link-callback")
+  async wcaIDLinkCallback(
+    @Query("code") code: string,
+    @Query("state") state: string,
+    @Req() req: Request,
+    @Res() res: Response,
+  ) {
+    return this.wcaIdService.wcaIDLinkCallback(code, state, req, res);
   }
 }
