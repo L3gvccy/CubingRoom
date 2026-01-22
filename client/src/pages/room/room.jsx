@@ -93,6 +93,11 @@ const Room = () => {
     }
   };
 
+  const editSolve = (data) => {
+    const { solveId, finalResult } = data;
+    socket.emit("room:update-solve", { roomId, solveId, finalResult });
+  };
+
   useEffect(() => {
     if (!socket || joinedRef.current) return;
 
@@ -224,6 +229,7 @@ const Room = () => {
             users={room.users}
             solves={solves}
             currentSolve={currentSolve}
+            onSolveEdit={editSolve}
           />
         </div>
         <div className="flex flex-col-reverse md:flex-row items-center justify-center">

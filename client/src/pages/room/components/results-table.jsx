@@ -1,9 +1,18 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { formatTimeDisplay } from "@/utils/tools";
 import "./table.css";
 import { Link } from "react-router-dom";
+import { useAppStore } from "@/store";
+import EditResult from "@/components/edit-result";
 
-const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
+const ResultsTable = ({
+  users = [],
+  solves = [],
+  currentSolve,
+  onSolveEdit,
+}) => {
+  const { userData } = useAppStore();
+  const [solveToEdit, setSolveToEdit] = useState(null);
   const activeUsers = useMemo(() => {
     return [...users]
       .filter((u) => u.status !== "LEFT")
@@ -18,7 +27,7 @@ const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
       if (!valid || valid.length === 0) return;
 
       const winner = valid.reduce((best, cur) =>
-        cur.result.finalTime < best.result.finalTime ? cur : best
+        cur.result.finalTime < best.result.finalTime ? cur : best,
       );
 
       map[solve.id] = winner.userId;
@@ -98,15 +107,31 @@ const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
 
                 {activeUsers.map((user) => {
                   const userResult = solve.results?.find(
-                    (r) => r.userId === user.id
+                    (r) => r.userId === user.id,
                   );
 
-                  const display = userResult
-                    ? formatTimeDisplay(
+                  const display = userResult ? (
+                    user.userId === userData.id ? (
+                      <span
+                        className="px-2 cursor-pointer hover:bg-zinc-100/10 rounded-md transition-all duration-300"
+                        onClick={() => {
+                          setSolveToEdit(userResult.result);
+                        }}
+                      >
+                        {formatTimeDisplay(
+                          userResult.result.time,
+                          userResult.result.penalty,
+                        )}
+                      </span>
+                    ) : (
+                      formatTimeDisplay(
                         userResult.result.time,
-                        userResult.result.penalty
+                        userResult.result.penalty,
                       )
-                    : "—";
+                    )
+                  ) : (
+                    "—"
+                  );
 
                   const isWinner = user.id === winnerUserId;
 
@@ -126,6 +151,14 @@ const ResultsTable = ({ users = [], solves = [], currentSolve }) => {
           })}
         </tbody>
       </table>
+
+      {solveToEdit !== null && (
+        <EditResult
+          solve={solveToEdit}
+          onClose={() => setSolveToEdit(null)}
+          onSubmit={onSolveEdit}
+        />
+      )}
     </div>
   );
 };
