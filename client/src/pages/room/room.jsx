@@ -177,7 +177,7 @@ const Room = () => {
           <Tooltip>
             <TooltipTrigger>
               <div>
-                <Info className="opacity-80 cursor-pointer" size={22} />
+                <Info className="opacity-65 cursor-pointer" size={22} />
               </div>
             </TooltipTrigger>
             <TooltipContent className="dark:bg-zinc-800 dark:text-zinc-100">

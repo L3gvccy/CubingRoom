@@ -22,6 +22,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import ContestResultTable from "./components/contest-result-table";
 import { toast } from "sonner";
 import ContestLeaderBoard from "./components/contest-leader-board";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Info } from "lucide-react";
 
 const Contest = () => {
   const naviagate = useNavigate();
@@ -150,7 +156,21 @@ const Contest = () => {
             solves &&
             solves.length < getNameAndFormat(event.event)[1].slice(2) && (
               <>
-                <div className="flex justify-end">
+                <div className="flex justify-between">
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div>
+                        <Info className="opacity-65 cursor-pointer" size={22} />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent className="dark:bg-zinc-800 dark:text-zinc-100">
+                      <div>
+                        Для підтвердження результату можна використовувати
+                        "Enter"
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
+
                   <TimerTypeSelect />
                 </div>
                 <div className="flex flex-col gap-2 items-center">
