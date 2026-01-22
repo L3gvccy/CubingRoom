@@ -66,7 +66,7 @@ const ContestLeaderBoard = ({ results, event }) => {
             {results.map((result, index) => (
               <tr
                 key={index}
-                className={`border-b ${userData?.id === result.user.id ? "bg-white/10" : ""} `}
+                className={`border-b ${userData?.id === result.user.id ? "bg-black/10 dark:bg-white/10" : ""} `}
               >
                 <td className="p-2 min-w-12 text-center">
                   {index + 1}

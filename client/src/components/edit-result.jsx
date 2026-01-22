@@ -64,7 +64,10 @@ const EditResult = ({ solve, onClose, onSubmit, scramble = null, event }) => {
 
         <div className="flex flex-col mt-4 gap-4">
           <div className="flex flex-col">
-            <label htmlFor="time" className="text-zinc-300 mb-2">
+            <label
+              htmlFor="time"
+              className="text-zinc-700 dark:text-zinc-300 mb-2"
+            >
               Час (без штрафів)
             </label>
             <input
@@ -72,12 +75,12 @@ const EditResult = ({ solve, onClose, onSubmit, scramble = null, event }) => {
               placeholder="0.00"
               value={rawTime}
               onChange={handleInput}
-              className="p-2 rounded-lg bg-zinc-800 outline-none"
+              className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 outline-none"
               autoFocus
             />
           </div>
           <div className="flex gap-2 flex-col">
-            <p className="text-zinc-300">Штраф:</p>
+            <p className="text-zinc-700 dark:text-zinc-300">Штраф:</p>
             <div className="flex gap-2 items-center">
               {["OK", "PLUS2", "DNF"].map((p) => (
                 <button
@@ -102,7 +105,7 @@ const EditResult = ({ solve, onClose, onSubmit, scramble = null, event }) => {
 
           <button
             disabled={!rawTime}
-            className="text-lg items-center bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
+            className="text-lg items-center text-zinc-100 bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
             onClick={handleSubmit}
           >
             Змінити результат

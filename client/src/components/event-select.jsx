@@ -43,7 +43,7 @@ const EventSelect = ({ value, setEvent }) => {
             <SelectItem
               key={i}
               value={event[0]}
-              className="hover:bg-cyan-700 cursor-pointer data-[state=checked]:bg-violet-700"
+              className="hover:bg-cyan-700 cursor-pointer data-[state=checked]:bg-violet-400 dark:data-[state=checked]:bg-violet-700"
             >
               {event[1]}
             </SelectItem>

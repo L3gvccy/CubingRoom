@@ -63,7 +63,7 @@ const CreateRoom = ({ onRoomCreate }) => {
           isPrivate: passwordRequired,
           password: password,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       )
       .then((res) => {
         toast.success("Кімната успішно створена");
@@ -87,7 +87,7 @@ const CreateRoom = ({ onRoomCreate }) => {
   return (
     <>
       <button
-        className="flex gap-2 text-lg items-center bg-violet-700 hover:bg-violet-600 px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
+        className="flex gap-2 text-lg items-center bg-violet-700 hover:bg-violet-600 text-zinc-100 px-4 py-2 rounded-lg cursor-pointer transition-all duration-300"
         onClick={() => {
           setOpen(true);
         }}
@@ -102,14 +102,17 @@ const CreateRoom = ({ onRoomCreate }) => {
           </DialogHeader>
           <div className="flex flex-col mt-4 gap-5">
             <div className="flex flex-col">
-              <label htmlFor="roomName" className="text-zinc-300 mb-2">
+              <label
+                htmlFor="roomName"
+                className="text-zinc-700 dark:text-zinc-300 mb-2"
+              >
                 Назва кімнати
               </label>
               <input
                 placeholder="Введіть назву"
                 name="roomName"
                 type="text"
-                className="p-2 rounded-lg bg-zinc-800 outline-0"
+                className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 outline-0"
                 value={roomName}
                 onChange={(e) => {
                   setRoomName(e.target.value);
@@ -124,7 +127,10 @@ const CreateRoom = ({ onRoomCreate }) => {
               <span>Приватна кімната</span>
             </div>
             <div className="flex flex-col">
-              <label htmlFor="roomPassword" className="text-zinc-300 mb-2">
+              <label
+                htmlFor="roomPassword"
+                className="text-zinc-700 dark:text-zinc-300 mb-2"
+              >
                 Пароль
               </label>
               <input
@@ -132,7 +138,7 @@ const CreateRoom = ({ onRoomCreate }) => {
                 placeholder="Введіть пароль"
                 name="roomPassword"
                 type="text"
-                className="p-2 rounded-lg bg-zinc-800 outline-0 read-only:text-zinc-600 read-only:placeholder:text-zinc-700 read-only:bg-zinc-900"
+                className="p-2 rounded-lg bg-zinc-100 read-only:opacity-50  dark:bg-zinc-800 dark:read-only:text-zinc-600 dark:read-only:placeholder:text-zinc-700 dark:read-only:bg-zinc-900 read-only:cursor-not-allowed outline-0"
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -146,7 +152,7 @@ const CreateRoom = ({ onRoomCreate }) => {
                   setEvent(e);
                 }}
               >
-                <SelectTrigger className="w-full cursor-pointer bg-zinc-800 p-2 text-md">
+                <SelectTrigger className="w-full cursor-pointer bg-zinc-100 dark:bg-zinc-800 shadow-none p-2 text-md">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent
@@ -159,7 +165,7 @@ const CreateRoom = ({ onRoomCreate }) => {
                     <SelectItem
                       key={i}
                       value={event[0]}
-                      className="hover:bg-cyan-700 cursor-pointer data-[state=checked]:bg-violet-700"
+                      className="hover:bg-cyan-700 cursor-pointer data-[state=checked]:bg-violet-400 dark:data-[state=checked]:bg-violet-700"
                     >
                       {event[1]}
                     </SelectItem>
@@ -169,7 +175,7 @@ const CreateRoom = ({ onRoomCreate }) => {
             </div>
             <button
               disabled={!canCreate || btnLoading}
-              className="text-lg items-center bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
+              className="text-lg items-center text-zinc-100 bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
               onClick={createRoom}
             >
               {btnLoading ? "Ствоерння кімнати..." : "Створити кімнату"}

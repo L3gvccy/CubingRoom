@@ -36,7 +36,7 @@ const RoomJoin = () => {
   }, []);
   return (
     <div className="flex flex-1 items-center justify-center">
-      <div className="flex flex-col w-[90vw] max-w-102 gap-5 p-4 bg-zinc-900 border border-zinc-800 shadow-xl rounded-lg">
+      <div className="flex flex-col w-[90vw] max-w-102 gap-5 p-4 bg-zinc-100 border-zinc-200 dark:bg-zinc-900 border dark:border-zinc-800 shadow-xl rounded-lg">
         <p className="text-lg font-semibold">Вхід в кімнату</p>
         <div className="flex flex-col gap-2">
           <label htmlFor="password" className="text-zinc-300 ">
@@ -46,7 +46,7 @@ const RoomJoin = () => {
             placeholder="Введіть пароль"
             name="password"
             type="text"
-            className="p-2 rounded-lg bg-zinc-800 outline-0"
+            className="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 outline-0"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -55,7 +55,7 @@ const RoomJoin = () => {
         </div>
         <button
           disabled={!password}
-          className="text-lg items-center bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
+          className="text-lg items-center text-zinc-100 bg-violet-700 hover:bg-violet-600 disabled:bg-violet-950 disabled:text-zinc-300 px-4 py-2 rounded-lg cursor-pointer disabled:cursor-auto transition-all duration-300"
           onClick={handleBtnClick}
         >
           Увійти

@@ -84,7 +84,7 @@ const ContestResultTable = ({
               <tr key={i}>
                 <td className="border">{i + 1}</td>
                 <td
-                  className={`border flex items-center justify-center py-1 ${i === bestIndex ? "text-emerald-400" : i === worstIndex ? "text-red-400" : ""}`}
+                  className={`border flex items-center justify-center py-1 ${i === bestIndex ? "text-emerald-600 dark:text-emerald-400" : i === worstIndex ? "text-red-400" : ""}`}
                 >
                   {solves.length > i ? (
                     editable ? (

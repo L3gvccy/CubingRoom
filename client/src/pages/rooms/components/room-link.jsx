@@ -38,7 +38,7 @@ const RoomLink = ({ room }) => {
       .post(
         JOIN_ROOM,
         { roomId: room.id, password: password },
-        { withCredentials: true }
+        { withCredentials: true },
       )
       .then((res) => {
         console.log(res.data);
@@ -89,7 +89,7 @@ const RoomLink = ({ room }) => {
         </DialogContent>
       </Dialog>
       <div
-        className="rounded-lg bg-zinc-800 hover:bg-zinc-700 flex p-4 gap-4 cursor-pointer transition-all duration-300"
+        className="rounded-lg bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 flex p-4 gap-4 cursor-pointer transition-all duration-300"
         onClick={() => {
           handleClick();
         }}
@@ -97,7 +97,7 @@ const RoomLink = ({ room }) => {
         <img
           src={`/event-icons/${room.event}.svg`}
           alt={room.event}
-          className="w-16"
+          className="w-16 invert-100 dark:invert-0"
         />
         <div className="flex flex-col justify-between">
           <div className="flex gap-5 items-center">

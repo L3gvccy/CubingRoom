@@ -59,12 +59,12 @@ const ResultsTable = ({
       <table className="border-collapse min-w-max w-full text-sm">
         <thead>
           <tr>
-            <th className="sticky top-0 left-0 bg-zinc-900 border px-2 py-1 z-40 w-12"></th>
+            <th className="sticky top-0 left-0 bg-zinc-100 dark:bg-zinc-900 border px-2 py-1 z-40 w-12"></th>
 
             {activeUsers.map((user) => (
               <th
                 key={user.userId}
-                className="sticky top-0 bg-zinc-900 border px-3 py-1 z-30 text-center"
+                className="sticky top-0 bg-zinc-100 dark:bg-zinc-900 border px-3 py-1 z-30 text-center h-8"
               >
                 <a
                   className="cursor-pointer"
@@ -78,14 +78,14 @@ const ResultsTable = ({
           </tr>
 
           <tr>
-            <th className="sticky top-8 left-0 bg-zinc-900 border px-2 py-1 z-40 text-xs w-12">
+            <th className="sticky top-8 left-0 bg-zinc-100 dark:bg-zinc-900 border px-2 py-1 z-40 text-xs w-12">
               🏆
             </th>
 
             {activeUsers.map((user) => (
               <th
                 key={user.userId}
-                className="sticky top-8 bg-zinc-900 border px-3 py-1 z-30 text-xs text-emerald-400"
+                className="sticky top-8 bg-zinc-100 dark:bg-zinc-900 border px-3 py-1 z-30 text-xs text-emerald-600 dark:text-emerald-400"
               >
                 {winsByUserId[user.id] || 0}
               </th>
@@ -101,8 +101,8 @@ const ResultsTable = ({
             return (
               <tr key={solve.id}>
                 <td
-                  className={`sticky left-0 bg-zinc-900 border px-2 py-1 z-20 text-center font-bold w-12
-                    ${isCurrent ? "bg-zinc-800" : ""}`}
+                  className={`sticky left-0 bg-zinc-100 dark:bg-zinc-900 border px-2 py-1 z-20 text-center font-bold w-12
+                    ${isCurrent ? "bg-zinc-300 dark:bg-zinc-800" : ""}`}
                 >
                   {solve.index}
                 </td>
@@ -115,7 +115,7 @@ const ResultsTable = ({
                   const display = userResult ? (
                     user.userId === userData.id ? (
                       <span
-                        className="px-2 cursor-pointer hover:bg-zinc-100/10 rounded-md transition-all duration-300"
+                        className="px-2 cursor-pointer hover:bg-zinc-900/10 dark:hover:bg-zinc-100/10 rounded-md transition-all duration-300"
                         onClick={() => {
                           setSolveToEdit(userResult.result);
                           setSelectedScramble(solve.scramble);
@@ -142,8 +142,8 @@ const ResultsTable = ({
                     <td
                       key={user.userId}
                       className={`border px-2 py-1 text-center whitespace-nowrap
-                        ${isCurrent ? "bg-zinc-700" : ""}
-                        ${isWinner ? "text-emerald-400 font-semibold" : ""}`}
+                        ${isCurrent ? "bg-zinc-200 dark:bg-zinc-700" : ""}
+                        ${isWinner ? "text-emerald-600 dark:text-emerald-400 font-semibold" : ""}`}
                     >
                       {display}
                     </td>

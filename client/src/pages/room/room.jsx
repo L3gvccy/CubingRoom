@@ -191,7 +191,7 @@ const Room = () => {
             <>
               <button
                 ref={newScrBtnRef}
-                className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300"
+                className="px-4 py-1 flex gap-2 items-center rounded-md bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700 cursor-pointer transition-all duration-300"
                 onClick={newScramble}
               >
                 <RotateCcw size={18} />

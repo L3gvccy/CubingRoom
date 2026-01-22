@@ -137,7 +137,7 @@ const Contest = () => {
             <img
               src={`/event-icons/${event.event}.svg`}
               alt="event-logo"
-              className="w-16"
+              className="w-16 invert-100 dark:invert-0"
             />
             <div className="flex gap-2 items-center justify-center">
               <h1 className="text-2xl font-semibold">Контест</h1>
@@ -246,7 +246,7 @@ const Contest = () => {
                 </div>
 
                 <button
-                  className="text-lg items-center bg-violet-700 hover:bg-violet-600 px-4 py-2 w-full max-w-64 rounded-lg cursor-pointer transition-all duration-300"
+                  className="text-lg items-center text-zinc-100 bg-violet-700 hover:bg-violet-600 px-4 py-2 w-full max-w-64 rounded-lg cursor-pointer transition-all duration-300"
                   onClick={submitResult}
                 >
                   Підтвердити
@@ -263,7 +263,7 @@ const Contest = () => {
                 {scrambles.map((s) => (
                   <div
                     key={s.index}
-                    className="flex gap-2 px-4 py-2 bg-zinc-800 rounded-lg"
+                    className="flex gap-2 px-4 py-2 bg-zinc-100 dark:bg-zinc-800 rounded-lg"
                   >
                     <span>{s.index}.</span>
                     {event.event === "megaminx" ? (

@@ -21,8 +21,8 @@ const HeaderNav = ({ authorized }) => {
           className={({ isActive }) =>
             `transition-all duration-300 ${
               isActive
-                ? "text-violet-400 font-semibold"
-                : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
+                ? "text-violet-700 dark:text-violet-400 font-semibold"
+                : "text-zinc-800 hover:text-zinc-700 dark:text-zinc-200 dark:hover:text-zinc-100"
             }`
           }
         >
@@ -33,8 +33,8 @@ const HeaderNav = ({ authorized }) => {
           className={({ isActive }) =>
             `transition-all duration-300 ${
               isActive
-                ? "text-violet-400 font-semibold"
-                : "text-zinc-200 hover:text-zinc-100 active:text-zinc-300"
+                ? "text-violet-700 dark:text-violet-400 font-semibold"
+                : "text-zinc-800 hover:text-zinc-700 dark:text-zinc-200 dark:hover:text-zinc-100"
             }`
           }
         >

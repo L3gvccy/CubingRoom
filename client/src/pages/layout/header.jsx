@@ -8,7 +8,7 @@ const Header = () => {
   const { userData } = useAppStore();
   const authorized = !!userData;
   return (
-    <div className="flex justify-center items-center w-full p-4 bg-zinc-900 border-zinc-800/50 border-b-2">
+    <div className="flex justify-center items-center w-full p-4 bg-zinc-100 dark:bg-zinc-900 dark:border-zinc-800/50 border-b-2 shadow-lg">
       <div className="flex items-center justify-between w-full max-w-342">
         <div className="flex flex-row-reverse md:flex-row gap-3 md:gap-12">
           <HeaderLogo />

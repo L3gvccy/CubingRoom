@@ -73,20 +73,22 @@ const Rooms = () => {
         <div className="flex w-full justify-between ">
           <CreateRoom onRoomCreate={getRooms} />
           <button
-            className="rounded-lg flex items-center gap-2 px-4 py-2 text-lg bg-zinc-800 hover:bg-zinc-700 cursor-pointer transition-all duration-300"
+            className="rounded-lg flex items-center gap-2 px-4 py-2 text-lg bg-zinc-200 hover:bg-zinc-100 dark:bg-zinc-800 dark:hover:bg-zinc-700  cursor-pointer transition-all duration-300"
             onClick={getRooms}
           >
             <span className="hidden sm:inline">Оновити список</span>
             <RotateCcw size={22} />
           </button>
         </div>
-        <p className="text-xl py-2 border-b-2 border-zinc-700">Мої кімнати</p>
+        <p className="text-xl py-2 border-b-2 border-zinc-300 dark:border-zinc-700">
+          Мої кімнати
+        </p>
         {myRooms.length > 0 ? (
           myRooms.map((r) => <RoomLink room={r} key={r.id} />)
         ) : (
           <p className="opacity-75">Власних кімнат не знайдено</p>
         )}
-        <p className="text-xl py-2 border-b-2 border-zinc-700">
+        <p className="text-xl py-2 border-b-2 border-zinc-300 dark:border-zinc-700">
           Відкриті кімнати
         </p>
         {publicRooms.length > 0 ? (
@@ -94,7 +96,7 @@ const Rooms = () => {
         ) : (
           <p className="opacity-75">Відкритих кімнат не знайдено</p>
         )}
-        <p className="text-xl py-2 border-b-2 border-zinc-700">
+        <p className="text-xl py-2 border-b-2 border-zinc-300 dark:border-zinc-700">
           Приватні кімнати
         </p>
         {privateRooms.length > 0 ? (
