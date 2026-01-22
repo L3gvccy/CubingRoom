@@ -20,6 +20,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Room = () => {
   const [loading, setLoading] = useState(true);
@@ -169,7 +174,19 @@ const Room = () => {
         </div>
 
         <div className="flex py-2 justify-between items-center">
-          <Info className="opacity-80 cursor-pointer" size={22} />
+          <Tooltip>
+            <TooltipTrigger>
+              <div>
+                <Info className="opacity-80 cursor-pointer" size={22} />
+              </div>
+            </TooltipTrigger>
+            <TooltipContent className="dark:bg-zinc-800 dark:text-zinc-100">
+              <div>
+                Для підтвердження результату можна використовувати "Enter"
+              </div>
+            </TooltipContent>
+          </Tooltip>
+
           {isAdmin && (
             <>
               <button
@@ -230,6 +247,7 @@ const Room = () => {
             solves={solves}
             currentSolve={currentSolve}
             onSolveEdit={editSolve}
+            event={room.event}
           />
         </div>
         <div className="flex flex-col-reverse md:flex-row items-center justify-center">

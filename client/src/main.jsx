@@ -12,6 +12,7 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/uk";
 import { SocketProvider } from "./context/socketContext.jsx";
+import { TooltipProvider } from "./components/ui/tooltip.jsx";
 
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
@@ -26,9 +27,11 @@ createRoot(document.getElementById("root")).render(
   // <StrictMode>
   <SocketProvider>
     <ThemeProvider>
-      <App />
-      <Toaster position="top-center" closeButton />
+      <TooltipProvider>
+        <App />
+        <Toaster position="top-center" closeButton />
+      </TooltipProvider>
     </ThemeProvider>
-  </SocketProvider>
+  </SocketProvider>,
   // </StrictMode>,
 );

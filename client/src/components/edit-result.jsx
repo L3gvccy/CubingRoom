@@ -6,8 +6,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { formatTimeDisplay, parseTimeInput } from "@/utils/tools";
+import ShowScramble from "./show-scramble";
 
-const EditResult = ({ solve, onClose, onSubmit }) => {
+const EditResult = ({ solve, onClose, onSubmit, scramble = null, event }) => {
   const [rawTime, setRawTime] = useState(formatTimeDisplay(solve.time, "OK"));
   const [penalty, setPenalty] = useState(solve.penalty);
 
@@ -48,6 +49,15 @@ const EditResult = ({ solve, onClose, onSubmit }) => {
         <DialogHeader>
           <DialogTitle>Редагувати результат</DialogTitle>
         </DialogHeader>
+
+        {scramble && event === "megaminx" ? (
+          <div className="flex justify-center">
+            <pre className="text-[14px] text-start w-fit">{scramble}</pre>
+          </div>
+        ) : (
+          <div className="text-[14px] text-center px-4">{scramble}</div>
+        )}
+
         <div className="flex flex-col mt-4 gap-4">
           <div className="flex flex-col">
             <label htmlFor="time" className="text-zinc-300 mb-2">

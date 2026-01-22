@@ -6,6 +6,7 @@ const TimeInput = ({ handleSubmit }) => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       chooseResult("OK");
     }
   };
@@ -50,7 +51,6 @@ const TimeInput = ({ handleSubmit }) => {
           handleInput(e);
         }}
         onKeyDown={(e) => {
-          e.preventDefault();
           handleKeyDown(e);
         }}
         type="text"

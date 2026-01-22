@@ -10,9 +10,11 @@ const ResultsTable = ({
   solves = [],
   currentSolve,
   onSolveEdit,
+  event,
 }) => {
   const { userData } = useAppStore();
   const [solveToEdit, setSolveToEdit] = useState(null);
+  const [selectedScramble, setSelectedScramble] = useState(null);
   const activeUsers = useMemo(() => {
     return [...users]
       .filter((u) => u.status !== "LEFT")
@@ -116,6 +118,7 @@ const ResultsTable = ({
                         className="px-2 cursor-pointer hover:bg-zinc-100/10 rounded-md transition-all duration-300"
                         onClick={() => {
                           setSolveToEdit(userResult.result);
+                          setSelectedScramble(solve.scramble);
                         }}
                       >
                         {formatTimeDisplay(
@@ -157,6 +160,8 @@ const ResultsTable = ({
           solve={solveToEdit}
           onClose={() => setSolveToEdit(null)}
           onSubmit={onSolveEdit}
+          scramble={selectedScramble}
+          event={event}
         />
       )}
     </div>
