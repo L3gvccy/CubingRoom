@@ -13,7 +13,7 @@ import * as bcrypt from "bcrypt";
 export class AuthService {
   constructor(
     private prisma: PrismaService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   async login(dto: AuthDto) {
@@ -35,7 +35,9 @@ export class AuthService {
     const payload = { sub: user.id };
     const token = this.jwtService.sign(payload);
 
-    return { user, token };
+    const { password: _, ...userToReturn } = user;
+
+    return { user: userToReturn, token };
   }
 
   async register(dto: AuthDto) {
@@ -56,11 +58,16 @@ export class AuthService {
     const payload = { sub: user.id };
     const token = this.jwtService.sign(payload);
 
-    return { user, token };
+    const { password: _, ...userToReturn } = user;
+
+    return { user: userToReturn, token };
   }
 
   async getMe(id: string) {
-    const user = await this.prisma.user.findUnique({ where: { id: id } });
+    const user = await this.prisma.user.findUnique({
+      where: { id: id },
+      omit: { password: true },
+    });
 
     if (!user) {
       throw new UnauthorizedException("Потрібно увійти до акаунту");

@@ -13,7 +13,7 @@ import * as bcrypt from "bcrypt";
 export class RoomService {
   constructor(
     private prisma: PrismaService,
-    private scramble: ScrambleService
+    private scramble: ScrambleService,
   ) {}
 
   async getAllRooms() {
@@ -29,7 +29,8 @@ export class RoomService {
 
     const room = await this.prisma.room.findUnique({
       where: { id },
-      include: { users: { include: { user: true } } },
+      include: { users: { include: { user: { omit: { password: true } } } } },
+      omit: { password: true },
     });
     if (!room) {
       throw new NotFoundException("Кімната не знайдена");
@@ -39,7 +40,10 @@ export class RoomService {
       where: { roomId: room.id },
       include: {
         results: {
-          include: { user: { include: { user: true } }, result: true },
+          include: {
+            user: { include: { user: { omit: { password: true } } } },
+            result: true,
+          },
         },
       },
       orderBy: {
@@ -55,7 +59,7 @@ export class RoomService {
 
     const room = await this.prisma.room.findUnique({
       where: { id },
-      include: { users: { include: { user: true } } },
+      include: { users: { include: { user: { omit: { password: true } } } } },
     });
     if (!room) {
       throw new NotFoundException("Кімната не знайдена");
@@ -65,7 +69,10 @@ export class RoomService {
       where: { roomId: room.id },
       include: {
         results: {
-          include: { user: { include: { user: true } }, result: true },
+          include: {
+            user: { include: { user: { omit: { password: true } } } },
+            result: true,
+          },
         },
       },
       orderBy: {
@@ -111,7 +118,9 @@ export class RoomService {
       },
     });
 
-    return { room };
+    const { password, ...roomToReturn } = room;
+
+    return { room: roomToReturn };
   }
 
   async generateNewScramble(roomId: number) {

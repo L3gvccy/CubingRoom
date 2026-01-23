@@ -18,7 +18,6 @@ export class ProfileService {
   }
 
   async updateName(id: string, newName: string) {
-    console.log(newName);
     const user = await this.prisma.user.update({
       where: { id },
       data: { displayName: newName },
