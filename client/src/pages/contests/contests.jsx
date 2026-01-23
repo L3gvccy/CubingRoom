@@ -18,7 +18,7 @@ const Contests = () => {
         const contests = res.data.contests;
         setContests(res.data.contests);
         const activeContest = contests.find((contest) => contest.isActive);
-        console.log(activeContest);
+
         if (activeContest) {
           setSelectedContest(activeContest);
         } else if (contests.length > 0) {

@@ -47,7 +47,6 @@ const Room = () => {
     await apiClient
       .get(GET_ROOM_BY_ID(roomId), { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         if (!res.data.room.users.some((u) => u.userId === userData.id)) {
           navigate(`/join-room/${roomId}`);
           return;

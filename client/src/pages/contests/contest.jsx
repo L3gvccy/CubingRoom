@@ -47,7 +47,6 @@ const Contest = () => {
     await apiClient
       .get(GET_CONTEST_EVENT(contestEventId), { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         setContest(res.data.contestEvent.contest);
         setEvent(res.data.contestEvent);
         setScrambles(res.data.scrambles);
@@ -64,7 +63,6 @@ const Contest = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log(res.data);
         setMyResult(res.data.contestResult);
         setSolves(res.data.solves);
       });

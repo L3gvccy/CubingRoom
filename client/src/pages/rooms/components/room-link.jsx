@@ -21,7 +21,6 @@ const RoomLink = ({ room }) => {
     await apiClient
       .post(JOIN_ROOM, { roomId: room.id }, { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         if (!res.data.ok) {
           setModalOpen(true);
         } else {
@@ -41,7 +40,6 @@ const RoomLink = ({ room }) => {
         { withCredentials: true },
       )
       .then((res) => {
-        console.log(res.data);
         if (!res.data.ok) {
           toast.error("Невірний пароль");
         } else {

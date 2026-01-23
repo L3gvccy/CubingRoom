@@ -22,7 +22,6 @@ const Rooms = () => {
       .get(GET_ALL_ROOMS, { withCredentials: true })
       .then((res) => {
         setAllRooms(res.data.rooms);
-        console.log(res.data);
       })
       .catch((err) => {
         if (err.response.status !== 500) {

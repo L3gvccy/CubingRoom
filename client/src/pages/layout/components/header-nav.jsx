@@ -78,7 +78,6 @@ const HeaderNav = ({ authorized }) => {
                 to="/contests"
                 end
                 className={({ isActive }) => {
-                  console.log(isActive);
                   return `transition-all duration-300 ${
                     isActive
                       ? "text-violet-400 font-semibold"

@@ -29,8 +29,6 @@ const PersonalResults = ({ solves, event, userId }) => {
     .filter(Boolean)
     .sort((a, b) => a.index - b.index);
 
-  console.log(mySolves);
-
   const computeStats = (userSolves) => {
     if (!userSolves || !userSolves.length) return {};
 
@@ -76,7 +74,6 @@ const PersonalResults = ({ solves, event, userId }) => {
   useEffect(() => {
     if (solves.length > 0) {
       const res = computeStats(mySolves);
-      console.log(res);
       setStats(res);
     }
   }, [solves]);

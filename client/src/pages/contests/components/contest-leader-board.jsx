@@ -8,7 +8,6 @@ const ContestLeaderBoard = ({ results, event }) => {
   const [name, format] = getNameAndFormat(event);
 
   const displaySolves = (solves) => {
-    console.log(solves);
     const solvesToDisplay = [];
 
     solves.forEach((solve) => {
