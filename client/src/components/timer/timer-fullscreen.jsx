@@ -3,8 +3,15 @@ import { formatTimeDisplay, getTimerColor } from "@/utils/tools";
 import { useGlobalTimer } from "@/context/timerContext";
 
 const TimerFullscreen = () => {
-  const { time, state, isFullscreen, pendingResult, chooseResult } =
-    useGlobalTimer();
+  const {
+    time,
+    state,
+    isFullscreen,
+    pendingResult,
+    chooseResult,
+    onPointerDown,
+    onPointerUp,
+  } = useGlobalTimer();
 
   const onEnterPress = (e) => {
     e.preventDefault();
@@ -28,9 +35,13 @@ const TimerFullscreen = () => {
   if (!isFullscreen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-zinc-100 dark:bg-zinc-900 flex flex-col items-center justify-center gap-8">
+    <div
+      className="fixed inset-0 z-50 bg-zinc-100 dark:bg-zinc-900 flex flex-col items-center justify-center gap-8"
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+    >
       <div
-        className={`font-mono text-6xl transition-colors ${getTimerColor(
+        className={`font-mono text-[8vh] transition-colors ${getTimerColor(
           state,
         )}`}
       >
