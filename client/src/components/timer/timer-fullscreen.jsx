@@ -41,7 +41,7 @@ const TimerFullscreen = () => {
       onPointerUp={onPointerUp}
     >
       <div
-        className={`font-mono text-[8vh] transition-colors ${getTimerColor(
+        className={`font-mono select-none text-[8vh] transition-colors ${getTimerColor(
           state,
         )}`}
       >

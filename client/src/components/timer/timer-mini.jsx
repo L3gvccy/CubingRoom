@@ -7,7 +7,7 @@ const TimerMini = () => {
     useGlobalTimer();
   return (
     <div
-      className={`px-4 py-6  bg-transparent font-mono text-4xl text-center ${getTimerColor(
+      className={`px-4 py-6 select-none bg-transparent font-mono text-4xl text-center ${getTimerColor(
         state,
       )}`}
       onPointerDown={onPointerDown}
