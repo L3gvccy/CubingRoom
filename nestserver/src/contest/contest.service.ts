@@ -13,6 +13,7 @@ export class ContestService {
   ) {}
 
   // @Cron("15 * * * * *")
+  @Cron("0 0 * * 1")
   async CreateContest() {
     try {
       await this.prisma.$transaction(async (tx) => {
