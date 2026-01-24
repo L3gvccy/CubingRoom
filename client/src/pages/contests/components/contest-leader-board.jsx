@@ -12,9 +12,9 @@ const ContestLeaderBoard = ({ results, event }) => {
 
     solves.forEach((solve) => {
       const timeToDisplay =
-        solve.finalTime === Number.MAX_SAFE_INTEGER
+        solve.penalty === "DNF"
           ? "DNF"
-          : formatTimeDisplay(solve.finalTime);
+          : formatTimeDisplay(solve.time, solve.penalty);
       solvesToDisplay.push(timeToDisplay);
     });
 
@@ -26,14 +26,15 @@ const ContestLeaderBoard = ({ results, event }) => {
         const times = solves.map((s) => s.finalTime);
         const validTimes = times.filter((t) => t !== Number.MAX_SAFE_INTEGER);
         const bestTime = Math.min(...validTimes);
-        const worstTime = Math.max(...validTimes);
+        const worstTime =
+          solves.find((s) => s.penalty === "DNF") || Math.max(...validTimes);
         const newSolvesToDisplay = solvesToDisplay.map((s, index) => {
           const solve = solves[index];
           const solveFinalTime = solve.finalTime;
           if (solveFinalTime === bestTime || solveFinalTime === worstTime) {
-            return `(${formatTimeDisplay(solve.time, solves.penalty)})`;
+            return `(${formatTimeDisplay(solve.time, solve.penalty)})`;
           }
-          return formatTimeDisplay(solve.time, solves.penalty);
+          return formatTimeDisplay(solve.time, solve.penalty);
         });
         console.log(newSolvesToDisplay);
         return newSolvesToDisplay.join(", ");
