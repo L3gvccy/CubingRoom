@@ -3,7 +3,8 @@ import { formatTimeDisplay, getTimerColor } from "@/utils/tools";
 import { useGlobalTimer } from "@/context/timerContext";
 
 const TimerMini = () => {
-  const { time, state, onPointerDown, onPointerUp } = useGlobalTimer();
+  const { time, state, onPointerDown, onPointerUp, onPointerCancel } =
+    useGlobalTimer();
   return (
     <div
       className={`px-4 py-6  bg-transparent font-mono text-4xl text-center ${getTimerColor(
@@ -11,6 +12,7 @@ const TimerMini = () => {
       )}`}
       onPointerDown={onPointerDown}
       onPointerUp={onPointerUp}
+      onPointerCancel={onPointerCancel}
     >
       {formatTimeDisplay(time)}
     </div>

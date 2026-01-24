@@ -74,6 +74,11 @@ export function useTimer({ onFinish } = {}) {
 
   const reset = () => {
     cancelAnimationFrame(raf.current);
+    if (holdTimeout.current) {
+      clearTimeout(holdTimeout.current);
+      holdTimeout.current = null;
+    }
+
     setPendingResult(null);
     setIsFullscreen(false);
     setTime(0);
@@ -131,6 +136,7 @@ export function useTimer({ onFinish } = {}) {
       if (e.pointerType === "mouse") return;
 
       if (state === "idle") {
+        e.preventDefault();
         setState("holding");
         holdTimeout.current = setTimeout(() => setState("ready"), 300);
       }
@@ -151,6 +157,10 @@ export function useTimer({ onFinish } = {}) {
     [state, start],
   );
 
+  const onPointerCancel = useCallback(() => {
+    reset();
+  }, []);
+
   return {
     time,
     state,
@@ -160,5 +170,6 @@ export function useTimer({ onFinish } = {}) {
     reset,
     onPointerDown,
     onPointerUp,
+    onPointerCancel,
   };
 }
