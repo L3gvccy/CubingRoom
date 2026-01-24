@@ -206,12 +206,9 @@ export class RoomService {
 
     if (!room?.private) {
       return true;
-    } else if (
-      room.private &&
-      password &&
-      bcrypt.compare(password, room.password)
-    ) {
-      return true;
+    } else if (room.private && password) {
+      const isValid = await bcrypt.compare(password, room.password);
+      if (isValid) return true;
     }
 
     return false;

@@ -38,6 +38,7 @@ const Room = () => {
   const [room, setRoom] = useState({});
   const [solves, setSolves] = useState(null);
   const [currentSolve, setCurrentSolve] = useState();
+  const [stateUpdated, setStateUpdated] = useState(false);
 
   const newScrBtnRef = useRef();
 
@@ -116,6 +117,7 @@ const Room = () => {
       const ru = state.room.users.find((u) => u.userId === userData.id);
       console.log(ru);
       setRoomUser(ru);
+      setStateUpdated(true);
     };
 
     const onRoomDelete = () => {
@@ -143,7 +145,7 @@ const Room = () => {
     }
   }, [solves]);
 
-  if (!loading && room && roomUser && currentSolve)
+  if (!loading && room && roomUser && currentSolve && stateUpdated)
     return (
       <div className="flex w-full justify-center py-4">
         <div className="flex flex-col max-w-342 w-full px-4">
