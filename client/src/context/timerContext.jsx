@@ -1,4 +1,4 @@
-import { useTimer } from "@/components/timer/hooks/usetimer";
+import { useTimer } from "@/components/timer/hooks/useTimer.jsx";
 import { createContext, useContext } from "react";
 
 const TimerContext = createContext(null);
