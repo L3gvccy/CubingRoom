@@ -28,4 +28,4 @@ ENV PORT=3000
 
 EXPOSE $PORT
 
-CMD npx prisma migrate deploy --schema=./prisma/schema.prisma && node dist/main
+CMD npx prisma migrate deploy && node dist/main
