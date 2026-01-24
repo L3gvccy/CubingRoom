@@ -9,8 +9,8 @@
 - Щотижневі контести
 
 ## 🧱 Tech Stack
-- Backend: NestJS
-- Frontend: ReactJS
+- Backend: NestJS, Socket.IO
+- Frontend: ReactJS, TailwindCSS, Zustand
 - DB: PostgreSQL
 - ORM: Prisma
 - Auth: JWT, WCAID
