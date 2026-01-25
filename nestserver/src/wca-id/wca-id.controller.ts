@@ -35,27 +35,21 @@ export class WcaIdController {
 
     const token = await this.wcaIdService.handleWcaIdCallback(code);
 
-    res.cookie("jwt", token, {
-      maxAge,
-      secure: true,
-      sameSite: "none",
-    });
-
-    return res.redirect(`${process.env.ORIGIN}/wca-success`);
+    return res.redirect(`${process.env.ORIGIN}/wca-success?token=${token}`);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get("/link")
-  getWcaUrlLink(@Req() req: Request, @Res() res: Response) {
-    return this.wcaIdService.getWcaUrlLink(req, res);
+  getWcaUrlLink(@CurrentUser() user: { id: string }, @Res() res: Response) {
+    return this.wcaIdService.getWcaUrlLink(user.id, res);
   }
 
   @Get("/link-callback")
   async wcaIDLinkCallback(
     @Query("code") code: string,
     @Query("state") state: string,
-    @Req() req: Request,
     @Res() res: Response,
   ) {
-    return this.wcaIdService.wcaIDLinkCallback(code, state, req, res);
+    return this.wcaIdService.wcaIDLinkCallback(code, state, res);
   }
 }

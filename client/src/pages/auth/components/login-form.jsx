@@ -30,6 +30,7 @@ const LoginForm = ({ setAuthAction }) => {
       .post(LOGIN_ROUTE, { email, password }, { withCredentials: true })
       .then((res) => {
         if (res.status === 201) {
+          localStorage.setItem("accessToken", res.data.accessToken);
           toast.success("Ви успішно увійшли");
           setUserData(res.data.user);
           navigate("/");

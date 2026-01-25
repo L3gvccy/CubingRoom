@@ -33,6 +33,7 @@ const EndMenu = ({ authorized }) => {
       .get(LOGOUT_ROUTE, { withCredentials: true })
       .then((res) => {
         setUserData(undefined);
+        localStorage.removeItem("accessToken");
         toast.success(res.data.message);
         navigate("/");
       })

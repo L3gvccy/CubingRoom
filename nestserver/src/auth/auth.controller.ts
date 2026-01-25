@@ -23,40 +23,22 @@ export class AuthController {
   async login(@Body() dto: AuthDto, @Res({ passthrough: true }) res: Response) {
     const { user, token } = await this.authService.login(dto);
 
-    res.cookie("jwt", token, {
-      maxAge,
-      secure: true,
-      sameSite: "none",
-    });
-
-    return { user };
+    return { user, accessToken: token };
   }
 
   @Post("register")
   async register(
     @Body() dto: AuthDto,
-    @Res({ passthrough: true }) res: Response
+    @Res({ passthrough: true }) res: Response,
   ) {
     const { user, token } = await this.authService.register(dto);
 
-    res.cookie("jwt", token, {
-      maxAge,
-      secure: true,
-      sameSite: "none",
-    });
-
-    return { user };
+    return { user, accessToken: token };
   }
 
   @UseGuards(JwtAuthGuard)
   @Get("logout")
-  logout(@Res({ passthrough: true }) res: Response) {
-    res.cookie("jwt", "", {
-      maxAge: 1,
-      secure: true,
-      sameSite: "none",
-    });
-
+  logout() {
     return { message: "Ви успішно вийшли з акаунту" };
   }
 
