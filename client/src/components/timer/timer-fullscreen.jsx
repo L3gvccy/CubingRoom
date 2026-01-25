@@ -32,6 +32,18 @@ const TimerFullscreen = () => {
     }
   }, [isFullscreen, pendingResult]);
 
+  useEffect(() => {
+    if (isFullscreen) {
+      const originalOverflow = document.body.style.overflow;
+
+      document.body.style.overflow = "hidden";
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isFullscreen]);
+
   if (!isFullscreen) return null;
 
   return (
