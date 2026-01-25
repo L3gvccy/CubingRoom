@@ -222,10 +222,14 @@ const Room = () => {
           </div>
 
           <div className="py-4">
-            <ShowScramble
-              event={room.event}
-              scramble={currentSolve?.scramble}
-            />
+            {roomUser.status !== "WAITING" ? (
+              <ShowScramble
+                event={room.event}
+                scramble={currentSolve?.scramble}
+              />
+            ) : (
+              <span></span>
+            )}
           </div>
           <div className="flex justify-center items-center py-2 h-22.5 w-full">
             {roomUser.status === "WAITING" ? (

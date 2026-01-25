@@ -91,7 +91,7 @@ const PersonalResults = ({ solves, event, userId }) => {
         <tbody>
           <tr>
             <td className="font-semibold">Single</td>
-            {stats.single && (
+            {stats.single ? (
               <>
                 <td className="text-center">
                   {formatTimeDisplay(
@@ -105,6 +105,11 @@ const PersonalResults = ({ solves, event, userId }) => {
                     stats.single?.best.penalty,
                   )}
                 </td>
+              </>
+            ) : (
+              <>
+                <td className="text-center">–</td>
+                <td className="text-center">–</td>
               </>
             )}
           </tr>
