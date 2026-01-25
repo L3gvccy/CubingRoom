@@ -103,7 +103,7 @@ const Profile = () => {
           {editingName ? (
             <div className="flex gap-2 items-center">
               <input
-                className="text-2xl border-b border-zinc-100/50 mb-1"
+                className="text-lg md:text-2xl border-b border-zinc-100/50 mb-1"
                 type="text"
                 value={newName}
                 onChange={(e) => {
@@ -111,13 +111,13 @@ const Profile = () => {
                 }}
               />
               <div
-                className="text-xl text-zinc-500 hover:text-zinc-400 cursor-pointer"
+                className="text-lg md:text-xl text-zinc-500 hover:text-zinc-400 cursor-pointer"
                 onClick={cancelNameEdit}
               >
                 <IoClose />
               </div>
               <div
-                className="text-xl text-zinc-500 hover:text-zinc-400 cursor-pointer"
+                className="text-lg md:text-xl text-zinc-500 hover:text-zinc-400 cursor-pointer"
                 onClick={handleNameEdit}
               >
                 <IoMdCheckmark />
@@ -125,10 +125,12 @@ const Profile = () => {
             </div>
           ) : (
             <div className="flex gap-2 items-center">
-              <p className="text-3xl font-semibold">{user.displayName}</p>
+              <p className="text-xl md:text-3xl font-semibold">
+                {user.displayName}
+              </p>
               {editable && (
                 <div
-                  className="text-xl text-zinc-500 hover:text-zinc-400 transition-all duration-300 cursor-pointer"
+                  className="text-lg md:text-xl text-zinc-500 hover:text-zinc-400 transition-all duration-300 cursor-pointer"
                   onClick={() => {
                     setEditingName(true);
                   }}
@@ -139,7 +141,7 @@ const Profile = () => {
             </div>
           )}
 
-          <div className="flex flex-col w-full gap-2 text-lg">
+          <div className="flex flex-col w-full gap-2 text-md md:text-lg">
             {user.wcaId ? (
               <>
                 <p className="flex gap-2">
