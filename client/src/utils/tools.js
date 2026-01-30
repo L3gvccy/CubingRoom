@@ -35,6 +35,9 @@ export const getScrambler = (event) => {
     pyraminx: ["pyrso", 10],
     skewb: ["skbso", 0],
     sq1: ["sqrs", 0],
+    "333bf": ["333ni", 0],
+    "444bf": ["444bld", 40],
+    "555bf": ["555bld", 60],
   };
 
   return wca_events[event];
@@ -54,6 +57,9 @@ export const getDisplay = (event) => {
     pyraminx: "pyram",
     skewb: "skewb",
     sq1: "sq1",
+    "333bf": "333",
+    "444bf": "444",
+    "555bf": "555",
   };
 
   return wca_events[event];
@@ -130,6 +136,9 @@ export const getNameAndFormat = (event) => {
     pyraminx: ["Pyraminx", "ao5"],
     skewb: ["Skewb", "ao5"],
     sq1: ["Square-1", "ao5"],
+    "333bf": ["3x3 BLD", "ao5"],
+    "444bf": ["4x4 BLD", "mo3"],
+    "555bf": ["4x4 BLD", "mo3"],
   };
 
   return wca_events[event];

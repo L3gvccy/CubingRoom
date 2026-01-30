@@ -12,6 +12,9 @@ export const getScrambler = (event: string) => {
     pyraminx: { scrambler: "pyrso", length: 10 },
     skewb: { scrambler: "skbso", length: 0 },
     sq1: { scrambler: "sqrs", length: 0 },
+    "333bf": { scrambler: "333ni", length: 0 },
+    "444bf": { scrambler: "333ni", length: 40 },
+    "555bf": { scrambler: "333ni", length: 60 },
   };
 
   return wcaEvents[event];
@@ -22,12 +25,15 @@ export const event_format = [
   ["222", "ao5"],
   ["444", "ao5"],
   ["555", "ao5"],
-  ["666", "ao5"],
-  ["777", "ao5"],
+  ["666", "mo3"],
+  ["777", "mo3"],
   ["333oh", "ao5"],
   ["clock", "ao5"],
   ["megaminx", "ao5"],
   ["pyraminx", "ao5"],
   ["skewb", "ao5"],
   ["sq1", "ao5"],
+  ["333bf", "ao5"],
+  ["444bf", "mo3"],
+  ["555bf", "mo3"],
 ];
