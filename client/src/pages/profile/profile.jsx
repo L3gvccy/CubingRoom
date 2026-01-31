@@ -169,7 +169,7 @@ const Profile = () => {
                 <p>
                   <span className="font-semibold">WCA:</span> Не підключено
                 </p>
-                <LinkWcaBtn />
+                {editable && <LinkWcaBtn />}
               </>
             )}
           </div>
