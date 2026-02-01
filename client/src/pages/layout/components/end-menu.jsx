@@ -58,7 +58,7 @@ const EndMenu = ({ authorized }) => {
             }}
           >
             <DropdownMenuTrigger className="cursor-pointer outline-0">
-              <UserAvatar size="md" />
+              <UserAvatar size="md" image={userData.image} />
             </DropdownMenuTrigger>
             <DropdownMenuContent
               className="w-[90vw] max-w-56"
