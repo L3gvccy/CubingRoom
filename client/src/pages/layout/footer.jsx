@@ -17,7 +17,7 @@ const Footer = () => {
               alexandr.i@ukr.net
             </a>
             <a
-              href="https://t.me/l3gaccy"
+              href="https://t.me/CubixDevelopment"
               target="_blank"
               rel="noopener noreferrer"
               className="px-3 py-1 rounded-md  hover:bg-zinc-200 text-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-200 transition"
