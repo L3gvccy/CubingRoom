@@ -12,46 +12,50 @@ export class ContestService {
     private scrambleService: ScrambleService,
   ) {}
 
-  // @Cron("15 * * * * *")
-  @Cron("0 0 * * 1")
+  @Cron("*/10 * * * *")
+  //@Cron("0 0 * * 1")
   async CreateContest() {
     try {
-      await this.prisma.$transaction(async (tx) => {
-        await tx.contest.updateMany({
-          where: { isActive: true },
-          data: { isActive: false },
-        });
+      await this.prisma.$transaction(
+        async (tx) => {
+          await tx.contest.updateMany({
+            where: { isActive: true },
+            data: { isActive: false },
+          });
 
-        const contest = await tx.contest.create({
-          data: {
-            startDate: new Date(),
-            endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
-            isActive: true,
-          },
-        });
-
-        for (const [event, format] of event_format) {
-          const contestEvent = await tx.contestEvent.create({
+          const contest = await tx.contest.create({
             data: {
-              contestId: contest.id,
-              event,
-              format,
+              startDate: new Date(),
+              endDate: new Date(Date.now() + 6 * 24 * 60 * 60 * 1000),
+              isActive: true,
             },
           });
-          const numberOfScrambles = format === "ao5" ? 5 : 3;
-          for (let i = 0; i < numberOfScrambles; i++) {
-            const scramble = await this.scrambleService.generateScramble(event);
 
-            await tx.scramble.create({
+          for (const [event, format] of event_format) {
+            const contestEvent = await tx.contestEvent.create({
               data: {
-                contestEventId: contestEvent.id,
-                scramble: scramble.scramble,
-                index: i + 1,
+                contestId: contest.id,
+                event,
+                format,
               },
             });
+            const numberOfScrambles = format === "ao5" ? 5 : 3;
+            for (let i = 0; i < numberOfScrambles; i++) {
+              const scramble =
+                await this.scrambleService.generateScramble(event);
+
+              await tx.scramble.create({
+                data: {
+                  contestEventId: contestEvent.id,
+                  scramble: scramble.scramble,
+                  index: i + 1,
+                },
+              });
+            }
           }
-        }
-      });
+        },
+        { timeout: 30000 },
+      );
 
       console.log("\n--- New contest created ---\n");
     } catch (error) {
