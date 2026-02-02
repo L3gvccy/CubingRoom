@@ -13,8 +13,8 @@ export const getScrambler = (event: string) => {
     skewb: { scrambler: "skbso", length: 0 },
     sq1: { scrambler: "sqrs", length: 0 },
     "333bf": { scrambler: "333ni", length: 0 },
-    "444bf": { scrambler: "333ni", length: 40 },
-    "555bf": { scrambler: "333ni", length: 60 },
+    "444bf": { scrambler: "444bld", length: 40 },
+    "555bf": { scrambler: "555bld", length: 60 },
   };
 
   return wcaEvents[event];

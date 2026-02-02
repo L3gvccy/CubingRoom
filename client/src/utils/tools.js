@@ -138,7 +138,7 @@ export const getNameAndFormat = (event) => {
     sq1: ["Square-1", "ao5"],
     "333bf": ["3x3 BLD", "ao5"],
     "444bf": ["4x4 BLD", "mo3"],
-    "555bf": ["4x4 BLD", "mo3"],
+    "555bf": ["5x5 BLD", "mo3"],
   };
 
   return wca_events[event];
