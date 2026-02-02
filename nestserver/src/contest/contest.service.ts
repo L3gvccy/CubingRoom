@@ -12,7 +12,7 @@ export class ContestService {
     private scrambleService: ScrambleService,
   ) {}
 
-  @Cron("*/10 * * * *")
+  //@Cron("*/10 * * * *")
   //@Cron("0 0 * * 1")
   async CreateContest() {
     try {
