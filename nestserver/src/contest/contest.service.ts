@@ -12,8 +12,8 @@ export class ContestService {
     private scrambleService: ScrambleService,
   ) {}
 
-  @Cron("*/5 * * * *")
-  //@Cron("0 0 * * 1")
+  //@Cron("*/5 * * * *")
+  @Cron("0 0 * * 1")
   async CreateContest() {
     try {
       await this.prisma.$transaction(
