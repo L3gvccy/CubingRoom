@@ -183,6 +183,7 @@ export const ContestResultScalarFieldEnum = {
   userId: 'userId',
   best: 'best',
   average: 'average',
+  place: 'place',
   submitted: 'submitted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

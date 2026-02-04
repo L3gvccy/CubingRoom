@@ -165,6 +165,8 @@ model ContestResult {
   
   best Int?
   average Int?
+
+  place Int?
   submitted Boolean @default(false)
 
   createdAt DateTime @default(now())
