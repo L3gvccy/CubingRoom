@@ -39,7 +39,7 @@ export class ContestService {
                 format,
               },
             });
-            const numberOfScrambles = format === "ao5" ? 5 : 3;
+            const numberOfScrambles = Number(format.slice(2));
             for (let i = 0; i < numberOfScrambles; i++) {
               const scramble =
                 await this.scrambleService.generateScramble(event);
@@ -85,12 +85,20 @@ export class ContestService {
       where: { contestEventId: contestEvent.id },
       orderBy: { index: "asc" },
     });
-
-    const results = await this.prisma.contestResult.findMany({
-      where: { contestEventId: contestEvent.id, submitted: true },
-      include: { user: true, results: { orderBy: { createdAt: "asc" } } },
-      orderBy: { average: "asc" },
-    });
+    let results;
+    if (contestEvent.format.startsWith("ao")) {
+      results = await this.prisma.contestResult.findMany({
+        where: { contestEventId: contestEvent.id, submitted: true },
+        include: { user: true, results: { orderBy: { createdAt: "asc" } } },
+        orderBy: { average: "asc" },
+      });
+    } else if (contestEvent.format.startsWith("bo")) {
+      results = await this.prisma.contestResult.findMany({
+        where: { contestEventId: contestEvent.id, submitted: true },
+        include: { user: true, results: { orderBy: { createdAt: "asc" } } },
+        orderBy: { best: "asc" },
+      });
+    }
 
     const sortedResults = results.sort((a, b) => {
       if (a.average !== null && b.average !== null) {

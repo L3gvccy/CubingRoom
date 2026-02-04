@@ -33,7 +33,7 @@ export const event_format = [
   ["pyraminx", "ao5"],
   ["skewb", "ao5"],
   ["sq1", "ao5"],
-  ["333bf", "ao5"],
-  ["444bf", "mo3"],
-  ["555bf", "mo3"],
+  ["333bf", "bo5"],
+  ["444bf", "bo3"],
+  ["555bf", "bo3"],
 ];

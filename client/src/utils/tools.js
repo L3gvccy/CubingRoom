@@ -136,9 +136,9 @@ export const getNameAndFormat = (event) => {
     pyraminx: ["Pyraminx", "ao5"],
     skewb: ["Skewb", "ao5"],
     sq1: ["Square-1", "ao5"],
-    "333bf": ["3x3 BLD", "ao5"],
-    "444bf": ["4x4 BLD", "mo3"],
-    "555bf": ["5x5 BLD", "mo3"],
+    "333bf": ["3x3 BLD", "bo5"],
+    "444bf": ["4x4 BLD", "bo3"],
+    "555bf": ["5x5 BLD", "bo3"],
   };
 
   return wca_events[event];
