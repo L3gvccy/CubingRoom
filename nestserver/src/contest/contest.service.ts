@@ -99,6 +99,7 @@ export class ContestService {
         orderBy: { best: "asc" },
       });
     }
+    console.log(`format: ${contestEvent.format}`);
 
     const sortedResults = results.sort((a, b) => {
       if (a.average !== null && b.average !== null) {
