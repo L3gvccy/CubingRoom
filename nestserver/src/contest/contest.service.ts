@@ -85,39 +85,43 @@ export class ContestService {
       where: { contestEventId: contestEvent.id },
       orderBy: { index: "asc" },
     });
-    let results;
+
+    const results = await this.prisma.contestResult.findMany({
+      where: { contestEventId: contestEvent.id, submitted: true },
+      include: { user: true, results: { orderBy: { createdAt: "asc" } } },
+    });
+
+    let sortedResults;
     if (contestEvent.format.startsWith("ao")) {
-      results = await this.prisma.contestResult.findMany({
-        where: { contestEventId: contestEvent.id, submitted: true },
-        include: { user: true, results: { orderBy: { createdAt: "asc" } } },
-        orderBy: { average: "asc" },
+      sortedResults = results.sort((a, b) => {
+        if (a.average !== null && b.average !== null) {
+          return a.average - b.average;
+        }
+
+        if (a.average !== null && b.average === null) return -1;
+        if (a.average === null && b.average !== null) return 1;
+
+        if (a.best !== null && b.best !== null) {
+          return a.best - b.best;
+        }
+
+        if (a.best !== null && b.best === null) return -1;
+        if (a.best === null && b.best !== null) return 1;
+
+        return 0;
       });
     } else if (contestEvent.format.startsWith("bo")) {
-      results = await this.prisma.contestResult.findMany({
-        where: { contestEventId: contestEvent.id, submitted: true },
-        include: { user: true, results: { orderBy: { createdAt: "asc" } } },
-        orderBy: { best: "asc" },
+      sortedResults = results.sort((a, b) => {
+        if (a.best !== null && b.best !== null) {
+          return a.best - b.best;
+        }
+
+        if (a.best !== null && b.best === null) return -1;
+        if (a.best === null && b.best !== null) return 1;
+
+        return 0;
       });
     }
-    console.log(`format: ${contestEvent.format}`);
-
-    const sortedResults = results.sort((a, b) => {
-      if (a.average !== null && b.average !== null) {
-        return a.average - b.average;
-      }
-
-      if (a.average !== null && b.average === null) return -1;
-      if (a.average === null && b.average !== null) return 1;
-
-      if (a.best !== null && b.best !== null) {
-        return a.best - b.best;
-      }
-
-      if (a.best !== null && b.best === null) return -1;
-      if (a.best === null && b.best !== null) return 1;
-
-      return 0;
-    });
 
     return { contestEvent, scrambles, results: sortedResults };
   }
