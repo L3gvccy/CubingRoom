@@ -50,7 +50,12 @@ const Contest = () => {
         setContest(res.data.contestEvent.contest);
         setEvent(res.data.contestEvent);
         setScrambles(res.data.scrambles);
-        setResults(res.data.results);
+        if (res.data.results) {
+          setResults(res.data.results);
+        } else {
+          setResults([]);
+        }
+
         console.log(res.data);
       })
       .catch((err) => {
