@@ -51,6 +51,7 @@ const Contest = () => {
         setEvent(res.data.contestEvent);
         setScrambles(res.data.scrambles);
         setResults(res.data.results);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
