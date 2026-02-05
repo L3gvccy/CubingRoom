@@ -133,7 +133,7 @@ const Contest = () => {
     fetchData();
   }, [contest]);
 
-  if (!loading && contest && event && scrambles && myResult)
+  if (!loading && contest && event && scrambles)
     return (
       <div className="flex w-full justify-center py-4 px-2">
         <div className="flex flex-col w-full max-w-342 gap-5">
