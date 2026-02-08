@@ -31,6 +31,7 @@ export type ContestResultAvgAggregateOutputType = {
   contestEventId: number | null
   best: number | null
   average: number | null
+  place: number | null
 }
 
 export type ContestResultSumAggregateOutputType = {
@@ -38,6 +39,7 @@ export type ContestResultSumAggregateOutputType = {
   contestEventId: number | null
   best: number | null
   average: number | null
+  place: number | null
 }
 
 export type ContestResultMinAggregateOutputType = {
@@ -46,6 +48,7 @@ export type ContestResultMinAggregateOutputType = {
   userId: string | null
   best: number | null
   average: number | null
+  place: number | null
   submitted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -57,6 +60,7 @@ export type ContestResultMaxAggregateOutputType = {
   userId: string | null
   best: number | null
   average: number | null
+  place: number | null
   submitted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -68,6 +72,7 @@ export type ContestResultCountAggregateOutputType = {
   userId: number
   best: number
   average: number
+  place: number
   submitted: number
   createdAt: number
   updatedAt: number
@@ -80,6 +85,7 @@ export type ContestResultAvgAggregateInputType = {
   contestEventId?: true
   best?: true
   average?: true
+  place?: true
 }
 
 export type ContestResultSumAggregateInputType = {
@@ -87,6 +93,7 @@ export type ContestResultSumAggregateInputType = {
   contestEventId?: true
   best?: true
   average?: true
+  place?: true
 }
 
 export type ContestResultMinAggregateInputType = {
@@ -95,6 +102,7 @@ export type ContestResultMinAggregateInputType = {
   userId?: true
   best?: true
   average?: true
+  place?: true
   submitted?: true
   createdAt?: true
   updatedAt?: true
@@ -106,6 +114,7 @@ export type ContestResultMaxAggregateInputType = {
   userId?: true
   best?: true
   average?: true
+  place?: true
   submitted?: true
   createdAt?: true
   updatedAt?: true
@@ -117,6 +126,7 @@ export type ContestResultCountAggregateInputType = {
   userId?: true
   best?: true
   average?: true
+  place?: true
   submitted?: true
   createdAt?: true
   updatedAt?: true
@@ -215,6 +225,7 @@ export type ContestResultGroupByOutputType = {
   userId: string
   best: number | null
   average: number | null
+  place: number | null
   submitted: boolean
   createdAt: Date
   updatedAt: Date
@@ -249,6 +260,7 @@ export type ContestResultWhereInput = {
   userId?: Prisma.StringFilter<"ContestResult"> | string
   best?: Prisma.IntNullableFilter<"ContestResult"> | number | null
   average?: Prisma.IntNullableFilter<"ContestResult"> | number | null
+  place?: Prisma.IntNullableFilter<"ContestResult"> | number | null
   submitted?: Prisma.BoolFilter<"ContestResult"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ContestResult"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContestResult"> | Date | string
@@ -263,6 +275,7 @@ export type ContestResultOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   best?: Prisma.SortOrderInput | Prisma.SortOrder
   average?: Prisma.SortOrderInput | Prisma.SortOrder
+  place?: Prisma.SortOrderInput | Prisma.SortOrder
   submitted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -280,6 +293,7 @@ export type ContestResultWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"ContestResult"> | string
   best?: Prisma.IntNullableFilter<"ContestResult"> | number | null
   average?: Prisma.IntNullableFilter<"ContestResult"> | number | null
+  place?: Prisma.IntNullableFilter<"ContestResult"> | number | null
   submitted?: Prisma.BoolFilter<"ContestResult"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ContestResult"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContestResult"> | Date | string
@@ -294,6 +308,7 @@ export type ContestResultOrderByWithAggregationInput = {
   userId?: Prisma.SortOrder
   best?: Prisma.SortOrderInput | Prisma.SortOrder
   average?: Prisma.SortOrderInput | Prisma.SortOrder
+  place?: Prisma.SortOrderInput | Prisma.SortOrder
   submitted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -313,6 +328,7 @@ export type ContestResultScalarWhereWithAggregatesInput = {
   userId?: Prisma.StringWithAggregatesFilter<"ContestResult"> | string
   best?: Prisma.IntNullableWithAggregatesFilter<"ContestResult"> | number | null
   average?: Prisma.IntNullableWithAggregatesFilter<"ContestResult"> | number | null
+  place?: Prisma.IntNullableWithAggregatesFilter<"ContestResult"> | number | null
   submitted?: Prisma.BoolWithAggregatesFilter<"ContestResult"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContestResult"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"ContestResult"> | Date | string
@@ -321,6 +337,7 @@ export type ContestResultScalarWhereWithAggregatesInput = {
 export type ContestResultCreateInput = {
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -335,6 +352,7 @@ export type ContestResultUncheckedCreateInput = {
   userId: string
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -344,6 +362,7 @@ export type ContestResultUncheckedCreateInput = {
 export type ContestResultUpdateInput = {
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -358,6 +377,7 @@ export type ContestResultUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -370,6 +390,7 @@ export type ContestResultCreateManyInput = {
   userId: string
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -378,6 +399,7 @@ export type ContestResultCreateManyInput = {
 export type ContestResultUpdateManyMutationInput = {
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -389,6 +411,7 @@ export type ContestResultUncheckedUpdateManyInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -415,6 +438,7 @@ export type ContestResultCountOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   best?: Prisma.SortOrder
   average?: Prisma.SortOrder
+  place?: Prisma.SortOrder
   submitted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -425,6 +449,7 @@ export type ContestResultAvgOrderByAggregateInput = {
   contestEventId?: Prisma.SortOrder
   best?: Prisma.SortOrder
   average?: Prisma.SortOrder
+  place?: Prisma.SortOrder
 }
 
 export type ContestResultMaxOrderByAggregateInput = {
@@ -433,6 +458,7 @@ export type ContestResultMaxOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   best?: Prisma.SortOrder
   average?: Prisma.SortOrder
+  place?: Prisma.SortOrder
   submitted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -444,6 +470,7 @@ export type ContestResultMinOrderByAggregateInput = {
   userId?: Prisma.SortOrder
   best?: Prisma.SortOrder
   average?: Prisma.SortOrder
+  place?: Prisma.SortOrder
   submitted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -454,6 +481,7 @@ export type ContestResultSumOrderByAggregateInput = {
   contestEventId?: Prisma.SortOrder
   best?: Prisma.SortOrder
   average?: Prisma.SortOrder
+  place?: Prisma.SortOrder
 }
 
 export type ContestResultCreateNestedManyWithoutUserInput = {
@@ -559,6 +587,7 @@ export type ContestResultUncheckedUpdateManyWithoutContestEventNestedInput = {
 export type ContestResultCreateWithoutUserInput = {
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -571,6 +600,7 @@ export type ContestResultUncheckedCreateWithoutUserInput = {
   contestEventId: number
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -612,6 +642,7 @@ export type ContestResultScalarWhereInput = {
   userId?: Prisma.StringFilter<"ContestResult"> | string
   best?: Prisma.IntNullableFilter<"ContestResult"> | number | null
   average?: Prisma.IntNullableFilter<"ContestResult"> | number | null
+  place?: Prisma.IntNullableFilter<"ContestResult"> | number | null
   submitted?: Prisma.BoolFilter<"ContestResult"> | boolean
   createdAt?: Prisma.DateTimeFilter<"ContestResult"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"ContestResult"> | Date | string
@@ -620,6 +651,7 @@ export type ContestResultScalarWhereInput = {
 export type ContestResultCreateWithoutResultsInput = {
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -633,6 +665,7 @@ export type ContestResultUncheckedCreateWithoutResultsInput = {
   userId: string
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -657,6 +690,7 @@ export type ContestResultUpdateToOneWithWhereWithoutResultsInput = {
 export type ContestResultUpdateWithoutResultsInput = {
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -670,6 +704,7 @@ export type ContestResultUncheckedUpdateWithoutResultsInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -678,6 +713,7 @@ export type ContestResultUncheckedUpdateWithoutResultsInput = {
 export type ContestResultCreateWithoutContestEventInput = {
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -690,6 +726,7 @@ export type ContestResultUncheckedCreateWithoutContestEventInput = {
   userId: string
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -727,6 +764,7 @@ export type ContestResultCreateManyUserInput = {
   contestEventId: number
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -735,6 +773,7 @@ export type ContestResultCreateManyUserInput = {
 export type ContestResultUpdateWithoutUserInput = {
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -747,6 +786,7 @@ export type ContestResultUncheckedUpdateWithoutUserInput = {
   contestEventId?: Prisma.IntFieldUpdateOperationsInput | number
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -758,6 +798,7 @@ export type ContestResultUncheckedUpdateManyWithoutUserInput = {
   contestEventId?: Prisma.IntFieldUpdateOperationsInput | number
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -768,6 +809,7 @@ export type ContestResultCreateManyContestEventInput = {
   userId: string
   best?: number | null
   average?: number | null
+  place?: number | null
   submitted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -776,6 +818,7 @@ export type ContestResultCreateManyContestEventInput = {
 export type ContestResultUpdateWithoutContestEventInput = {
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -788,6 +831,7 @@ export type ContestResultUncheckedUpdateWithoutContestEventInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -799,6 +843,7 @@ export type ContestResultUncheckedUpdateManyWithoutContestEventInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   best?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   average?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  place?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   submitted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -841,6 +886,7 @@ export type ContestResultSelect<ExtArgs extends runtime.Types.Extensions.Interna
   userId?: boolean
   best?: boolean
   average?: boolean
+  place?: boolean
   submitted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -856,6 +902,7 @@ export type ContestResultSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   best?: boolean
   average?: boolean
+  place?: boolean
   submitted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -869,6 +916,7 @@ export type ContestResultSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   userId?: boolean
   best?: boolean
   average?: boolean
+  place?: boolean
   submitted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -882,12 +930,13 @@ export type ContestResultSelectScalar = {
   userId?: boolean
   best?: boolean
   average?: boolean
+  place?: boolean
   submitted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ContestResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contestEventId" | "userId" | "best" | "average" | "submitted" | "createdAt" | "updatedAt", ExtArgs["result"]["contestResult"]>
+export type ContestResultOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contestEventId" | "userId" | "best" | "average" | "place" | "submitted" | "createdAt" | "updatedAt", ExtArgs["result"]["contestResult"]>
 export type ContestResultInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contestEvent?: boolean | Prisma.ContestEventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -916,6 +965,7 @@ export type $ContestResultPayload<ExtArgs extends runtime.Types.Extensions.Inter
     userId: string
     best: number | null
     average: number | null
+    place: number | null
     submitted: boolean
     createdAt: Date
     updatedAt: Date
@@ -1350,6 +1400,7 @@ export interface ContestResultFieldRefs {
   readonly userId: Prisma.FieldRef<"ContestResult", 'String'>
   readonly best: Prisma.FieldRef<"ContestResult", 'Int'>
   readonly average: Prisma.FieldRef<"ContestResult", 'Int'>
+  readonly place: Prisma.FieldRef<"ContestResult", 'Int'>
   readonly submitted: Prisma.FieldRef<"ContestResult", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"ContestResult", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"ContestResult", 'DateTime'>

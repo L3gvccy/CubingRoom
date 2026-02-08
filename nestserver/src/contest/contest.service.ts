@@ -12,8 +12,8 @@ export class ContestService {
     private scrambleService: ScrambleService,
   ) {}
 
-  //@Cron("*/5 * * * *")
-  @Cron("0 0 * * 1")
+  // @Cron("*/5 * * * *")
+  // @Cron("0 0 * * 1")
   async CreateContest() {
     try {
       await this.prisma.$transaction(
@@ -60,6 +60,86 @@ export class ContestService {
       console.log("\n--- New contest created ---\n");
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  async getLastContestId() {
+    const lastContest = await this.prisma.contest.findFirst({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return lastContest?.id;
+  }
+
+  async SummarizeResults(contestId: number) {
+    try {
+      const contest = await this.prisma.contest.findUnique({
+        where: { id: contestId },
+        include: { contests: true },
+      });
+
+      if (!contest) {
+        throw new NotFoundException("Контест не знайдено");
+      }
+
+      for (const event of contest.contests) {
+        const results = await this.prisma.contestResult.findMany({
+          where: { contestEventId: event.id, submitted: true },
+          include: { user: true, results: { orderBy: { createdAt: "asc" } } },
+        });
+
+        let sortedResults;
+        if (event.format.startsWith("ao")) {
+          sortedResults = results.sort((a, b) => {
+            if (a.average !== null && b.average !== null) {
+              return a.average - b.average;
+            }
+
+            if (a.average !== null && b.average === null) return -1;
+            if (a.average === null && b.average !== null) return 1;
+
+            if (a.best !== null && b.best !== null) {
+              return a.best - b.best;
+            }
+
+            if (a.best !== null && b.best === null) return -1;
+            if (a.best === null && b.best !== null) return 1;
+
+            return 0;
+          });
+        } else if (event.format.startsWith("bo")) {
+          sortedResults = results.sort((a, b) => {
+            if (a.best !== null && b.best !== null) {
+              return a.best - b.best;
+            }
+
+            if (a.best !== null && b.best === null) return -1;
+            if (a.best === null && b.best !== null) return 1;
+
+            return 0;
+          });
+        }
+
+        for (let i = 0; i < sortedResults.length; i++) {
+          sortedResults[i].place = i + 1;
+        }
+
+        await this.prisma.$transaction(
+          sortedResults.map((r) =>
+            this.prisma.contestResult.update({
+              where: { id: r.id },
+              data: { place: r.place },
+            }),
+          ),
+        );
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
     }
   }
 

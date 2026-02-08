@@ -12,10 +12,27 @@ import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CurrentUser } from "src/common/decorators/current-user.decorator";
 import { SolveDto } from "./dto/solve.dto";
 import { SubmitResultDto } from "./dto/submit-result.dto";
+import { Cron } from "@nestjs/schedule";
 
 @Controller("contests")
 export class ContestController {
   constructor(private readonly contestService: ContestService) {}
+
+  // @Cron("*/1 * * * *")
+  @Cron("0 0 * * 1")
+  async generateContest() {
+    const contestId = await this.contestService.getLastContestId();
+
+    const resultsSuccess_temp = await this.contestService.SummarizeResults(1);
+
+    if (contestId) {
+      const resultsSuccess =
+        await this.contestService.SummarizeResults(contestId);
+      if (resultsSuccess) {
+        await this.contestService.CreateContest();
+      }
+    }
+  }
 
   @UseGuards(JwtAuthGuard)
   @Get()
