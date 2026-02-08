@@ -19,16 +19,19 @@ export class ContestController {
   constructor(private readonly contestService: ContestService) {}
 
   // @Cron("*/1 * * * *")
-  // @Cron("0 0 * * 1")
+  @Cron("0 0 * * 1")
   async generateContest() {
     const contestId = await this.contestService.getLastContestId();
-    console.log(contestId);
 
-    const resultsSuccess = await this.contestService.SummarizeResults(28);
+    const resultsSuccess_temp = await this.contestService.SummarizeResults(1);
 
-    // if (resultsSuccess) {
-    //   await this.contestService.CreateContest();
-    // }
+    if (contestId) {
+      const resultsSuccess =
+        await this.contestService.SummarizeResults(contestId);
+      if (resultsSuccess) {
+        await this.contestService.CreateContest();
+      }
+    }
   }
 
   @UseGuards(JwtAuthGuard)
