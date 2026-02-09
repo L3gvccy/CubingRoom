@@ -9,6 +9,7 @@ import { ScrambleService } from "./scramble/scramble.service";
 import { ScrambleController } from "./scramble/scramble.controller";
 import { ScrambleModule } from "./scramble/scramble.module";
 import { ScheduleModule } from "@nestjs/schedule";
+import { StatsModule } from './stats/stats.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ScheduleModule } from "@nestjs/schedule";
     RoomModule,
     ScrambleModule,
     ScheduleModule.forRoot(),
+    StatsModule,
   ],
   providers: [ScrambleService],
   controllers: [ScrambleController],
