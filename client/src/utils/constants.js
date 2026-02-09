@@ -45,6 +45,11 @@ export const SUBMIT_CONTEST_RESULT = (contestEventId) => {
   return `${CONTESTS_ROUTES}/submit-result/${contestEventId}`;
 };
 
+export const STATS_ROUTES = "/api/stats";
+export const GET_MEDALS = (userId) => {
+  return `${STATS_ROUTES}/medals/${userId}`;
+};
+
 // Scramble routes
 export const SCRAMBLE_ROUTES = "/api/scramble";
 export const GENERATE_SCRAMBLE = (event) => {

@@ -68,7 +68,7 @@ const ContestLeaderBoard = ({ results, event }) => {
                 key={index}
                 className={`border-b ${userData?.id === result.user.id ? "bg-black/10 dark:bg-white/10" : ""} `}
               >
-                <td className="p-2 min-w-12 text-center">
+                <td className="p-2 min-w-16 text-center">
                   {index + 1}
                   {index === 0 && <span>🥇</span>}
                   {index === 1 && <span>🥈</span>}

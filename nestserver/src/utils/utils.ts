@@ -37,3 +37,21 @@ export const event_format = [
   ["444bf", "bo3"],
   ["555bf", "bo3"],
 ];
+
+export const eventOrder = [
+  "333",
+  "222",
+  "444",
+  "555",
+  "666",
+  "777",
+  "333oh",
+  "clock",
+  "megaminx",
+  "pyraminx",
+  "skewb",
+  "sq1",
+  "333bf",
+  "444bf",
+  "555bf",
+];

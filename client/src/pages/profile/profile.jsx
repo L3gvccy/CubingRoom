@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getFlagEmoji } from "@/utils/tools";
 import LinkWcaBtn from "./components/link-wca-btn";
 import { toast } from "sonner";
+import Stats from "./components/stats/stats";
 
 const Profile = () => {
   const { userData, setUserData } = useAppStore();
@@ -173,6 +174,8 @@ const Profile = () => {
               </>
             )}
           </div>
+
+          <Stats userId={id} />
         </div>
       </div>
     </>
