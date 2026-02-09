@@ -18,8 +18,8 @@ import { Cron } from "@nestjs/schedule";
 export class ContestController {
   constructor(private readonly contestService: ContestService) {}
 
-  // @Cron("*/1 * * * *")
-  @Cron("0 0 * * 1")
+  @Cron("*/5 * * * *")
+  // @Cron("0 0 * * 1")
   async generateContest() {
     const contestId = await this.contestService.getLastContestId();
 

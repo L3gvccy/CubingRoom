@@ -122,18 +122,20 @@ export class ContestService {
           });
         }
 
-        for (let i = 0; i < sortedResults.length; i++) {
-          sortedResults[i].place = i + 1;
-        }
+        if (sortedResults) {
+          for (let i = 0; i < sortedResults.length; i++) {
+            sortedResults[i].place = i + 1;
+          }
 
-        await this.prisma.$transaction(
-          sortedResults.map((r) =>
-            this.prisma.contestResult.update({
-              where: { id: r.id },
-              data: { place: r.place },
-            }),
-          ),
-        );
+          await this.prisma.$transaction(
+            sortedResults.map((r) =>
+              this.prisma.contestResult.update({
+                where: { id: r.id },
+                data: { place: r.place },
+              }),
+            ),
+          );
+        }
       }
 
       return true;
