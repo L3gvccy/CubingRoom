@@ -90,7 +90,7 @@ export class ContestService {
           include: { user: true, results: { orderBy: { createdAt: "asc" } } },
         });
 
-        let sortedResults;
+        let sortedResults = [...results];
         if (event.format.startsWith("ao")) {
           sortedResults = results.sort((a, b) => {
             if (a.average !== null && b.average !== null) {
