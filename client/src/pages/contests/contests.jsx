@@ -37,6 +37,14 @@ const Contests = () => {
     getAllContests();
   }, []);
 
+  useEffect(() => {
+    if (selectedContest) {
+      selectedContest.contests.sort(
+        (a, b) => eventOrder.indexOf(a.event) - eventOrder.indexOf(b.event),
+      );
+    }
+  }, [selectedContest]);
+
   if (loading) {
     return (
       <div className="flex flex-1 items-center justify-center">

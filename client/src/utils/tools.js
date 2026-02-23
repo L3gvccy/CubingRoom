@@ -168,3 +168,21 @@ export const calculateAverage = (solves, length) => {
   const sum = solves.reduce((acc, s) => acc + s.finalTime, 0);
   return Math.round(sum / (length - 2 * solvesToRemove));
 };
+
+export const eventOrder = [
+  "333",
+  "222",
+  "444",
+  "555",
+  "666",
+  "777",
+  "333oh",
+  "clock",
+  "megaminx",
+  "pyraminx",
+  "skewb",
+  "sq1",
+  "333bf",
+  "444bf",
+  "555bf",
+];
