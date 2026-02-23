@@ -44,11 +44,14 @@ const Contests = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedContest) {
-      selectedContest.contests.sort(
+    if (!selectedContest) return;
+
+    setSelectedContest((prev) => ({
+      ...prev,
+      contests: [...prev.contests].sort(
         (a, b) => eventOrder.indexOf(a.event) - eventOrder.indexOf(b.event),
-      );
-    }
+      ),
+    }));
   }, [selectedContest]);
 
   if (loading) {
