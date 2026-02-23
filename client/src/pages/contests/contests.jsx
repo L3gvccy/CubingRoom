@@ -4,6 +4,7 @@ import ContestCard from "./components/contest-card";
 import Loader from "@/components/loader/loader";
 import { apiClient } from "@/lib/api-client";
 import { GET_ALL_CONTESTS } from "@/utils/constants";
+import { eventOrder } from "@/utils/tools";
 
 const Contests = () => {
   const [loading, setLoading] = useState(true);
