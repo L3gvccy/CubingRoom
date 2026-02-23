@@ -36,11 +36,6 @@ const Contests = () => {
 
   useEffect(() => {
     getAllContests();
-    if (selectedContest) {
-      selectedContest.contests.sort(
-        (a, b) => eventOrder.indexOf(a.event) - eventOrder.indexOf(b.event),
-      );
-    }
   }, []);
 
   useEffect(() => {
@@ -52,7 +47,7 @@ const Contests = () => {
         (a, b) => eventOrder.indexOf(a.event) - eventOrder.indexOf(b.event),
       ),
     }));
-  }, [selectedContest]);
+  }, [selectedContest?.id]);
 
   if (loading) {
     return (
